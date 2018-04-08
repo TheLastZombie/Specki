@@ -259,10 +259,3 @@ client.on("message", async message => {
 });
 
 // TODO: MCNAME | SCHUSS
-
-// message.channel.send("MESSAGE", {
-//     files: ["https://i.imgur.com/XxxXxXX.jpg"]
-// });
-
-// Bei Bild: message.attachments.url
-// Bei Link: message.args
