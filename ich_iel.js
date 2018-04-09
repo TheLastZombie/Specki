@@ -1,7 +1,8 @@
-var dscrd = require("discord.js");
-var trnsl = require("google-translate-api");
-var ascii = require("cool-ascii-faces")
-var client = new dscrd.Client({
+const dscrd = require("discord.js");
+const trnsl = require("google-translate-api");
+const ascii = require("cool-ascii-faces");
+const puppt = require("puppeteer");
+const client = new dscrd.Client({
 	autoReconnect: true
 });
 client.login(process.env.TOKEN);
@@ -146,7 +147,11 @@ client.on("message", async message => {
 					{
                         name: `${process.env.PREFIX}spott | ${process.env.PREFIX}mock`,
 						value: "Gibt die Nachricht abwechselnd in Groß- und Kleinbuchstaben wieder. [Inspiriert von SpongeBob Schwammkopf.](https://www.imdb.com/title/tt2512000/)"
-					}
+                    },
+                    {
+                        name: `${process.env.PREFIX}swfchan`,
+                        value: "Nimmt eine zufällige Flash-Animation aus der [swfchan](http://swfchan.com/)-Datenbank."
+                    }
 				],
 				footer: {
 					icon_url: client.user.avatarURL,
@@ -255,7 +260,35 @@ client.on("message", async message => {
 				message.channel.send(temp);
 			});
 		};
-	};
+    };
+    if (command === "swfchan") {
+        console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
+        if (args && args != "") {
+            var temp = args(join, " ");
+        } else {
+            message.channel.fetchMessages({
+                limit: 2
+            }).then(temp => {
+                var temp = temp.last().content;
+            });
+        };
+        if !(temp === "all" || temp === "wild" || temp === "catted" || temp === "porn" || temp === "clean") {
+            var temp = "all";
+        };
+        var pbrws = await puppt.launch();
+        var ppage = await pbrws.newPage();
+        await ppage.goto("http://eye.swfchan.com/random.asp?" + test);
+        await Promise.all([
+            ppage.click("#t > a"),
+            ppage.waitForNavigation()
+        ]);
+        var plink = "Link: " + ppage.url();
+        var pprev = await ppage.$("#sect2 img");
+        pprev = "Preview: " + await pprev.getProperty("src");
+        var ptitl = await ppage.evaluate(() => document.getElementById("currname").innerHTML);
+        ptitl = "Title: " + ptitl.replace(/<u>&nbsp;<\/u> /g, "");
+        await pbrws.close();
+    };
 });
 
 // TODO: MCNAME | SCHUSS
