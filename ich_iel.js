@@ -257,5 +257,3 @@ client.on("message", async message => {
 		};
 	};
 });
-
-// TODO: MCNAME | SCHUSS
