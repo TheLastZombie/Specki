@@ -264,21 +264,29 @@ client.on("message", async message => {
     };
     if (command === "supreme") {
         console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
-        var pbrws = puppt.launch();
-        var ppage = pbrws.newPage();
-        ppage.goto("https://undercase.github.io/supreme/");
+        (async() => {
+            var pbrws = await puppt.launch();
+            var ppage = await pbrws.newPage();
+            await ppage.goto("https://undercase.github.io/supreme/");
+        })();
         if (args && args != "") {
-            ppage.type("input", args.join(" "));
+            (async() => {
+                await ppage.type("input", args.join(" "));
+            })();
         } else {
             message.channel.fetchMessages({
                 limit: 2
             }).then(temp => {
-                ppage.type("input", temp.last().content);
+                (async() => {
+                    await ppage.type("input", temp.last().content);
+                })();
             });
         };
-        var pcnvs = ppage.$("canvas");
-        pcnvs.screenshot({ path: "supreme.png" });
-        pbrws.close();
+        (async() => {
+            var pcnvs = await ppage.$("canvas");
+            await pcnvs.screenshot({ path: "supreme.png" });
+            await pbrws.close();
+        })();
         message.channel.send("some text", {
             file: "supreme.png"
         });
