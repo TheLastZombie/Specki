@@ -1,9 +1,7 @@
-const dscrd = require("discord.js");
-const trnsl = require("google-translate-api");
-const ascii = require("cool-ascii-faces");
-const puppt = require("puppeteer");
-const flsys = require("fs");
-const client = new dscrd.Client({
+var dscrd = require("discord.js");
+var trnsl = require("google-translate-api");
+var ascii = require("cool-ascii-faces")
+var client = new dscrd.Client({
 	autoReconnect: true
 });
 client.login(process.env.TOKEN);
@@ -148,11 +146,7 @@ client.on("message", async message => {
 					{
                         name: `${process.env.PREFIX}spott | ${process.env.PREFIX}mock`,
 						value: "Gibt die Nachricht abwechselnd in Groß- und Kleinbuchstaben wieder. [Inspiriert von SpongeBob Schwammkopf.](https://www.imdb.com/title/tt2512000/)"
-                    },
-                    {
-                        name: `${process.env.PREFIX}supreme`,
-                        value: "Generiert ein Supreme-Logo mithilfe des [Supreme Logo Generators.](https://undercase.github.io/supreme/)"
-                    }
+					}
 				],
 				footer: {
 					icon_url: client.user.avatarURL,
@@ -261,40 +255,7 @@ client.on("message", async message => {
 				message.channel.send(temp);
 			});
 		};
-    };
-    if (command === "supreme") {
-        console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
-        var pbrws;
-        var ppage;
-        var pcnvs;
-        (async() => {
-            pbrws = await puppt.launch();
-            ppage = await pbrws.newPage();
-            await ppage.goto("https://undercase.github.io/supreme/");
-        })();
-        if (args && args != "") {
-            (async() => {
-                await ppage.type("input", args.join(" "));
-            })();
-        } else {
-            message.channel.fetchMessages({
-                limit: 2
-            }).then(temp => {
-                (async() => {
-                    await ppage.type("input", temp.last().content);
-                })();
-            });
-        };
-        (async() => {
-            pcnvs = await ppage.$("canvas");
-            await pcnvs.screenshot({ path: "supreme.png" });
-            await pbrws.close();
-        })();
-        message.channel.send("some text", {
-            file: "supreme.png"
-        });
-        flsys.unlink("supreme.png");
-    };
+	};
 });
 
 // TODO: MCNAME | SCHUSS
