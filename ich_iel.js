@@ -272,7 +272,7 @@ client.on("message", async message => {
                 var temp = temp.last().content;
             });
         };
-        if !(temp === "all" || temp === "wild" || temp === "catted" || temp === "porn" || temp === "clean") {
+        if (!(temp === "all" || temp === "wild" || temp === "catted" || temp === "porn" || temp === "clean")) {
             var temp = "all";
         };
         var pbrws = await puppt.launch();
