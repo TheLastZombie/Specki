@@ -1,7 +1,6 @@
 const dscrd = require("discord.js");
 const trnsl = require("google-translate-api");
 const ascii = require("cool-ascii-faces");
-const puppt = require("puppeteer");
 const client = new dscrd.Client({
 	autoReconnect: true
 });
@@ -27,27 +26,27 @@ client.on("message", async message => {
 		return;
 	};	
 	var args = message.content.slice(process.env.PREFIX.length).trim().split(/ /g);
-    var command = args.shift().toLowerCase();
-    if (command === "deutsch") {
-        console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
-        if (args && args != "") {
-            trnsl(args.join(" "), {
-                to: "de"
-            }).then(temp => {
-                message.channel.send(temp.text);
-            });
-        } else {
-            message.channel.fetchMessages({
-                limit: 2
-            }).then(temp => {
-                trnsl(temp.last().content, {
-                    to: "de"
-                }).then(temp => {
-                    message.channel.send(temp.text);
-                });
-            });
-        };
-    };
+	var command = args.shift().toLowerCase();
+	if (command === "deutsch") {
+		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
+		if (args && args != "") {
+			trnsl(args.join(" "), {
+				to: "de"
+			}).then(temp => {
+				message.channel.send(temp.text);
+			});
+		} else {
+			message.channel.fetchMessages({
+				limit: 2
+			}).then(temp => {
+				trnsl(temp.last().content, {
+					to: "de"
+				}).then(temp => {
+					message.channel.send(temp.text);
+				});
+			});
+		};
+	};
 	if (command === "ersatz" || command === "replace") {
 		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 		if (args && args != "") {
@@ -59,33 +58,33 @@ client.on("message", async message => {
 				message.channel.send(temp.last().content.replace(/aus/gi, "<:1aus:403611412938620929>").replace(/gel/gi, "<:2gel:403611412586430474>").replace(/öst/gi, "<:3oest:403611413022638081>").replace(/err/gi, "<:2err:406902951064371211>").replace(/eich/gi, "<:3eich:406902925764460544>").replace(/nuss/gi, "<:NUSS:402536220074180609>").replace(/schwul/gi, "<:schwul:406965196687671297>").replace(/verbessern/gi, "<:verbessern:403900299514740746>").replace(/xd/gi, "<:Xd:424962963095552000>").replace(/perfekt/gi, "<:perfekt:408736206885748736>").replace(/notiz beachten/gi, "<:notizbeachten:402532937221931008>").replace(/null/gi, "<:null:400375286451142656>").replace(/nein/gi, "<:NEIN:416727817623961610>").replace(/lösc dies/gi, "<:loesc_dies:406958134771580938>").replace(/fick geh zurück/gi, "<:fickgehzurueck:403900299087183872>"));
 			});
 		};
-    };
-    if (command === "ficken") {
-        console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
-        if (/\[.+\] \[.+\]/.test(args.join(" "))) {
-            message.channel.send(`toll`);
-            message.channel.send(`dieses ding ${args.join(" ").match(/\[.+\] \[/).toString().slice(1, -3)} ab`);
-            message.channel.send(`dieses ${args.join(" ").match(/\] \[.+\]/).toString().slice(3, -1)}`);
-            message.channel.send(`FICKen`);
-        } else {
-            message.channel.send(`toll`);
-            message.channel.send(`dieses ding beim kopfhörer ab`);
-            message.channel.send(`dieses um das ohr`);
-            message.channel.send(`FICKen`);
-        };
-    };
-    if (command === "frauen") {
-        console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
-        if (args && args != "") {
-            message.channel.send(`Frauen stehn auf Männer wo ${args.join(" ")}`);
-        } else {
-            message.channel.fetchMessages({
-                limit: 2
-            }).then(temp => {
-                message.channel.send(`Frauen stehn auf Männer wo ${temp.last().content}`);
-            });
-        };
-    };
+	};
+	if (command === "ficken") {
+		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
+		if (/\[.+\] \[.+\]/.test(args.join(" "))) {
+			message.channel.send(`toll`);
+			message.channel.send(`dieses ding ${args.join(" ").match(/\[.+\] \[/).toString().slice(1, -3)} ab`);
+			message.channel.send(`dieses ${args.join(" ").match(/\] \[.+\]/).toString().slice(3, -1)}`);
+			message.channel.send(`FICKen`);
+		} else {
+			message.channel.send(`toll`);
+			message.channel.send(`dieses ding beim kopfhörer ab`);
+			message.channel.send(`dieses um das ohr`);
+			message.channel.send(`FICKen`);
+		};
+	};
+	if (command === "frauen") {
+		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
+		if (args && args != "") {
+			message.channel.send(`Frauen stehn auf Männer wo ${args.join(" ")}`);
+		} else {
+			message.channel.fetchMessages({
+				limit: 2
+			}).then(temp => {
+				message.channel.send(`Frauen stehn auf Männer wo ${temp.last().content}`);
+			});
+		};
+	};
 	if (command === "hilfe" || command === "help") {
 		message.channel.send({
 			embed: {
@@ -95,63 +94,59 @@ client.on("message", async message => {
 				},
 				url: "https://rsch.neocities.org",
 				description: "Der Roboter exklusiv für den /r/ich_iel Discord. Hier gibt's eine Übersicht über alle Commands.\nFür die meisten Commands gilt: Ist kein Text angegeben, wird die vorherige Nachricht verwendet.",
-                fields: [
-                    {
-                        name: `${process.env.PREFIX}deutsch`,
-                        value: "Übersetzt eine Nachricht ins Deutsche – mal mehr, mal weniger gut."
-                    },
-                    {
-                        name: `${process.env.PREFIX}ersatz | ${process.env.PREFIX}replace`,
-						value: "Ersetzt \"AUS\", \"GEL\", \"ÖST\", etc. mit den entsprechenden Emotes."
-                    },
-                    {
-                        name: `${process.env.PREFIX}ficken`,
-                        value: "Zwei Argumente in eckigen Klammern: [beim kopfhörer] [um das ohr]. [FICKen](https://github.com/samogot/betterdiscord-plugins/blob/master/v2/Quoter/link-stub.md?guild_id=392678434687549440&channel_id=430838493359636490&message_id=431582731239948308&author_id=254703312312467467)"
-                    },
-                    {
-                        name: `${process.env.PREFIX}frauen`,
-                        value: "Frauen stehn auf Männer wo beim Sex die Arme kaputt"
-                    },
+				fields: [
 					{
-                        name: `${process.env.PREFIX}hilfe | ${process.env.PREFIX}help`,
+						name: `${process.env.PREFIX}deutsch`,
+						value: "Übersetzt eine Nachricht ins Deutsche – mal mehr, mal weniger gut."
+					},
+					{
+						name: `${process.env.PREFIX}ersatz | ${process.env.PREFIX}replace`,
+						value: "Ersetzt \"AUS\", \"GEL\", \"ÖST\", etc. mit den entsprechenden Emotes."
+					},
+					{
+						name: `${process.env.PREFIX}ficken`,
+						value: "Zwei Argumente in eckigen Klammern: [beim kopfhörer] [um das ohr]. [FICKen](https://github.com/samogot/betterdiscord-plugins/blob/master/v2/Quoter/link-stub.md?guild_id=392678434687549440&channel_id=430838493359636490&message_id=431582731239948308&author_id=254703312312467467)"
+					},
+					{
+						name: `${process.env.PREFIX}frauen`,
+						value: "Frauen stehn auf Männer wo beim Sex die Arme kaputt"
+					},
+					{
+						name: `${process.env.PREFIX}hilfe | ${process.env.PREFIX}help`,
 						value: "Wenn du das hier lesen kannst, weißt du bereits, was dieser Command macht."
 					},
 					{
-                        name: `${process.env.PREFIX}huso`,
+						name: `${process.env.PREFIX}huso`,
 						value: "Wie gibt's nicht, du Hurensohn? [Inspiriert von Ömer.](https://www.facebook.com/KFC.Deutschland/posts/1145486008814468?comment_id=1145949152101487&reply_comment_id=1145955162100886)"
 					},
 					{
-                        name: `${process.env.PREFIX}ibims`,
+						name: `${process.env.PREFIX}ibims`,
 						value: "I bims, 1 ... Der wohl sinnloseste Command dieses Roboters."
 					},
 					{
-                        name: `${process.env.PREFIX}ichmach`,
+						name: `${process.env.PREFIX}ichmach`,
 						value: "Ich mach Scheine, ey ey! [Inspiriert von Gloryholei55.](https://www.gutefrage.net/frage/wie-findet-ihr-meinen-ganster-rap-text)"
-                    },
-                    {
-                        name: `${process.env.PREFIX}jemand | ${process.env.PREFIX}someone`,
-                        value: "Ersetzt Discord's Aprilscherz 2018 (@someone) und erwähnt einen zufälligen User."
-                    },
+					},
 					{
-                        name: `${process.env.PREFIX}kerle | ${process.env.PREFIX}dudes`,
+						name: `${process.env.PREFIX}jemand | ${process.env.PREFIX}someone`,
+						value: "Ersetzt Discord's Aprilscherz 2018 (@someone) und erwähnt einen zufälligen User."
+					},
+					{
+						name: `${process.env.PREFIX}kerle | ${process.env.PREFIX}dudes`,
 						value: "Es ist Mittwoch, meine Kerle! [Inspiriert von kidpix2.](https://web.archive.org/web/20161007164108/https://kidpix2.tumblr.com/post/104840641707/wednesday-meme)"
 					},
 					{
-                        name: `${process.env.PREFIX}klatsch | ${process.env.PREFIX}clap`,
+						name: `${process.env.PREFIX}klatsch | ${process.env.PREFIX}clap`,
 						value: "Fügt das erste Wort zwischen alle anderen ein. [Inspiriert vom \"Ratchet Clap\".](https://www.urbandictionary.com/define.php?term=Ratchet+Clap)"
 					},
 					{
-                        name: `${process.env.PREFIX}ping`,
+						name: `${process.env.PREFIX}ping`,
 						value: "Pingt den Roboter an und antwortet mit den Latenzzeiten."
 					},
 					{
-                        name: `${process.env.PREFIX}spott | ${process.env.PREFIX}mock`,
+						name: `${process.env.PREFIX}spott | ${process.env.PREFIX}mock`,
 						value: "Gibt die Nachricht abwechselnd in Groß- und Kleinbuchstaben wieder. [Inspiriert von SpongeBob Schwammkopf.](https://www.imdb.com/title/tt2512000/)"
-                    },
-                    {
-                        name: `${process.env.PREFIX}swfchan`,
-                        value: "Nimmt eine zufällige Flash-Animation aus der [swfchan](http://swfchan.com/)-Datenbank."
-                    }
+					}
 				],
 				footer: {
 					icon_url: client.user.avatarURL,
@@ -192,16 +187,16 @@ client.on("message", async message => {
 			var temp = "Scheine";
 		};
 		message.channel.send(`Bitte Objektiv beurteilen hab jetzt lange dafür gebraucht Stellt euch den Beat vor die Hook ist mit AutoTune\n\ney ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} Ich rappe und mache Krieg wie '39 und bin beim Dealen fleißig Ich hatte mit vielen Frauen Sex und saufe Wodka Bull auf Ex ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} Wer mich fikt den fike ich zurück Eyyyy Brudi mach nicht so auf 31er den ich komm in Haus und mach Schaden mit Waffe yooooohhhooo Wallah ich schiesse mit 5 kancken auf dein Haus ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} Ich mache mit Koks Para und fike und Porsche Pana Ich nehm Drogen ala MDMA HEROIN COCAIN DOPE CRYSTAL und rauche denn Stoff gib mir den J und deine Mutter gibt mir Shoot So habe ich euch gefikkt yea yea Cho`);
-    };
-    if (command === "jemand" || command === "someone") {
-        console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
-        var temp = message.channel.guild.members.random().user;
-        if (message.guild.members.get(temp.id).nickname) {
-            message.channel.send(ascii() + " " + message.guild.members.get(temp.id).nickname + " " + args.join(" "));
-        } else {
-            message.channel.send(ascii() + " " + temp.username + " " + args.join(" "));
-        };
-    };
+	};
+	if (command === "jemand" || command === "someone") {
+		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
+		var temp = message.channel.guild.members.random().user;
+		if (message.guild.members.get(temp.id).nickname) {
+			message.channel.send(ascii() + " " + message.guild.members.get(temp.id).nickname + " " + args.join(" "));
+		} else {
+			message.channel.send(ascii() + " " + temp.username + " " + args.join(" "));
+		};
+	};
 	if (command === "kerle" || command === "dudes") {
 		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 		if (args && args != "") {
@@ -260,35 +255,7 @@ client.on("message", async message => {
 				message.channel.send(temp);
 			});
 		};
-    };
-    if (command === "swfchan") {
-        console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
-        if (args && args != "") {
-            var temp = args(join, " ");
-        } else {
-            message.channel.fetchMessages({
-                limit: 2
-            }).then(temp => {
-                var temp = temp.last().content;
-            });
-        };
-        if (!(temp === "all" || temp === "wild" || temp === "catted" || temp === "porn" || temp === "clean")) {
-            var temp = "all";
-        };
-        var pbrws = await puppt.launch();
-        var ppage = await pbrws.newPage();
-        await ppage.goto("http://eye.swfchan.com/random.asp?" + test);
-        await Promise.all([
-            ppage.click("#t > a"),
-            ppage.waitForNavigation()
-        ]);
-        var plink = "Link: " + ppage.url();
-        var pprev = await ppage.$("#sect2 img");
-        pprev = "Preview: " + await pprev.getProperty("src");
-        var ptitl = await ppage.evaluate(() => document.getElementById("currname").innerHTML);
-        ptitl = "Title: " + ptitl.replace(/<u>&nbsp;<\/u> /g, "");
-        await pbrws.close();
-    };
+	};
 });
 
 // TODO: MCNAME | SCHUSS
