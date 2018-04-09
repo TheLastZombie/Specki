@@ -264,9 +264,12 @@ client.on("message", async message => {
     };
     if (command === "supreme") {
         console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
+        var pbrws;
+        var ppage;
+        var pcnvs;
         (async() => {
-            var pbrws = await puppt.launch();
-            var ppage = await pbrws.newPage();
+            pbrws = await puppt.launch();
+            ppage = await pbrws.newPage();
             await ppage.goto("https://undercase.github.io/supreme/");
         })();
         if (args && args != "") {
@@ -283,7 +286,7 @@ client.on("message", async message => {
             });
         };
         (async() => {
-            var pcnvs = await ppage.$("canvas");
+            pcnvs = await ppage.$("canvas");
             await pcnvs.screenshot({ path: "supreme.png" });
             await pbrws.close();
         })();
