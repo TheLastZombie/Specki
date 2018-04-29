@@ -268,11 +268,11 @@ client.on("message", async message => {
 		} else {
 			message.channel.fetchMessages({
 				limit: 2
-			}).then(temp => {
-				if (message.guild.members.get(temp.last().author.id).nickname) {
-					temp = message.guild.members.get(temp.last().author.id).nickname;
+			}).then(mesg => {
+				if (message.guild.members.get(mesg.last().author.id).nickname) {
+					temp = message.guild.members.get(mesg.last().author.id).nickname;
 				} else {
-					temp = temp.last().author.username;
+					temp = mesg.last().author.username;
 				};
 			});
 		};
