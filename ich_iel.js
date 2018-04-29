@@ -264,11 +264,14 @@ client.on("message", async message => {
 		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 		var temp;
 		if (args && args != "") {
-			// user tagged? todo
-			if (message.guild.members.get(args.join(" ").match(/\d+/g)).nickname) {
-				temp = message.guild.members.get(args.join(" ").match(/\d+/g)).nickname;
-			} else if (message.guild.members.get(args.join(" ").match(/\d+/g)).user.username) {
-				temp = message.guild.members.get(args.join(" ").match(/\d+/g)).user.username;
+			if (message.guild.members.get(args.join(" ").match(/\d+/g))) {
+				if (message.guild.members.get(args.join(" ").match(/\d+/g)).nickname) {
+					temp = message.guild.members.get(args.join(" ").match(/\d+/g)).nickname;
+				} else if (message.guild.members.get(args.join(" ").match(/\d+/g)).user.username) {
+					temp = message.guild.members.get(args.join(" ").match(/\d+/g)).user.username;
+				} else {
+					temp = args.join(" ");
+				};
 			} else {
 				temp = args.join(" ");
 			};
