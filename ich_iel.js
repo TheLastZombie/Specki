@@ -59,7 +59,7 @@ client.on("message", async message => {
 			});
 		};
 	};
-	if (command === "ficken") {
+	if (command === "ficken" || command === "toll") {
 		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 		if (/\[.+\] \[.+\]/.test(args.join(" "))) {
 			message.channel.send(`toll`);
@@ -104,7 +104,7 @@ client.on("message", async message => {
 						value: "Ersetzt \"AUS\", \"GEL\", \"ÖST\", etc. mit den entsprechenden Emotes."
 					},
 					{
-						name: `${process.env.PREFIX}ficken`,
+						name: `${process.env.PREFIX}ficken | ${process.env.PREFIX}toll`,
 						value: "Zwei Argumente in eckigen Klammern: [beim kopfhörer] [um das ohr]. [FICKen](https://github.com/samogot/betterdiscord-plugins/blob/master/v2/Quoter/link-stub.md?guild_id=392678434687549440&channel_id=430838493359636490&message_id=431582731239948308&author_id=254703312312467467)"
 					},
 					{
@@ -116,7 +116,7 @@ client.on("message", async message => {
 						value: "Wenn du das hier lesen kannst, weißt du bereits, was dieser Command macht."
 					},
 					{
-						name: `${process.env.PREFIX}huso`,
+						name: `${process.env.PREFIX}huso | ${process.env.PREFIX}wie`,
 						value: "Wie gibt's nicht, du Hurensohn? [Inspiriert von Ömer.](https://www.facebook.com/KFC.Deutschland/posts/1145486008814468?comment_id=1145949152101487&reply_comment_id=1145955162100886)"
 					},
 					{
@@ -146,10 +146,6 @@ client.on("message", async message => {
 					{
 						name: `${process.env.PREFIX}spott | ${process.env.PREFIX}mock`,
 						value: "Gibt die Nachricht abwechselnd in Groß- und Kleinbuchstaben wieder. [Inspiriert von SpongeBob Schwammkopf.](https://www.imdb.com/title/tt2512000/)"
-					},
-					{
-						name: `${process.env.PREFIX}stfu`,
-						value: "shut the fuck up hannes – [Ich raste aus](https://i.redd.it/7qj006wr2kq01.png)"
 					}
 				],
 				footer: {
@@ -159,7 +155,7 @@ client.on("message", async message => {
 			}
 		});
 	};
-	if (command === "huso") {
+	if (command === "huso" || command === "wie") {
 		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 		if (args && args != "") {
 			message.channel.send(`Wie ${args.join(" ")}, du Hurensohn?`);
@@ -259,23 +255,5 @@ client.on("message", async message => {
 				message.channel.send(temp);
 			});
 		};
-	};
-	if (command === "stfu") {
-		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
-		var temp;
-		if (args && args != "") {
-			temp = args.join(" ");
-		} else {
-			message.channel.fetchMessages({
-				limit: 2
-			}).then(mesg => {
-				if (message.guild.members.get(mesg.last().author.id).nickname) {
-					temp = message.guild.members.get(mesg.last().author.id).nickname;
-				} else {
-					temp = mesg.last().author.username;
-				};
-			});
-		};
-		message.channel.send("shut the fuck up " + temp);
 	};
 });
