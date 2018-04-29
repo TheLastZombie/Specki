@@ -146,6 +146,10 @@ client.on("message", async message => {
 					{
 						name: `${process.env.PREFIX}spott | ${process.env.PREFIX}mock`,
 						value: "Gibt die Nachricht abwechselnd in Groß- und Kleinbuchstaben wieder. [Inspiriert von SpongeBob Schwammkopf.](https://www.imdb.com/title/tt2512000/)"
+					},
+					{
+						name: `${process.env.PREFIX}stfu`,
+						value: "shut the fuck up hannes – [Ich raste aus](https://i.redd.it/7qj006wr2kq01.png)"
 					}
 				],
 				footer: {
@@ -255,5 +259,30 @@ client.on("message", async message => {
 				message.channel.send(temp);
 			});
 		};
+	};
+	if (command === "stfu") {
+		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
+		var temp;
+		if (args && args != "") {
+			// user tagged? todo
+			if (message.guild.members.get(args.join(" ").match(/\d+/g)).nickname) {
+				temp = message.guild.members.get(args.join(" ").match(/\d+/g)).nickname;
+			} else if (message.guild.members.get(args.join(" ").match(/\d+/g)).user.username) {
+				temp = message.guild.members.get(args.join(" ").match(/\d+/g)).user.username;
+			} else {
+				temp = args.join(" ");
+			};
+		} else {
+			message.channel.fetchMessages({
+				limit: 2
+			}).then(temp => {
+				if (message.guild.members.get(temp.last().author.id).nickname) {
+					temp = message.guild.members.get(temp.last().author.id).nickname;
+				} else {
+					temp = temp.last().author.username;
+				};
+			});
+		};
+		message.channel.send("shut the fuck up " + temp);
 	};
 });
