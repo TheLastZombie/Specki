@@ -31,5 +31,6 @@ npm start
 | jemand<br>someone | Ersetzt Discord's Aprilscherz 2018 (@someone) und erwähnt einen zufälligen User. |
 | kerle<br>dudes | Es ist Mittwoch, meine Kerle! [Inspiriert von kidpix2.](https://web.archive.org/web/20161007164108/https://kidpix2.tumblr.com/post/104840641707/wednesday-meme) |
 | klatsch<br>clap | Fügt das erste Wort zwischen alle anderen ein. [Inspiriert vom \"Ratchet Clap\".](https://www.urbandictionary.com/define.php?term=Ratchet+Clap) |
+| pfosten | Antwortet mit einem zufälligen Post aus dem spezifizierten Subreddit. |
 | ping | Pingt den Roboter an und antwortet mit den Latenzzeiten. |
 | spott<br>mock | Gibt die Nachricht abwechselnd in Groß- und Kleinbuchstaben wieder. [Inspiriert von SpongeBob Schwammkopf.](https://www.imdb.com/title/tt2512000/) |
