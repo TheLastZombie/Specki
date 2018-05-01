@@ -1,6 +1,7 @@
 const dscrd = require("discord.js");
 const trnsl = require("google-translate-api");
 const ascii = require("cool-ascii-faces");
+const reqst = require("request");
 const client = new dscrd.Client({
 	autoReconnect: true
 });
@@ -144,6 +145,10 @@ client.on("message", async message => {
 						value: "Pingt den Roboter an und antwortet mit den Latenzzeiten."
 					},
 					{
+						name: `${process.env.PREFIX}pfosten`,
+						value: "Antwortet mit einem zufälligen Post aus dem spezifizierten Subreddit."
+					},
+					{
 						name: `${process.env.PREFIX}spott | ${process.env.PREFIX}mock`,
 						value: "Gibt die Nachricht abwechselnd in Groß- und Kleinbuchstaben wieder. [Inspiriert von SpongeBob Schwammkopf.](https://www.imdb.com/title/tt2512000/)"
 					}
@@ -218,6 +223,53 @@ client.on("message", async message => {
 				limit: 2
 			}).then(temp => {
 				message.channel.send(temp.last().content.split(/ /g).join(` ${args} `));
+			});
+		};
+	};
+	if (command === "pfosten") {
+		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
+		if (args && args != "") {
+			reqst("https://www.reddit.com/r/" + args.join(" ") + "/random/.json", function (error, response, body) {
+				message.channel.send({
+					"embed": {
+						"title": JSON.parse(body)[0]["data"]["children"][0]["data"]["title"],
+						"description": JSON.parse(body)[0]["data"]["children"][0]["data"]["selftext"],
+						"fields": [{
+								"name": "Subreddit",
+								"value": JSON.parse(body)[0]["data"]["children"][0]["data"]["subreddit"],
+								"inline": true
+							},
+							{
+								"name": "Datum",
+								"value": new Date(JSON.parse(body)[0]["data"]["children"][0]["data"]["created"] * 1000).toISOString().replace(/T/, " ").replace(/\..+/, ""),
+								"inline": true
+							},
+							{
+								"name": "Votes",
+								"value": "▲ " + JSON.parse(body)[0]["data"]["children"][0]["data"]["ups"] + " | " + JSON.parse(body)[0]["data"]["children"][0]["data"]["downs"] + " ▼",
+								"inline": true
+							},
+							{
+								"name": "Kommentare",
+								"value": "🗩 " + JSON.parse(body)[0]["data"]["children"][0]["data"]["num_comments"],
+								"inline": true
+							},
+							{
+								"name": "Crossposts",
+								"value": "✕ " + JSON.parse(body)[0]["data"]["children"][0]["data"]["num_crossposts"],
+								"inline": true
+							},
+							{
+								"name": "Link",
+								"value": "https://redd.it/" + JSON.parse(body)[0]["data"]["children"][0]["data"]["id"],
+								"inline": true
+							}
+						],
+						"image": {
+							"url": JSON.parse(body)[0]["data"]["children"][0]["data"]["url"]
+						}
+					}
+				});
 			});
 		};
 	};
