@@ -150,7 +150,7 @@ client.on("message", async message => {
 					},
 					{
 						name: `${process.env.PREFIX}sag`,
-						value: "Sag moin zurück 🔫 <:uff_kaputt:402413360748036128>"
+						value: "[Sag moin zurück 🔫 <:uff_kaputt:402413360748036128>](https://github.com/samogot/betterdiscord-plugins/blob/master/v2/Quoter/link-stub.md?guild_id=392678434687549440&channel_id=392678434687549442&message_id=432426867690307586&author_id=183398612024295425)"
 					},
 					{
 						name: `${process.env.PREFIX}spott | ${process.env.PREFIX}mock`,
