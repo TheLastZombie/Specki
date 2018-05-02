@@ -149,6 +149,10 @@ client.on("message", async message => {
 						value: "Antwortet mit einem zufälligen Post aus dem spezifizierten Subreddit."
 					},
 					{
+						name: `${process.env.PREFIX}sag`,
+						value: "Sag moin zurück 🔫 <:uff_kaputt:402413360748036128>"
+					},
+					{
 						name: `${process.env.PREFIX}spott | ${process.env.PREFIX}mock`,
 						value: "Gibt die Nachricht abwechselnd in Groß- und Kleinbuchstaben wieder. [Inspiriert von SpongeBob Schwammkopf.](https://www.imdb.com/title/tt2512000/)"
 					}
@@ -277,6 +281,18 @@ client.on("message", async message => {
 		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 		var temp = await message.channel.send("Ping...");
 		temp.edit(`Pong! Latenz: ${temp.createdTimestamp - message.createdTimestamp} ms. API-Latenz: ${Math.round(client.ping)} ms.`);
+	};
+	if (command === "sag") {
+		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
+		if (args && args != "") {
+			message.channel.send(`Sag ${args.join(" ")} zurück 🔫 <:uff_kaputt:402413360748036128>`);
+		} else {
+			message.channel.fetchMessages({
+				limit: 2
+			}).then(temp => {
+				message.channel.send(`Sag ${temp.last().content} zurück 🔫 <:uff_kaputt:402413360748036128>`);
+			});
+		};
 	};
 	if (command === "spott" || command === "mock") {
 		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
