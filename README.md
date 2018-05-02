@@ -33,4 +33,5 @@ npm start
 | klatsch<br>clap | Fügt das erste Wort zwischen alle anderen ein. [Inspiriert vom \"Ratchet Clap\".](https://www.urbandictionary.com/define.php?term=Ratchet+Clap) |
 | pfosten | Antwortet mit einem zufälligen Post aus dem spezifizierten Subreddit. |
 | ping | Pingt den Roboter an und antwortet mit den Latenzzeiten. |
+| sag | Sag moin zurück 🔫 😠 |
 | spott<br>mock | Gibt die Nachricht abwechselnd in Groß- und Kleinbuchstaben wieder. [Inspiriert von SpongeBob Schwammkopf.](https://www.imdb.com/title/tt2512000/) |
