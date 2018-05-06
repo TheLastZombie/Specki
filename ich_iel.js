@@ -260,6 +260,11 @@ client.on("message", async message => {
 								"inline": true
 							},
 							{
+								"name": "Autor",
+								"value": JSON.parse(body)[0]["data"]["children"][0]["data"]["author"],
+								"inline": true
+							},
+							{
 								"name": "Datum",
 								"value": new Date(JSON.parse(body)[0]["data"]["children"][0]["data"]["created"] * 1000).toISOString().replace(/T/, " ").replace(/\..+/, ""),
 								"inline": true
@@ -272,11 +277,6 @@ client.on("message", async message => {
 							{
 								"name": "Kommentare",
 								"value": "🗩 " + JSON.parse(body)[0]["data"]["children"][0]["data"]["num_comments"],
-								"inline": true
-							},
-							{
-								"name": "Crossposts",
-								"value": "✕ " + JSON.parse(body)[0]["data"]["children"][0]["data"]["num_crossposts"],
 								"inline": true
 							},
 							{
