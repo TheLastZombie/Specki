@@ -2,6 +2,7 @@ const dscrd = require("discord.js");
 const trnsl = require("google-translate-api");
 const ascii = require("cool-ascii-faces");
 const reqst = require("request");
+const figlt = require("figlet");
 const client = new dscrd.Client({
 	autoReconnect: true
 });
@@ -28,6 +29,22 @@ client.on("message", async message => {
 	};	
 	var args = message.content.slice(process.env.PREFIX.length).trim().split(/ /g);
 	var command = args.shift().toLowerCase();
+	if (command === "ascii") {
+		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
+		if (/\[.+\] \[.+\]/.test(args.join(" "))) {
+			figlt.text(args.join(" ").match(/\] \[.+\]/).toString().slice(3, -1), {
+				font: args.join(" ").match(/\[.+\] \[/).toString().slice(1, -3)
+			}, function(err, temp) {
+				if (err) {
+					figlt.fonts(function(err, temp) {
+						message.channel.send(`Fehler: Schrift wurde nicht gefunden.\nAnwendung: \`${process.env.PREFIX}${command} [Schrift] [Nachricht]\`.\nBeispiel: \`${process.env.PREFIX}${command} [Ghost] [Hallo, Welt!]\`\nVerfügbare Schriften: ${temp}.`);
+					});
+					return;
+				};
+				message.channel.send(temp);
+			});
+		};
+	};
 	if (command === "deutsch") {
 		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 		if (args && args != "") {
@@ -108,6 +125,10 @@ client.on("message", async message => {
 				url: "https://rsch.neocities.org",
 				description: "Der Roboter exklusiv für den /r/ich_iel Discord. Hier gibt's eine Übersicht über alle Commands.\nFür die meisten Commands gilt: Ist kein Text angegeben, wird die vorherige Nachricht verwendet.",
 				fields: [
+					{
+						name: `${process.env.PREFIX}ascii`,
+						value: "Generiert ASCII-Art. Anwendung: [Schrift] [Nachricht]."
+					},
 					{
 						name: `${process.env.PREFIX}deutsch`,
 						value: "Übersetzt eine Nachricht ins Deutsche – mal mehr, mal weniger gut."
