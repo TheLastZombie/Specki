@@ -86,6 +86,17 @@ client.on("message", async message => {
 			});
 		};
 	};
+	if (command === "hab") {
+		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
+		if (args && args != "") {
+			message.channel.send(`Hab ${args.join(" ")} gemacht in meine hose skyaa <:donken:400036407697211403>`);
+		} else {
+			message.channel.fetchMessages({
+				limit: 2
+			}).then(temp => {
+				message.channel.send(`Hab ${temp.last().content} gemacht in meine hose skyaa <:donken:400036407697211403>`);
+			});
+		};
 	if (command === "hilfe" || command === "help") {
 		message.channel.send({
 			embed: {
@@ -111,6 +122,10 @@ client.on("message", async message => {
 					{
 						name: `${process.env.PREFIX}frauen`,
 						value: "Frauen stehn auf Männer wo beim Sex die Arme kaputt"
+					},
+					{
+						name: `${process.env.PREFIX}hab`,
+						value: "[Hab kacka gemacht in meine hose skyaa 🤔](https://github.com/samogot/betterdiscord-plugins/blob/master/v2/Quoter/link-stub.md?guild_id=392678434687549440&channel_id=392678434687549442&message_id=402965723825307668&author_id=247387337204432896)"
 					},
 					{
 						name: `${process.env.PREFIX}hilfe | ${process.env.PREFIX}help`,
