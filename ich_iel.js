@@ -97,6 +97,7 @@ client.on("message", async message => {
 				message.channel.send(`Hab ${temp.last().content} gemacht in meine hose skyaa <:donken:400036407697211403>`);
 			});
 		};
+	};
 	if (command === "hilfe" || command === "help") {
 		message.channel.send({
 			embed: {
