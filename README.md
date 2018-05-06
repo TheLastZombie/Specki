@@ -34,5 +34,5 @@ npm start
 | klatsch<br>clap | Fügt das erste Wort zwischen alle anderen ein. [Inspiriert vom \"Ratchet Clap\".](https://www.urbandictionary.com/define.php?term=Ratchet+Clap) |
 | pfosten | Antwortet mit einem zufälligen Post aus dem spezifizierten Subreddit. |
 | ping | Pingt den Roboter an und antwortet mit den Latenzzeiten. |
-| sag | Sag moin zurück 🔫 😠 |
+| sag |[Sag moin zurück 🔫 😠](https://github.com/samogot/betterdiscord-plugins/blob/master/v2/Quoter/link-stub.md?guild_id=392678434687549440&channel_id=392678434687549442&message_id=432426867690307586&author_id=183398612024295425) |
 | spott<br>mock | Gibt die Nachricht abwechselnd in Groß- und Kleinbuchstaben wieder. [Inspiriert von SpongeBob Schwammkopf.](https://www.imdb.com/title/tt2512000/) |
