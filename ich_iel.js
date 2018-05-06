@@ -37,7 +37,7 @@ client.on("message", async message => {
 			}, function(err, temp) {
 				if (err) {
 					figlt.fonts(function(err, temp) {
-						message.channel.send(`Fehler: Schrift wurde nicht gefunden.\nAnwendung: \`${process.env.PREFIX}${command} [Schrift] [Nachricht]\`.\nBeispiel: \`${process.env.PREFIX}${command} [Ghost] [Hallo, Welt!]\`\nFür eine Liste der verfügbaren Schriften siehe [figlet.js](https://github.com/patorjk/figlet.js).`);
+						message.channel.send(`Fehler: Schrift wurde nicht gefunden.\nAnwendung: \`${process.env.PREFIX}${command} [Schrift] [Nachricht]\`\nBeispiel: \`${process.env.PREFIX}${command} [Ghost] [Hallo, Welt!]\`\nFür eine Liste der verfügbaren Schriften siehe https://github.com/patorjk/figlet.js.`);
 					});
 					return;
 				};
