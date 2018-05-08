@@ -2,6 +2,7 @@ const dscrd = require("discord.js");
 const trnsl = require("google-translate-api");
 const ascii = require("cool-ascii-faces");
 const reqst = require("request");
+const figlt = require("figlet");
 const client = new dscrd.Client({
 	autoReconnect: true
 });
@@ -28,6 +29,22 @@ client.on("message", async message => {
 	};	
 	var args = message.content.slice(process.env.PREFIX.length).trim().split(/ /g);
 	var command = args.shift().toLowerCase();
+	if (command === "ascii") {
+		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
+		if (/\[.+\] \[.+\]/.test(args.join(" "))) {
+			figlt.text(args.join(" ").match(/\] \[.+\]/).toString().slice(3, -1), {
+				font: args.join(" ").match(/\[.+\] \[/).toString().slice(1, -3)
+			}, function(err, temp) {
+				if (err) {
+					figlt.fonts(function(err, temp) {
+						message.channel.send(`Fehler: Schrift wurde nicht gefunden.\n\nAnwendung: \`${process.env.PREFIX}${command} [Schrift] [Nachricht]\`\nBeispiel: \`${process.env.PREFIX}${command} [Ghost] [Hallo, Welt!]\`\n\nFür eine Liste der verfügbaren Schriften siehe https://github.com/patorjk/figlet.js/tree/master/fonts.`);
+					});
+					return;
+				};
+				message.channel.send("```" + temp + "```");
+			});
+		};
+	};
 	if (command === "deutsch") {
 		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 		if (args && args != "") {
@@ -80,6 +97,18 @@ client.on("message", async message => {
 			});
 		};
 	};
+	if (command === "hab") {
+		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
+		if (args && args != "") {
+			message.channel.send(`Hab ${args.join(" ")} gemacht in meine hose skyaa <:donken:400036407697211403>`);
+		} else {
+			message.channel.fetchMessages({
+				limit: 2
+			}).then(temp => {
+				message.channel.send(`Hab ${temp.last().content} gemacht in meine hose skyaa <:donken:400036407697211403>`);
+			});
+		};
+	};
 	if (command === "hilfe" || command === "help") {
 		message.channel.send({
 			embed: {
@@ -90,6 +119,10 @@ client.on("message", async message => {
 				url: "https://rsch.neocities.org",
 				description: "Der Roboter exklusiv für den /r/ich_iel Discord. Hier gibt's eine Übersicht über alle Commands.\nFür die meisten Commands gilt: Ist kein Text angegeben, wird die vorherige Nachricht verwendet.",
 				fields: [
+					{
+						name: `${process.env.PREFIX}ascii`,
+						value: "Generiert ASCII-Art. Anwendung: [Schrift] [Nachricht]."
+					},
 					{
 						name: `${process.env.PREFIX}deutsch`,
 						value: "Übersetzt eine Nachricht ins Deutsche – mal mehr, mal weniger gut."
@@ -105,6 +138,10 @@ client.on("message", async message => {
 					{
 						name: `${process.env.PREFIX}frauen`,
 						value: "Frauen stehn auf Männer wo beim Sex die Arme kaputt"
+					},
+					{
+						name: `${process.env.PREFIX}hab`,
+						value: "[Hab kacka gemacht in meine hose skyaa 🤔](https://github.com/samogot/betterdiscord-plugins/blob/master/v2/Quoter/link-stub.md?guild_id=392678434687549440&channel_id=392678434687549442&message_id=402965723825307668&author_id=247387337204432896)"
 					},
 					{
 						name: `${process.env.PREFIX}hilfe | ${process.env.PREFIX}help`,
@@ -141,6 +178,10 @@ client.on("message", async message => {
 					{
 						name: `${process.env.PREFIX}pfosten`,
 						value: "Antwortet mit einem zufälligen Post aus dem spezifizierten Subreddit."
+					},
+					{
+						name: `${process.env.PREFIX}sag`,
+						value: "[Sag moin zurück 🔫 <:uff_kaputt:402413360748036128>](https://github.com/samogot/betterdiscord-plugins/blob/master/v2/Quoter/link-stub.md?guild_id=392678434687549440&channel_id=392678434687549442&message_id=432426867690307586&author_id=183398612024295425)"
 					},
 					{
 						name: `${process.env.PREFIX}spott | ${process.env.PREFIX}mock`,
@@ -234,6 +275,11 @@ client.on("message", async message => {
 								"inline": true
 							},
 							{
+								"name": "Autor",
+								"value": JSON.parse(body)[0]["data"]["children"][0]["data"]["author"],
+								"inline": true
+							},
+							{
 								"name": "Datum",
 								"value": new Date(JSON.parse(body)[0]["data"]["children"][0]["data"]["created"] * 1000).toISOString().replace(/T/, " ").replace(/\..+/, ""),
 								"inline": true
@@ -246,11 +292,6 @@ client.on("message", async message => {
 							{
 								"name": "Kommentare",
 								"value": "🗩 " + JSON.parse(body)[0]["data"]["children"][0]["data"]["num_comments"],
-								"inline": true
-							},
-							{
-								"name": "Crossposts",
-								"value": "✕ " + JSON.parse(body)[0]["data"]["children"][0]["data"]["num_crossposts"],
 								"inline": true
 							},
 							{
@@ -271,6 +312,18 @@ client.on("message", async message => {
 		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 		var temp = await message.channel.send("Ping...");
 		temp.edit(`Pong! Latenz: ${temp.createdTimestamp - message.createdTimestamp} ms. API-Latenz: ${Math.round(client.ping)} ms.`);
+	};
+	if (command === "sag") {
+		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
+		if (args && args != "") {
+			message.channel.send(`Sag ${args.join(" ")} zurück 🔫 <:uff_kaputt:402413360748036128>`);
+		} else {
+			message.channel.fetchMessages({
+				limit: 2
+			}).then(temp => {
+				message.channel.send(`Sag ${temp.last().content} zurück 🔫 <:uff_kaputt:402413360748036128>`);
+			});
+		};
 	};
 	if (command === "spott" || command === "mock") {
 		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
