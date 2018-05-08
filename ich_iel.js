@@ -63,15 +63,9 @@ client.on("message", async message => {
 	if (command === "ficken" || command === "toll") {
 		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 		if (/\[.+\] \[.+\]/.test(args.join(" "))) {
-			message.channel.send(`toll`);
-			message.channel.send(`dieses ding ${args.join(" ").match(/\[.+\] \[/).toString().slice(1, -3)} ab`);
-			message.channel.send(`dieses ${args.join(" ").match(/\] \[.+\]/).toString().slice(3, -1)}`);
-			message.channel.send(`FICKen`);
+			message.channel.send(`toll\ndieses ding ${args.join(" ").match(/\[.+\] \[/).toString().slice(1, -3)} ab\ndieses ${args.join(" ").match(/\] \[.+\]/).toString().slice(3, -1)}\nFICKen`);
 		} else {
-			message.channel.send(`toll`);
-			message.channel.send(`dieses ding beim kopfhörer ab`);
-			message.channel.send(`dieses um das ohr`);
-			message.channel.send(`FICKen`);
+			message.channel.send(`toll\ndieses ding beim kopfhörer ab\ndieses um das ohr\nFICKen`);
 		};
 	};
 	if (command === "frauen") {
