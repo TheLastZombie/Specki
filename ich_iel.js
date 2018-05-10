@@ -296,8 +296,8 @@ client.on("message", async message => {
 								"inline": true
 							},
 							{
-								"name": "Kommentare",
-								"value": "🗩 " + JSON.parse(body)[0]["data"]["children"][0]["data"]["num_comments"],
+								"name": "Aktivität",
+								"value": "🗩 " + JSON.parse(body)[0]["data"]["children"][0]["data"]["num_comments"] + " | " + JSON.parse(body)[0]["data"]["children"][0]["data"]["num_crossposts"] + " ✕",
 								"inline": true
 							},
 							{
