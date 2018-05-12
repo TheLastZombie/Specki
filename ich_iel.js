@@ -15,9 +15,8 @@ client.on("ready", () => {
 });
 client.on("message", async message => {
 	console.log(``);
-	console.log(`Neue Nachricht von ${message.author.username} (ID: ${message.author.id}).`);
-	console.log(``);
-	console.log(message);
+	console.log(`Neue Nachricht von ${message.author.username} (ID: ${message.author.id}):`);
+	console.log(message.content);
 	console.log(``);
 	if (message.author.bot) {
 		console.log(`Nachricht wurde nicht verarbeitet, da sie von einem Bot und keinem Nutzer stammt.`);
