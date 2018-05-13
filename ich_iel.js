@@ -15,11 +15,14 @@ client.on("ready", () => {
 });
 client.on("message", async message => {
 	console.log(``);
-	console.log(`Neue Nachricht von ${message.author.username} (ID: ${message.author.id}).`);
+	console.log(`Neue Nachricht von ${message.author.username} (ID: ${message.author.id}):`);
+	console.log(message.content);
 	console.log(``);
-	console.log(message);
-	console.log(``);
-	if (message.author.bot) {
+	if (message.author.id == 445238293626486787 && message.content == "wir wissen alle, dass ich besser als <@405408491969314826> bin") {
+		console.log(`Nachricht wird als ADB-Antwort verarbeitet.`);
+		message.channel.send("Das ist wo du falsch bist, Kiddo!");
+		return;
+	} else if (message.author.bot) {
 		console.log(`Nachricht wurde nicht verarbeitet, da sie von einem Bot und keinem Nutzer stammt.`);
 		return;
 	};
@@ -290,8 +293,8 @@ client.on("message", async message => {
 								"inline": true
 							},
 							{
-								"name": "Kommentare",
-								"value": "🗩 " + JSON.parse(body)[0]["data"]["children"][0]["data"]["num_comments"],
+								"name": "Aktivität",
+								"value": "🗩 " + JSON.parse(body)[0]["data"]["children"][0]["data"]["num_comments"] + " | " + JSON.parse(body)[0]["data"]["children"][0]["data"]["num_crossposts"] + " ✕",
 								"inline": true
 							},
 							{
