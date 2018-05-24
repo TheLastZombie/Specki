@@ -18,11 +18,7 @@ client.on("message", async message => {
 	console.log(`Neue Nachricht von ${message.author.username} (ID: ${message.author.id}):`);
 	console.log(message.content);
 	console.log(``);
-	if (message.author.id == 346295434546774016) {
-		console.log(`Nachricht wird als Jerrynicki-Antwort verarbeitet.`);
-		message.author.send("Du weißt schon, dass du den großen Schwul hast, oder?");
-		return;
-	} else if (message.author.bot) {
+	if (message.author.bot) {
 		console.log(`Nachricht wurde nicht verarbeitet, da sie von einem Bot und keinem Nutzer stammt.`);
 		return;
 	};
