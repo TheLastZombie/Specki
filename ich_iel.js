@@ -158,7 +158,7 @@ client.on("message", async message => {
 					},
 					{
 						name: `${process.env.PREFIX}ficken | ${process.env.PREFIX}toll`,
-						value: "Zwei Argumente in eckigen Klammern: [beim kopfhörer] [um das ohr]. [FICKen](https://github.com/samogot/betterdiscord-plugins/blob/master/v2/Quoter/link-stub.md?guild_id=392678434687549440&channel_id=430838493359636490&message_id=431582731239948308&author_id=254703312312467467)"
+						value: "Zwei Argumente in eckigen Klammern: [beim kopfhörer] [um das ohr]. [FICKen](https://discordapp.com/channels/392678434687549440/430838493359636490?jump=431582731239948308)"
 					},
 					{
 						name: `${process.env.PREFIX}frauen`,
@@ -166,7 +166,7 @@ client.on("message", async message => {
 					},
 					{
 						name: `${process.env.PREFIX}hab`,
-						value: "[Hab kacka gemacht in meine hose skyaa 🤔](https://github.com/samogot/betterdiscord-plugins/blob/master/v2/Quoter/link-stub.md?guild_id=392678434687549440&channel_id=392678434687549442&message_id=402965723825307668&author_id=247387337204432896)"
+						value: "[Hab kacka gemacht in meine hose skyaa 🤔](https://discordapp.com/channels/392678434687549440/392678434687549442?jump=402965723825307668)"
 					},
 					{
 						name: `${process.env.PREFIX}hilfe | ${process.env.PREFIX}help`,
@@ -206,7 +206,7 @@ client.on("message", async message => {
 					},
 					{
 						name: `${process.env.PREFIX}sag`,
-						value: "[Sag moin zurück 🔫 <:uff_kaputt:402413360748036128>](https://github.com/samogot/betterdiscord-plugins/blob/master/v2/Quoter/link-stub.md?guild_id=392678434687549440&channel_id=392678434687549442&message_id=432426867690307586&author_id=183398612024295425)"
+						value: "[Sag moin zurück 🔫 <:uff_kaputt:402413360748036128>](https://discordapp.com/channels/392678434687549440/392678434687549442?jump=432426867690307586)"
 					},
 					{
 						name: `${process.env.PREFIX}spott | ${process.env.PREFIX}mock`,
