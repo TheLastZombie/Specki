@@ -44,6 +44,28 @@ client.on("message", async message => {
 			});
 		};
 	};
+	if (command === "b" || command === "🅱") {
+		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
+		var temp;
+		if (args && args != "") {
+			temp = args;
+		} else {
+			message.channel.fetchMessages({
+				limit: 2
+			}).then(temp => {
+				temp = temp.last().content.split(" ");
+			});
+		};
+		for (var index = 0; index < temp.length; index++) {
+			if (["B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "X", "Z"].includes(temp[index].charAt(0).toUpperCase())) {
+				temp[index] = temp[index].replace(temp[index].charAt(0), "🅱");
+			} else {
+				temp[index] = "🅱" + temp[index];
+			};
+		};
+		temp = temp.join(" ").replace(/B/gi, "🅱");
+		message.channel.send(temp);
+	};
 	if (command === "deutsch") {
 		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 		if (args && args != "") {
@@ -121,6 +143,10 @@ client.on("message", async message => {
 					{
 						name: `${process.env.PREFIX}ascii`,
 						value: "Generiert ASCII-Art. Anwendung: [Schrift] [Nachricht]."
+					},
+					{
+						name: `${process.env.PREFIX}b | ${process.env.PREFIX}🅱`,
+						value: "🅱"
 					},
 					{
 						name: `${process.env.PREFIX}deutsch`,
