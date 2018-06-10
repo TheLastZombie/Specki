@@ -52,8 +52,8 @@ client.on("message", async message => {
 		} else {
 			message.channel.fetchMessages({
 				limit: 2
-			}).then(temp => {
-				temp = temp.last().content.split(" ");
+			}).then(tmsg => {
+				temp = tmsg.last().content.split(" ");
 			});
 		};
 		for (var index = 0; index < temp.length; index++) {
