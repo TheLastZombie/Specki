@@ -81,7 +81,7 @@ client.on("message", async message => {
 			trnsl(args.join(" "), {
 				to: "de"
 			}).then(temp => {
-				message.channel.send(temp.text);
+				message.channel.send("**" + message.author.tag + ": **" + temp.text);
 			});
 		} else {
 			message.channel.fetchMessages({
@@ -90,7 +90,7 @@ client.on("message", async message => {
 				trnsl(temp.last().content, {
 					to: "de"
 				}).then(temp => {
-					message.channel.send(temp.text);
+					message.channel.send("**" + message.author.tag + ": **" + temp.text);
 				});
 			});
 		};
