@@ -7,8 +7,10 @@ const client = new dscrd.Client({
 	autoReconnect: true
 });
 function cycleActivity(){
-	var games = ["Jerrynicki hat den großen Schwul", "/r/anti_iel > /r/ich_iel", "----- unt schw -----", "Ein Bot ausnahmsweise mal nicht von Jerrynicki", "wen du furzt aber notfal psirt :3oest:", "Ich finde den toMATenmark nicht", "Sonic sagt: du bsit ein fetter hurensohn halt maul", "Bevor es zu spät ist | Minecraft Kurzfilm", "Coole frau", "Wa", "Da ich auf die Frage “ wo ist eigentlich das ganze Geld geblieben” nicht mehr hören kann ,habe ich ein offizielles Statement zu diesem Thema aufgenommen !", "Hello", "Scheise!!!!!", "www.boris-becker", "Wohin ist satellit abgestuerzt ???", "!!!JETZT bin ich ein NAZI!!!!!", "Ich blase nach Feierabend die Schwänze der lokalen Hundertschaft für lau weil ich null punkte in Chemie hab. Ich gönn mir richtig", "!!!könnte mir gefallen + schmecken ! ! !", "Gutes Gesicht, magst du Tiere?"]
-	client.user.setActivity(games[Math.floor(Math.random()*games.length)]);
+	var games = ["Jerrynicki hat den großen Schwul", "/r/anti_iel > /r/ich_iel", "----- unt schw -----", "Ein Bot ausnahmsweise mal nicht von Jerrynicki", "wen du furzt aber notfal psirt :3oest:", "Ich finde den toMATenmark nicht", "Sonic sagt: du bsit ein fetter hurensohn halt maul", "Bevor es zu spät ist | Minecraft Kurzfilm", "Coole frau", "Wa", "Hello", "Scheise!!!!!", "www.boris-becker", "Wohin ist satellit abgestuerzt ???", "!!!JETZT bin ich ein NAZI!!!!!", "!!!könnte mir gefallen + schmecken ! ! !", "Gutes Gesicht, magst du Tiere?"]
+	var cgame = games[Math.floor(Math.random()*games.length)];
+	console.log(`Ändere Bot-Status zu ${cgame}...`);
+	client.user.setActivity(cgame);
 	setTimeout(cycleActivity, 3600000);
 };
 client.login(process.env.TOKEN);
