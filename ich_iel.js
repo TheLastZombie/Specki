@@ -101,9 +101,9 @@ client.on("message", async message => {
 					to: "de"
 				}).then(temp => {
 					message.channel.send("**" + message.author.tag + ": **" + temp.text);
+				}).catch(err => {
+					message.channel.send("```" + err + "```");
 				});
-			}).catch(err => {
-				message.channel.send("```" + err + "```");
 			});
 		};
 	};
