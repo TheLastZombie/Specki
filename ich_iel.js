@@ -410,12 +410,7 @@ client.on("message", async message => {
 		if (args && args != "") {
 			message.channel.send("wenn du ***" + args.join(" ").split("").join(" ").toUpperCase() + " " + args.join(" ").split("")[args.join(" ").split("").length - 1].toUpperCase() + "***");
 		} else {
-			message.channel.fetchMessages({
-				limit: 2
-			}).then(temp => {
-				var tcnt = temp.last().content;
-				message.channel.send("wenn du ***" + tcnt.split("").join(" ").toUpperCase() + " " + tcnt.join(" ").split("")[tcnt.join(" ").split("").length - 1].toUpperCase() + "***");
-			});
+			message.channel.send("geht nich du huso");
 		};
 	};
 });
