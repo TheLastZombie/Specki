@@ -235,6 +235,7 @@ client.on("message", async message => {
 					},
 					{
 						name: `${process.env.PREFIX}wenndu`,
+						value: "wenn du ***" + process.env.PREFIX + " W E N N D U***"
 					}
 				],
 				footer: {
@@ -407,12 +408,12 @@ client.on("message", async message => {
 	if (command === "wenndu") {
 		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 		if (args && args != "") {
-			message.channel.send("wenn du ***" + args.join(" ").split("").join(" ") + "***");
+			message.channel.send("wenn du ***" + args.join(" ").split("").join(" ").toUpperCase() + "***");
 		} else {
 			message.channel.fetchMessages({
 				limit: 2
 			}).then(temp => {
-				message.channel.send("wenn du ***" + temp.last().content.split("").join(" ") + "***");
+				message.channel.send("wenn du ***" + temp.last().content.split("").join(" ").toUpperCase() + "***");
 			});
 		};
 	};
