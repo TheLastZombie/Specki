@@ -413,7 +413,8 @@ client.on("message", async message => {
 			message.channel.fetchMessages({
 				limit: 2
 			}).then(temp => {
-				message.channel.send("wenn du ***" + temp.last().content.split("").join(" ").toUpperCase() + " " + temp.last().content.join(" ").split("")[temp.last().content.join(" ").split("").length - 1].toUpperCase() + "***");
+				var tcnt = temp.last().content;
+				message.channel.send("wenn du ***" + tcnt.split("").join(" ").toUpperCase() + " " + tcnt.join(" ").split("")[tcnt.join(" ").split("").length - 1].toUpperCase() + "***");
 			});
 		};
 	};
