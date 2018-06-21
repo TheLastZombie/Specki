@@ -408,12 +408,12 @@ client.on("message", async message => {
 	if (command === "wenndu") {
 		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 		if (args && args != "") {
-			message.channel.send("wenn du ***" + args.join(" ").split("").join(" ").toUpperCase() + "***");
+			message.channel.send("wenn du ***" + args.join(" ").split("").join(" ").toUpperCase() + " " + args.join(" ").split("")[args.join(" ").split("").length - 1] + "***");
 		} else {
 			message.channel.fetchMessages({
 				limit: 2
 			}).then(temp => {
-				message.channel.send("wenn du ***" + temp.last().content.split("").join(" ").toUpperCase() + "***");
+				message.channel.send("wenn du ***" + temp.last().content.split("").join(" ").toUpperCase() + " " + args.join(" ").split("")[args.join(" ").split("").length - 1] + "***");
 			});
 		};
 	};
