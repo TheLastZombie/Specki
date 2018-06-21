@@ -232,6 +232,9 @@ client.on("message", async message => {
 					{
 						name: `${process.env.PREFIX}spott | ${process.env.PREFIX}mock`,
 						value: "Gibt die Nachricht abwechselnd in Groß- und Kleinbuchstaben wieder. [Inspiriert von SpongeBob Schwammkopf.](https://www.imdb.com/title/tt2512000/)"
+					},
+					{
+						name: `${process.env.PREFIX}wenndu`,
 					}
 				],
 				footer: {
@@ -398,6 +401,18 @@ client.on("message", async message => {
 				};
 				temp = temp.join("");
 				message.channel.send(temp);
+			});
+		};
+	};
+	if (command === "wenndu") {
+		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
+		if (args && args != "") {
+			message.channel.send("wenn du ***" + args.join(" ").split("").join(" ") + "***");
+		} else {
+			message.channel.fetchMessages({
+				limit: 2
+			}).then(temp => {
+				message.channel.send("wenn du ***" + temp.last().content.split("").join(" ") + "***");
 			});
 		};
 	};
