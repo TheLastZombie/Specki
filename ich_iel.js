@@ -179,7 +179,7 @@ client.on("message", async message => {
 					},
 					{
 						name: `${process.env.PREFIX}ficken | ${process.env.PREFIX}toll`,
-						value: "Zwei Argumente in eckigen Klammern: [beim kopfhörer] [um das ohr]. [FICKen](https://discordapp.com/channels/392678434687549440/430838493359636490?jump=431582731239948308)"
+						value: "Zwei Argumente in eckigen Klammern: [beim kopfhörer] [um das ohr]. [FICKen](https://discordapp.com/channels/392678434687549440/430838493359636490/431582731239948308)"
 					},
 					{
 						name: `${process.env.PREFIX}frauen`,
@@ -187,7 +187,7 @@ client.on("message", async message => {
 					},
 					{
 						name: `${process.env.PREFIX}hab`,
-						value: "[Hab kacka gemacht in meine hose skyaa 🤔](https://discordapp.com/channels/392678434687549440/392678434687549442?jump=402965723825307668)"
+						value: "[Hab kacka gemacht in meine hose skyaa 🤔](https://discordapp.com/channels/392678434687549440/392678434687549442/402965723825307668)"
 					},
 					{
 						name: `${process.env.PREFIX}hilfe | ${process.env.PREFIX}help`,
@@ -227,7 +227,7 @@ client.on("message", async message => {
 					},
 					{
 						name: `${process.env.PREFIX}sag`,
-						value: "[Sag moin zurück 🔫 <:uff_kaputt:402413360748036128>](https://discordapp.com/channels/392678434687549440/392678434687549442?jump=432426867690307586)"
+						value: "[Sag moin zurück 🔫 <:uff_kaputt:402413360748036128>](https://discordapp.com/channels/392678434687549440/392678434687549442/432426867690307586)"
 					},
 					{
 						name: `${process.env.PREFIX}spott | ${process.env.PREFIX}mock`,
