@@ -42,6 +42,33 @@ client.on("message", async message => {
 	} else {
 		var args = message.content.slice(process.env.PREFIX.length).trim().split(/ /g);
 		var command = args.shift().toLowerCase();
+		if (command == "🅱") {
+			command = "b";
+		};
+		if (command == "replace") {
+			command = "ersatz";
+		};
+		if (command == "toll") {
+			command = "ficken";
+		};
+		if (command == "help") {
+			command = "hilfe";
+		};
+		if (command == "wie") {
+			command = "huso";
+		};
+		if (command == "someone") {
+			command = "jemand";
+		};
+		if (command == "dudes") {
+			command = "kerle";
+		};
+		if (command == "clap") {
+			command = "klatsch";
+		};
+		if (command == "mock") {
+			command = "spott";
+		};
 		if (command in commandCounts) {
 			commandCounts[command]++;
 		} else {
