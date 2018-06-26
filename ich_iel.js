@@ -8,6 +8,7 @@ const client = new dscrd.Client({
 });
 const talkedRecently = new Set();
 var talkedTimestamp = {};
+var commandCounts = {};
 function cycleActivity(){
 	var games = ["Jerrynicki hat den großen Schwul", "/r/anti_iel > /r/ich_iel", "----- unt schw -----", "Ein Bot ausnahmsweise mal nicht von Jerrynicki", "wen du furzt aber notfal psirt :3oest:", "alter ich finde den toMATenmark nicht", "Oh nein habZAHn padra feckel rumter geschmisen", "Sonic sagt: du bsit ein fetter hurensohn halt maul", "Bevor es zu spät ist | Minecraft Kurzfilm", "Coole frau", "Wa", "Hello", "Scheise!!!!!", "www.boris-becker", "Wohin ist satellit abgestuerzt ???", "!!!JETZT bin ich ein NAZI!!!!!", "!!!könnte mir gefallen + schmecken ! ! !", "Gutes Gesicht, magst du Tiere?", "http://www.youtube.com/watch?", "Hello ...ich bin drin !!!"]
 	var cgame = games[Math.floor(Math.random()*games.length)];
@@ -41,6 +42,12 @@ client.on("message", async message => {
 	} else {
 		var args = message.content.slice(process.env.PREFIX.length).trim().split(/ /g);
 		var command = args.shift().toLowerCase();
+		if (command in commandCounts) {
+			commandCounts[command]++;
+		} else {
+			commandCounts[command] = 1;
+		};
+		console.log(commandCounts);
 		if (command === "ascii") {
 			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (/\[.+\] \[.+\]/.test(args.join(" "))) {
@@ -87,6 +94,15 @@ client.on("message", async message => {
 					message.channel.send(temp);
 				});
 			};
+		};
+		if (command === "commands") {
+			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
+			var temp = "**Command-Counter**\n\n";
+			for (var indx in commandCounts) {
+				temp += "`" + indx + "` ";
+				temp += commandCounts[indx] + "\n";
+			};
+			message.channel.send(temp);
 		};
 		if (command === "deutsch") {
 			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
@@ -173,6 +189,10 @@ client.on("message", async message => {
 						{
 							name: `${process.env.PREFIX}b | ${process.env.PREFIX}🅱`,
 							value: "🅱"
+						},
+						{
+							name: `${process.env.PREFIX}commands`,
+							value: "Ausgeführte Commands werden automatisch gezählt, dieser Command gibt die Statistiken wieder."
 						},
 						{
 							name: `${process.env.PREFIX}deutsch`,
