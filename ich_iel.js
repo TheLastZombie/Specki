@@ -12,32 +12,25 @@ var commandCounts = {};
 function cycleActivity(){
 	var games = ["Jerrynicki hat den großen Schwul", "/r/anti_iel > /r/ich_iel", "----- unt schw -----", "Ein Bot ausnahmsweise mal nicht von Jerrynicki", "wen du furzt aber notfal psirt :3oest:", "alter ich finde den toMATenmark nicht", "Oh nein habZAHn padra feckel rumter geschmisen", "Sonic sagt: du bsit ein fetter hurensohn halt maul", "Bevor es zu spät ist | Minecraft Kurzfilm", "Coole frau", "Wa", "Hello", "Scheise!!!!!", "www.boris-becker", "Wohin ist satellit abgestuerzt ???", "!!!JETZT bin ich ein NAZI!!!!!", "!!!könnte mir gefallen + schmecken ! ! !", "Gutes Gesicht, magst du Tiere?", "http://www.youtube.com/watch?", "Hello ...ich bin drin !!!"]
 	var cgame = games[Math.floor(Math.random()*games.length)];
-	console.log(`Ändere Bot-Status zu ${cgame}...`);
+	console.log(`Ändere Bot-Status zu "${cgame}".`);
 	client.user.setActivity(cgame);
 	setTimeout(cycleActivity, 3600000);
 };
 client.login(process.env.TOKEN);
 client.on("ready", () => {
-	console.log(client);
-	console.log(``);
+	// console.log(client);
+	// console.log(``);
 	console.log(`Erfolgreich eingeloggt als ${client.user.username} (ID: ${client.user.id}).`);
 	// client.user.setActivity(`v2.0 Pre-Beta | ${process.env.PREFIX}hilfe`);
 	cycleActivity();
 });
 client.on("message", async message => {
-	console.log(``);
-	console.log(`Neue Nachricht von ${message.author.username} (ID: ${message.author.id}):`);
-	console.log(message.content);
-	console.log(``);
-	if (message.author.bot) {
-		console.log(`Nachricht wurde nicht verarbeitet, da sie von einem Bot und keinem Nutzer stammt.`);
+	if (message.author.bot || message.content.indexOf(process.env.PREFIX) !== 0) {
 		return;
 	};
-	if (message.content.indexOf(process.env.PREFIX) !== 0) {
-		console.log(`Nachricht wurde nicht verarbeitet, da sie nicht mit dem bestimmten Prefix (${process.env.PREFIX}) beginnt.`);
-		return;
-	};	
+	console.log(`Neue Command-Nachricht von ${message.author.username} (ID: ${message.author.id}).`);
 	if (talkedRecently.has(message.author.id)) {
+		console.log(`Nachricht von ${client.user.username} (ID: ${client.user.id}) wurde wegen Rate-Limit geblockt (noch ${((talkedTimestamp[message.author.id] - Date.now()) / 1000)} Sekunden).`);
 		message.channel.send("Halt die verdammte " + message.author.username + " für " + ((talkedTimestamp[message.author.id] - Date.now()) / 1000) + " Sekunden");
 	} else {
 		var args = message.content.slice(process.env.PREFIX.length).trim().split(/ /g);
