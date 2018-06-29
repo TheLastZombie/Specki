@@ -9,7 +9,7 @@ https://discordapp.com/api/oauth2/authorize?client_id=405408491969314826&permiss
 ## Selber laufen lassen
 
 ```bash
-git clone https://github.com/ente3000/ich_iel
+git clone https://github.com/TheLastZombie/ich_iel
 cd ich_iel
 sed -i 's/process\.env\.PREFIX/"[PREFX]"/g' ich_iel.js # [PREFIX] mit dem gewünschten Prefix ersetzen
 sed -i 's/process\.env\.TOKEN/"[TOKEN]"/g' ich_iel.js # [TOKEN] mit dem Discord-Bot-Token ersetzen
