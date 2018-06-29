@@ -1,3 +1,5 @@
+<img src="https://forthebadge.com/images/badges/you-didnt-ask-for-this.svg" width="100%">
+
 # ich_iel Roboter
 
 Bot für den ich_iel Discordserver, jetzt mit 200% mehr Insidern, die sonst sowieso keiner kapiert.
