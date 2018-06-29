@@ -62,10 +62,12 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command in commandCounts) {
-			commandCounts[command]++;
-		} else {
-			commandCounts[command] = 1;
+		if (command == "ascii" || command == "b" || command == "commands" || command == "deutsch" || command == "ersatz" || command == "ficken" || command == "frauen" || command == "hab" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "wenndu") {
+			if (command in commandCounts) {
+				commandCounts[command]++;
+			} else {
+				commandCounts[command] = 1;
+			};
 		};
 		if (command === "ascii") {
 			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
