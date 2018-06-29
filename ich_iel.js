@@ -67,7 +67,6 @@ client.on("message", async message => {
 		} else {
 			commandCounts[command] = 1;
 		};
-		console.log(commandCounts);
 		if (command === "ascii") {
 			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (/\[.+\] \[.+\]/.test(args.join(" "))) {
