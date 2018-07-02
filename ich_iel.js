@@ -3,6 +3,7 @@ const trnsl = require("google-translate-api");
 const ascii = require("cool-ascii-faces");
 const reqst = require("request");
 const figlt = require("figlet");
+const fs = require("fs");
 const client = new dscrd.Client({
 	autoReconnect: true
 });
@@ -23,6 +24,14 @@ client.on("ready", () => {
 	console.log(`Erfolgreich eingeloggt als ${client.user.username} (ID: ${client.user.id}).`);
 	// client.user.setActivity(`v2.0 Pre-Beta | ${process.env.PREFIX}hilfe`);
 	cycleActivity();
+	fs.readFile("commands.json", function read(err, data) {
+		if (err) {
+			console.log("Fehler beim Laden der Commands, wahrscheinlich wurde die Datei nicht gefunden. Counter startet von 0.");
+		} else {
+			commandCounts = JSON.parse(data);
+			console.log("commandCounts von commands.json geladen.");
+		};
+	});
 });
 client.on("message", async message => {
 	if (message.author.bot || message.content.indexOf(process.env.PREFIX) !== 0) {
@@ -68,6 +77,9 @@ client.on("message", async message => {
 			} else {
 				commandCounts[command] = 1;
 			};
+			fs.writeFile("commands.json", JSON.stringify(commandCounts), "utf8", function() {
+				console.log("commandCounts in commands.json geschrieben.");
+			});
 		};
 		if (command === "ascii") {
 			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
