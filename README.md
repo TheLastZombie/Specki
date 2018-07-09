@@ -15,6 +15,8 @@ git clone https://github.com/TheLastZombie/ich_iel
 cd ich_iel
 sed -i 's/process\.env\.PREFIX/"[PREFX]"/g' ich_iel.js # [PREFIX] mit dem gewünschten Prefix ersetzen
 sed -i 's/process\.env\.TOKEN/"[TOKEN]"/g' ich_iel.js # [TOKEN] mit dem Discord-Bot-Token ersetzen
+sed -i 's/process\.env\.GLOT_ID/"[GLOT_ID]"/g' ich_iel.js # [GLOT_ID] mit der ID eines glot.io-Pastes ersetzen
+sed -i 's/process\.env\.GLOT_TK/"[GLOT_TK]"/g' ich_iel.js # [GLOT_TK] mit dem glot.io-API-Token ersetzen
 npm install
 npm start
 ```
