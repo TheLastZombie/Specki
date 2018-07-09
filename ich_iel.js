@@ -409,6 +409,7 @@ client.on("message", async message => {
 					message.guild.members.get(client.user.id).setNickname(temp.last().content);
 				});
 			};
+			message.react("✅");
 		};
 		if (command === "pfosten") {
 			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
@@ -517,6 +518,7 @@ client.on("message", async message => {
 					client.user.setActivity(temp.last().content);
 				});
 			};
+			message.react("✅");
 		};
 		if (command === "wenndu") {
 			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
