@@ -3,7 +3,6 @@ const translate = require("google-translate-api");
 const cool = require("cool-ascii-faces");
 const request = require("request");
 const figlet = require("figlet");
-const fs = require("fs");
 const client = new discord.Client({
 	autoReconnect: true
 });
@@ -152,8 +151,7 @@ client.on("message", async message => {
 			});
 			var temp = "**Command-Counter**\n\n";
 			for (var indx in commandSort.reverse()) {
-				temp += "`" + indx + "` ";
-				temp += commandSort.reverse()[indx] + "\n";
+				temp += "`" + commandSort.reverse()[indx].toString().split(",")[0] + "` " + commandSort.reverse()[indx].toString().split(",")[1] + "\n";
 			};
 			message.channel.send(temp);
 		};
