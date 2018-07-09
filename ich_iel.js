@@ -24,12 +24,12 @@ client.on("ready", () => {
 	console.log(`Erfolgreich eingeloggt als ${client.user.username} (ID: ${client.user.id}).`);
 	// client.user.setActivity(`v2.0 Pre-Beta | ${process.env.PREFIX}hilfe`);
 	cycleActivity();
-	fs.readFile("commands.json", function read(err, data) {
-		if (err) {
-			console.log("Fehler beim Laden der Commands, wahrscheinlich wurde die Datei nicht gefunden. Counter startet von 0.");
+	request("https://snippets.glot.io/snippets/" + process.env.GLOT_ID, function (error, response, body) {
+		if (error) {
+			console.log("Konnte Command-Counts nicht von glot.io laden. Counter startet von 0.");
 		} else {
-			commandCounts = JSON.parse(data);
-			console.log("commandCounts von commands.json geladen.");
+			console.log("Command-Counts erfolgreich von glot.io heruntergeladen.");
+			commandCounts = JSON.parse(body).files[0].content;
 		};
 	});
 });
@@ -77,8 +77,21 @@ client.on("message", async message => {
 			} else {
 				commandCounts[command] = 1;
 			};
-			fs.writeFile("commands.json", JSON.stringify(commandCounts), "utf8", function() {
-				console.log("commandCounts in commands.json geschrieben.");
+			request({
+				url: "https://snippets.glot.io/snippets/" + process.env.GLOT_ID,
+				method: "PUT",
+				headers: {
+					"Authorization": "Token " + process.env.GLOT_TK
+				},
+				json: {
+					"files": [{"name": "commands.json", "content": JSON.stringify(commandCounts)}]
+				}
+			}, function (error, response, body) {
+				if (error) {
+					console.log("Konnte Command-Counts nicht auf glot.io hochladen.");
+				} else {
+					console.log("Command-Counts erfolgreich auf glot.io hochgeladen.");
+				};
 			});
 		};
 		if (command === "ascii") {
