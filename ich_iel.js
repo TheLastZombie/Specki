@@ -113,11 +113,15 @@ client.on("message", async message => {
 			if (message.attachments.first()) {
 				console.log("Ändere Avatar zu " + message.attachments.first().url + ".");
 				message.react("✅");
-				client.user.setAvatar(message.attachments.first().url);
+				client.user.setAvatar(message.attachments.first().url).catch(function(error) {
+					message.react("❎");
+				});
 			} else if (args && args != "") {
 				console.log("Ändere Avatar zu " + args.join(" ") + ".");
 				message.react("✅");
-				client.user.setAvatar(args.join(" "));
+				client.user.setAvatar(args.join(" ")).catch(function(error) {
+					message.react("❎");	
+				});
 			} else {
 				message.react("❎");
 			};
