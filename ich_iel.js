@@ -29,7 +29,7 @@ client.on("ready", () => {
 			console.log("Konnte Command-Counts nicht von glot.io laden. Counter startet von 0.");
 		} else {
 			console.log("Command-Counts erfolgreich von glot.io heruntergeladen.");
-			commandCounts = JSON.parse(body).files[0].content;
+			commandCounts = JSON.parse(JSON.parse(body).files[0].content);
 		};
 	});
 });
