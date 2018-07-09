@@ -143,10 +143,17 @@ client.on("message", async message => {
 		};
 		if (command === "commands") {
 			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
+			var commandSort = [];
+			for (var commandCurr in commandCounts) {
+				commandSort.push([commandCurr, commandCounts[commandCurr]]);
+			};
+			commandSort.sort(function(a, b) {
+				return a[1] - b[1];
+			});
 			var temp = "**Command-Counter**\n\n";
-			for (var indx in commandCounts) {
+			for (var indx in commandSort.reverse()) {
 				temp += "`" + indx + "` ";
-				temp += commandCounts[indx] + "\n";
+				temp += commandSort.reverse()[indx] + "\n";
 			};
 			message.channel.send(temp);
 		};
