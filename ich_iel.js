@@ -70,7 +70,7 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command == "ascii" || command == "b" || command == "commands" || command == "deutsch" || command == "ersatz" || command == "ficken" || command == "frauen" || command == "hab" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "wenndu") {
+		if (command == "ascii" || command == "b" || command == "commands" || command == "deutsch" || command == "ersatz" || command == "ficken" || command == "frauen" || command == "hab" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "wenndu") {
 			if (command in commandCounts) {
 				commandCounts[command]++;
 			} else {
@@ -295,6 +295,10 @@ client.on("message", async message => {
 							value: "Fügt das erste Wort zwischen alle anderen ein. [Inspiriert vom \"Ratchet Clap\".](https://www.urbandictionary.com/define.php?term=Ratchet+Clap)"
 						},
 						{
+							name: `${process.env.PREFIX}nick`,
+							value: "Ähnlich wie " + process.env.PREFIX + "status. Ändert den Nickname vom Bot zu dem angegebenen Text."
+						},
+						{
 							name: `${process.env.PREFIX}ping`,
 							value: "Pingt den Roboter an und antwortet mit den Latenzzeiten."
 						},
@@ -312,7 +316,7 @@ client.on("message", async message => {
 						},
 						{
 							name: `${process.env.PREFIX}status`,
-							value: "Ändert den Status vom Bot zu dem angegebenen Text."
+							value: "Ähnlich wie " + process.env.PREFIX + "nick. Ändert den Status vom Bot zu dem angegebenen Text."
 						},
 						{
 							name: `${process.env.PREFIX}wenndu`,
@@ -389,6 +393,20 @@ client.on("message", async message => {
 					limit: 2
 				}).then(temp => {
 					message.channel.send(temp.last().content.split(/ /g).join(` ${args} `));
+				});
+			};
+		};
+		if (command === "nick") {
+			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
+			if (args && args != "") {
+				console.log(`Ändere Bot-Nick zu "${args.join(" ")}".`);
+				message.guild.members.get(bot.user.id).setNickname(args.join(" "));
+			} else {
+				message.channel.fetchMessages({
+					limit: 2
+				}).then(temp => {
+					console.log(`Ändere Bot-Nick zu "${temp.last().content}".`);
+					message.guild.members.get(bot.user.id).setNickname(temp.last().content);
 				});
 			};
 		};
