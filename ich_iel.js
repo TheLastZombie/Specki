@@ -21,8 +21,8 @@ client.on("ready", () => {
 	// console.log(client);
 	// console.log(``);
 	console.log(`Erfolgreich eingeloggt als ${client.user.username} (ID: ${client.user.id}).`);
-	// client.user.setActivity(`v2.0 Pre-Beta | ${process.env.PREFIX}hilfe`);
-	cycleActivity();
+	client.user.setActivity(`v2.0 Pre-Beta | ${process.env.PREFIX}hilfe`);
+	// cycleActivity();
 	request("https://snippets.glot.io/snippets/" + process.env.GLOT_ID, function (error, response, body) {
 		if (error) {
 			console.log("Konnte Command-Counts nicht von glot.io laden. Counter startet von 0.");
@@ -70,7 +70,7 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command == "ascii" || command == "b" || command == "commands" || command == "deutsch" || command == "ersatz" || command == "ficken" || command == "frauen" || command == "hab" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "wenndu") {
+		if (command == "ascii" || command == "b" || command == "commands" || command == "deutsch" || command == "ersatz" || command == "ficken" || command == "frauen" || command == "hab" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "wenndu") {
 			if (command in commandCounts) {
 				commandCounts[command]++;
 			} else {
@@ -311,6 +311,10 @@ client.on("message", async message => {
 							value: "Gibt die Nachricht abwechselnd in Groß- und Kleinbuchstaben wieder. [Inspiriert von SpongeBob Schwammkopf.](https://www.imdb.com/title/tt2512000/)"
 						},
 						{
+							name: `${process.env.PREFIX}status`,
+							value: "Ändert den Status vom Bot zu dem angegebenen Text."
+						},
+						{
 							name: `${process.env.PREFIX}wenndu`,
 							value: "wenn du ***" + process.env.PREFIX + " W E N N D U***"
 						}
@@ -479,6 +483,20 @@ client.on("message", async message => {
 					};
 					temp = temp.join("");
 					message.channel.send(temp);
+				});
+			};
+		};
+		if (command === "status") {
+			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
+			if (args && args != "") {
+				console.log(`Ändere Bot-Status zu "${args.join(" ")}".`);
+				client.user.setActivity(args.join(" "));
+			} else {
+				message.channel.fetchMessages({
+					limit: 2
+				}).then(temp => {
+					console.log(`Ändere Bot-Status zu "${temp.last().content}".`);
+					client.user.setActivity(temp.last().content);
 				});
 			};
 		};
