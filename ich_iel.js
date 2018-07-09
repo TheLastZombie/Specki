@@ -151,7 +151,8 @@ client.on("message", async message => {
 			});
 			var temp = "**Command-Counter**\n\n";
 			for (var indx in commandSort.reverse()) {
-				temp += "`" + commandSort.reverse()[indx].toString().split(",")[0] + "` " + commandSort.reverse()[indx].toString().split(",")[1] + "\n";
+				var commandSTmp = commandSort[indx].toString().split(",");
+				temp += "`" + commandSTmp[0] + "` " + commandSTmp[1] + "\n";
 			};
 			message.channel.send(temp);
 		};
