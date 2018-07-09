@@ -400,13 +400,13 @@ client.on("message", async message => {
 			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (args && args != "") {
 				console.log(`Ändere Bot-Nick zu "${args.join(" ")}".`);
-				message.guild.members.get(bot.user.id).setNickname(args.join(" "));
+				message.guild.members.get(client.user.id).setNickname(args.join(" "));
 			} else {
 				message.channel.fetchMessages({
 					limit: 2
 				}).then(temp => {
 					console.log(`Ändere Bot-Nick zu "${temp.last().content}".`);
-					message.guild.members.get(bot.user.id).setNickname(temp.last().content);
+					message.guild.members.get(client.user.id).setNickname(temp.last().content);
 				});
 			};
 		};
