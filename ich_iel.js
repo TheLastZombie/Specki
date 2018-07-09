@@ -70,7 +70,7 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command == "ascii" || command == "b" || command == "commands" || command == "deutsch" || command == "ersatz" || command == "ficken" || command == "frauen" || command == "hab" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "wenndu") {
+		if (command == "ascii" || command == "avatar" || command == "b" || command == "commands" || command == "deutsch" || command == "ersatz" || command == "ficken" || command == "frauen" || command == "hab" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "wenndu") {
 			if (command in commandCounts) {
 				commandCounts[command]++;
 			} else {
@@ -107,6 +107,19 @@ client.on("message", async message => {
 					};
 					message.channel.send("```" + temp + "```");
 				});
+			};
+		};
+		if (command === "avatar") {
+			if (message.attachments.first()) {
+				console.log("Ändere Avatar zu " + message.attachments.first().url + ".");
+				message.react("✅");
+				client.user.setAvatar(message.attachments.first().url);
+			} else if (args && args != "") {
+				console.log("Ändere Avatar zu " + args.join(" ") + ".");
+				message.react("✅");
+				client.user.setAvatar(args.join(" "));
+			} else {
+				message.react("❎");
 			};
 		};
 		if (command === "b" || command === "🅱") {
@@ -239,6 +252,10 @@ client.on("message", async message => {
 							value: "Generiert ASCII-Art. Anwendung: [Schrift] [Nachricht]."
 						},
 						{
+							name: `${process.env.PREFIX}avatar`,
+							value: "Ähnlich wie " + process.env.PREFIX + "nick und " + process.env.PREFIX + "status. Ändert den Avatar vom Bot zu dem angegebenen Bild."
+						},
+						{
 							name: `${process.env.PREFIX}b | ${process.env.PREFIX}🅱`,
 							value: "🅱"
 						},
@@ -296,7 +313,7 @@ client.on("message", async message => {
 						},
 						{
 							name: `${process.env.PREFIX}nick`,
-							value: "Ähnlich wie " + process.env.PREFIX + "status. Ändert den Nickname vom Bot zu dem angegebenen Text."
+							value: "Ähnlich wie " + process.env.PREFIX + "avatar und " + process.env.PREFIX + "status. Ändert den Nickname vom Bot zu dem angegebenen Text."
 						},
 						{
 							name: `${process.env.PREFIX}ping`,
@@ -316,7 +333,7 @@ client.on("message", async message => {
 						},
 						{
 							name: `${process.env.PREFIX}status`,
-							value: "Ähnlich wie " + process.env.PREFIX + "nick. Ändert den Status vom Bot zu dem angegebenen Text."
+							value: "Ähnlich wie " + process.env.PREFIX + "avatar und " + process.env.PREFIX + "nick. Ändert den Status vom Bot zu dem angegebenen Text."
 						},
 						{
 							name: `${process.env.PREFIX}wenndu`,
