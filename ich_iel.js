@@ -1,10 +1,10 @@
-const dscrd = require("discord.js");
-const trnsl = require("google-translate-api");
-const ascii = require("cool-ascii-faces");
-const reqst = require("request");
-const figlt = require("figlet");
+const discord = require("discord.js");
+const translate = require("google-translate-api");
+const cool = require("cool-ascii-faces");
+const request = require("request");
+const figlet = require("figlet");
 const fs = require("fs");
-const client = new dscrd.Client({
+const client = new discord.Client({
 	autoReconnect: true
 });
 const talkedRecently = new Set();
@@ -84,11 +84,11 @@ client.on("message", async message => {
 		if (command === "ascii") {
 			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (/\[.+\] \[.+\]/.test(args.join(" "))) {
-				figlt.text(args.join(" ").match(/\] \[.+\]/).toString().slice(3, -1), {
+				figlet.text(args.join(" ").match(/\] \[.+\]/).toString().slice(3, -1), {
 					font: args.join(" ").match(/\[.+\] \[/).toString().slice(1, -3)
 				}, function(err, temp) {
 					if (err) {
-						figlt.fonts(function(err, temp) {
+						figlet.fonts(function(err, temp) {
 							message.channel.send(`Fehler: Schrift wurde nicht gefunden.\n\nAnwendung: \`${process.env.PREFIX}${command} [Schrift] [Nachricht]\`\nBeispiel: \`${process.env.PREFIX}${command} [Ghost] [Hallo, Welt!]\`\n\nFür eine Liste der verfügbaren Schriften siehe https://github.com/patorjk/figlet.js/tree/master/fonts.`);
 						});
 						return;
@@ -140,7 +140,7 @@ client.on("message", async message => {
 		if (command === "deutsch") {
 			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (args && args != "") {
-				trnsl(args.join(" "), {
+				translate(args.join(" "), {
 					to: "de"
 				}).then(temp => {
 					message.channel.send("**" + message.author.tag + ": **" + temp.text);
@@ -151,7 +151,7 @@ client.on("message", async message => {
 				message.channel.fetchMessages({
 					limit: 2
 				}).then(temp => {
-					trnsl(temp.last().content, {
+					translate(temp.last().content, {
 						to: "de"
 					}).then(temp => {
 						message.channel.send("**" + message.author.tag + ": **" + temp.text);
@@ -340,9 +340,9 @@ client.on("message", async message => {
 			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			var temp = message.channel.guild.members.random().user;
 			if (message.guild.members.get(temp.id).nickname) {
-				message.channel.send(ascii() + " " + message.guild.members.get(temp.id).nickname + " " + args.join(" "));
+				message.channel.send(cool() + " " + message.guild.members.get(temp.id).nickname + " " + args.join(" "));
 			} else {
-				message.channel.send(ascii() + " " + temp.username + " " + args.join(" "));
+				message.channel.send(cool() + " " + temp.username + " " + args.join(" "));
 			};
 		};
 		if (command === "kerle" || command === "dudes") {
@@ -372,7 +372,7 @@ client.on("message", async message => {
 		if (command === "pfosten") {
 			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (args && args != "") {
-				reqst("https://www.reddit.com/r/" + args.join(" ") + "/random/.json", function (error, response, body) {
+				request("https://www.reddit.com/r/" + args.join(" ") + "/random/.json", function (error, response, body) {
 					message.channel.send({
 						"embed": {
 							"title": JSON.parse(body)[0]["data"]["children"][0]["data"]["title"],
