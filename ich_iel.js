@@ -421,16 +421,23 @@ client.on("message", async message => {
 			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (args && args != "") {
 				console.log(`Ändere Bot-Nick zu "${args.join(" ")}".`);
-				message.guild.members.get(client.user.id).setNickname(args.join(" "));
+				message.guild.members.get(client.user.id).setNickname(args.join(" ")).catch(function(error) {
+					message.react("❎");	
+				} else {
+					message.react("✅");
+				});
 			} else {
 				message.channel.fetchMessages({
 					limit: 2
 				}).then(temp => {
 					console.log(`Ändere Bot-Nick zu "${temp.last().content}".`);
-					message.guild.members.get(client.user.id).setNickname(temp.last().content);
+					message.guild.members.get(client.user.id).setNickname(temp.last().content).catch(function(error) {
+						message.react("❎");	
+					} else {
+						message.react("✅");
+					});
 				});
 			};
-			message.react("✅");
 		};
 		if (command === "pfosten") {
 			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
@@ -530,16 +537,23 @@ client.on("message", async message => {
 			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (args && args != "") {
 				console.log(`Ändere Bot-Status zu "${args.join(" ")}".`);
-				client.user.setActivity(args.join(" "));
+				client.user.setActivity(args.join(" ")).catch(function(error) {
+					message.react("❎");	
+				} else {
+					message.react("✅");
+				});
 			} else {
 				message.channel.fetchMessages({
 					limit: 2
 				}).then(temp => {
 					console.log(`Ändere Bot-Status zu "${temp.last().content}".`);
-					client.user.setActivity(temp.last().content);
+					client.user.setActivity(temp.last().content).catch(function(error) {
+						message.react("❎");	
+					} else {
+						message.react("✅");
+					});
 				});
 			};
-			message.react("✅");
 		};
 		if (command === "wenndu") {
 			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
