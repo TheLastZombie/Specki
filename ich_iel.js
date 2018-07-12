@@ -70,7 +70,7 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command == "ascii" || command == "avatar" || command == "b" || command == "commands" || command == "deutsch" || command == "ersatz" || command == "ficken" || command == "frauen" || command == "hab" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "wenndu") {
+		if (command == "ascii" || command == "avatar" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "ficken" || command == "frauen" || command == "hab" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "wenndu") {
 			if (command in commandCounts) {
 				commandCounts[command]++;
 			} else {
@@ -197,6 +197,30 @@ client.on("message", async message => {
 				});
 			};
 		};
+		if (command === "english") {
+			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
+			if (args && args != "") {
+				translate(args.join(" "), {
+					to: "en"
+				}).then(temp => {
+					message.channel.send("**" + message.author.tag + ": **" + temp.text);
+				}).catch(err => {
+					message.channel.send("```" + err + "```");
+				});
+			} else {
+				message.channel.fetchMessages({
+					limit: 2
+				}).then(temp => {
+					translate(temp.last().content, {
+						to: "en"
+					}).then(temp => {
+						message.channel.send("**" + message.author.tag + ": **" + temp.text);
+					}).catch(err => {
+						message.channel.send("```" + err + "```");
+					});
+				});
+			};
+		};
 		if (command === "ersatz" || command === "replace") {
 			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (args && args != "") {
@@ -270,6 +294,10 @@ client.on("message", async message => {
 						{
 							name: `${process.env.PREFIX}deutsch`,
 							value: "Übersetzt eine Nachricht ins Deutsche – mal mehr, mal weniger gut."
+						},
+						{
+							name: `${process.env.PREFIX}english`,
+							value: "Übersetzt eine Nachricht ins Englische – mal mehr, mal weniger gut."
 						},
 						{
 							name: `${process.env.PREFIX}ersatz | ${process.env.PREFIX}replace`,
