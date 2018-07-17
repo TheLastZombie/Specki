@@ -3,6 +3,7 @@ const translate = require("google-translate-api");
 const cool = require("cool-ascii-faces");
 const request = require("request");
 const figlet = require("figlet");
+const zalgo = require("to-zalgo");
 const client = new discord.Client({
 	autoReconnect: true
 });
@@ -578,6 +579,18 @@ client.on("message", async message => {
 				message.channel.send("wenn du ***" + args.join(" ").split("").join(" ").toUpperCase() + " " + args.join(" ").split("")[args.join(" ").split("").length - 1].toUpperCase() + "***");
 			} else {
 				message.channel.send("geht nich du huso");
+			};
+		};
+		if (command === "zalgo") {
+			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
+			if (args && args != "") {
+				message.channel.send(zalgo(args.join(" ")));
+			} else {
+				message.channel.fetchMessages({
+					limit: 2
+				}).then(temp => {
+					message.channel.send(zalgo(temp.last().content));
+				});
 			};
 		};
 		if (message.author.id != 175877241517899776) {
