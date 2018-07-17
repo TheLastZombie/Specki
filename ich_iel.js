@@ -74,7 +74,7 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command == "ascii" || command == "avatar" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "ficken" || command == "frauen" || command == "hab" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "wenndu") {
+		if (command == "ascii" || command == "avatar" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "ficken" || command == "frauen" || command == "hab" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "wenndu" || command == "zalgo") {
 			if (command in commandCounts) {
 				commandCounts[command]++;
 			} else {
@@ -374,6 +374,10 @@ client.on("message", async message => {
 						{
 							name: `${process.env.PREFIX}wenndu`,
 							value: "wenn du ***" + process.env.PREFIX + " W E N N D U***"
+						},
+						{
+							name: `${process.env.PREFIX}zalgo`,
+							value: "Er kommt und so halt, gell?"
 						}
 					],
 					footer: {
