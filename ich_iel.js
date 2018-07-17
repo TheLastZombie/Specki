@@ -46,6 +46,9 @@ client.on("message", async message => {
 		if (command == "🅱") {
 			command = "b";
 		};
+		if (command == "englisch") {
+			command = "english";
+		};
 		if (command == "replace") {
 			command = "ersatz";
 		};
@@ -197,7 +200,7 @@ client.on("message", async message => {
 				});
 			};
 		};
-		if (command === "english") {
+		if (command === "english" || command === "englisch") {
 			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (args && args != "") {
 				translate(args.join(" "), {
@@ -296,7 +299,7 @@ client.on("message", async message => {
 							value: "Übersetzt eine Nachricht ins Deutsche – mal mehr, mal weniger gut."
 						},
 						{
-							name: `${process.env.PREFIX}english`,
+							name: `${process.env.PREFIX}english | ${process.env.PREFIX}englisch`,
 							value: "Übersetzt eine Nachricht ins Englische – mal mehr, mal weniger gut."
 						},
 						{
