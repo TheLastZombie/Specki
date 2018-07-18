@@ -22,7 +22,14 @@ client.on("ready", () => {
 	// console.log(client);
 	// console.log(``);
 	console.log(`Erfolgreich eingeloggt als ${client.user.username} (ID: ${client.user.id}).`);
-	client.user.setActivity(`v2.0 Pre-Beta | ${process.env.PREFIX}hilfe`);
+	request({
+		url: "https://api.github.com/repos/TheLastZombie/ich_iel/git/refs/heads/master",
+		headers: {
+			"User-Agent": "TheLastZombie/ich_iel"
+		}
+	}, function(error, response, body) {
+		client.user.setActivity(`v2.0 Pre-Beta | Commit ${JSON.parse(body).object.url.substr(JSON.parse(body).object.url.lastIndexOf("/") + 1, 7)} | ${process.env.PREFIX}hilfe`);
+	});
 	// cycleActivity();
 	request("https://snippets.glot.io/snippets/" + process.env.GLOT_ID, function (error, response, body) {
 		if (error) {
