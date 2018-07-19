@@ -81,7 +81,7 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command == "ascii" || command == "avatar" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "ficken" || command == "frauen" || command == "hab" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "wenndu" || command == "zalgo") {
+		if (command == "ascii" || command == "avatar" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "ficken" || command == "frauen" || command == "hab" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "wenndu" || command == "zalgo") {
 			if (command in commandCounts) {
 				commandCounts[command]++;
 			} else {
@@ -292,7 +292,7 @@ client.on("message", async message => {
 						},
 						{
 							name: `${process.env.PREFIX}avatar`,
-							value: "Ähnlich wie " + process.env.PREFIX + "nick und " + process.env.PREFIX + "status. Ändert den Avatar vom Bot zu dem angegebenen Bild."
+							value: "Ähnlich wie " + process.env.PREFIX + "name, " + process.env.PREFIX + "nick und " + process.env.PREFIX + "status. Ändert den Avatar vom Bot zu dem angegebenen Bild."
 						},
 						{
 							name: `${process.env.PREFIX}b | ${process.env.PREFIX}🅱`,
@@ -355,8 +355,12 @@ client.on("message", async message => {
 							value: "Fügt das erste Wort zwischen alle anderen ein. [Inspiriert vom \"Ratchet Clap\".](https://www.urbandictionary.com/define.php?term=Ratchet+Clap)"
 						},
 						{
+							name: `${process.env.PREFIX}name`,
+							value: "Ähnlich wie " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "nick und " + process.env.PREFIX + "status. Ändert den Namen vom Bot zu dem angegebenen Text (global)."
+						},
+						{
 							name: `${process.env.PREFIX}nick`,
-							value: "Ähnlich wie " + process.env.PREFIX + "avatar und " + process.env.PREFIX + "status. Ändert den Nickname vom Bot zu dem angegebenen Text."
+							value: "Ähnlich wie " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "name und " + process.env.PREFIX + "status. Ändert den Nickname vom Bot zu dem angegebenen Text."
 						},
 						{
 							name: `${process.env.PREFIX}ping`,
@@ -376,7 +380,7 @@ client.on("message", async message => {
 						},
 						{
 							name: `${process.env.PREFIX}status`,
-							value: "Ähnlich wie " + process.env.PREFIX + "avatar und " + process.env.PREFIX + "nick. Ändert den Status vom Bot zu dem angegebenen Text."
+							value: "Ähnlich wie " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "name und " + process.env.PREFIX + "nick. Ändert den Status vom Bot zu dem angegebenen Text."
 						},
 						{
 							name: `${process.env.PREFIX}wenndu`,
@@ -453,6 +457,20 @@ client.on("message", async message => {
 					message.channel.send(temp.last().content.split(/ /g).join(` ${args} `));
 				});
 			};
+		};
+		if (command === "name") {
+			if (args && args != "") {
+				console.log(`Ändere Bot-Name zu "${args.join(" ")}".`);
+				client.user.setUsername(args.join(" "));
+			} else {
+				message.channel.fetchMessages({
+					limit: 2
+				}).then(temp => {
+					console.log(`Ändere Bot-Name zu "${temp.last().content}".`);
+					client.user.setUsername(temp.last().content);
+				});
+			};
+			message.react("✅");
 		};
 		if (command === "nick") {
 			if (args && args != "") {
