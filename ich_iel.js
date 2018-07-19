@@ -609,10 +609,12 @@ client.on("message", async message => {
 			};
 		};
 		if(command === "dreizehn"){
-			if(args[0] == 13){
-				message.channel.send("Ja, " + message.author.username + ", 13 ist 13.");
+			if(parseInt(args[0]) == 13){
+				message.channel.send("Ja, " + message.author.username.replace("@", "") + ", 13 ist 13.");
+			}else if(isNaN(parseInt(args[0]))){
+				message.channel.send("Nein nur Zahlen die 13 sind können die Zahl dreizehn sein.");
 			}else{
-				message.channel.send("Nein, " + message.author.username + ", "+args[0]+" ist nicht 13.");
+				message.channel.send("Nein, " + message.author.username.replace("@", "") + ", \""+parseInt(args[0])+"\" ist nicht 13.");
 			}
 		}
 	};
