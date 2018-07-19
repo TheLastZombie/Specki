@@ -103,6 +103,14 @@ client.on("message", async message => {
 					console.log("Command-Counts erfolgreich auf glot.io hochgeladen.");
 				};
 			});
+			if (message.author.id != 175877241517899776) {
+				talkedRecently.add(message.author.id);
+				talkedTimestamp[message.author.id] = Date.now() + 5000;
+				setTimeout(() => {
+					talkedRecently.delete(message.author.id);
+					delete talkedTimestamp[message.author.id];
+				}, 5000);
+			};
 		};
 		if (command === "ascii") {
 			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
@@ -603,14 +611,6 @@ client.on("message", async message => {
 					message.channel.send(zalgo(temp.last().content));
 				});
 			};
-		};
-		if (message.author.id != 175877241517899776) {
-			talkedRecently.add(message.author.id);
-			talkedTimestamp[message.author.id] = Date.now() + 5000;
-			setTimeout(() => {
-				talkedRecently.delete(message.author.id);
-				delete talkedTimestamp[message.author.id];
-			}, 5000);
 		};
 	};
 });
