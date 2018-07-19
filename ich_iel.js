@@ -81,7 +81,7 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command == "ascii" || command == "avatar" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "ficken" || command == "frauen" || command == "hab" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "wenndu" || command == "zalgo") {
+		if (command == "ascii" || command == "avatar" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "ficken" || command == "frauen" || command == "hab" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "wenndu" || command == "zalgo" || command == "dreizehn") {
 			if (command in commandCounts) {
 				commandCounts[command]++;
 			} else {
@@ -608,5 +608,12 @@ client.on("message", async message => {
 				});
 			};
 		};
+		if(command === "dreizehn"){
+			if(args[0] == 13){
+				message.channel.send("Ja, " + message.author.username + ", 13 ist 13.");
+			}else{
+				message.channel.send("Nein, " + message.author.username + ", "+args[0]+" ist nicht 13.");
+			}
+		}
 	};
 });
