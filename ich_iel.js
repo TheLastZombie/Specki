@@ -111,9 +111,9 @@ client.on("message", async message => {
 					delete talkedTimestamp[message.author.id];
 				}, 5000);
 			};
+			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 		};
 		if (command === "ascii") {
-			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (/\[.+\] \[.+\]/.test(args.join(" "))) {
 				figlet.text(args.join(" ").match(/\] \[.+\]/).toString().slice(3, -1), {
 					font: args.join(" ").match(/\[.+\] \[/).toString().slice(1, -3)
@@ -146,7 +146,6 @@ client.on("message", async message => {
 			};
 		};
 		if (command === "b" || command === "🅱") {
-			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			var temp;
 			if (args && args != "") {
 				temp = args;
@@ -177,7 +176,6 @@ client.on("message", async message => {
 			};
 		};
 		if (command === "commands") {
-			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			var commandSort = [];
 			for (var commandCurr in commandCounts) {
 				commandSort.push([commandCurr, commandCounts[commandCurr]]);
@@ -193,7 +191,6 @@ client.on("message", async message => {
 			message.channel.send(temp);
 		};
 		if (command === "deutsch") {
-			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (args && args != "") {
 				translate(args.join(" "), {
 					to: "de"
@@ -217,7 +214,6 @@ client.on("message", async message => {
 			};
 		};
 		if (command === "english" || command === "englisch") {
-			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (args && args != "") {
 				translate(args.join(" "), {
 					to: "en"
@@ -241,7 +237,6 @@ client.on("message", async message => {
 			};
 		};
 		if (command === "ersatz" || command === "replace") {
-			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (args && args != "") {
 				message.channel.send("**" + message.author.tag + ": **" + args.join(" ").replace(/aus/gi, "<:1aus:403611412938620929>").replace(/gel/gi, "<:2gel:403611412586430474>").replace(/öst/gi, "<:3oest:403611413022638081>").replace(/err/gi, "<:2err:406902951064371211>").replace(/eich/gi, "<:3eich:406902925764460544>").replace(/nuss/gi, "<:NUSS:402536220074180609>").replace(/schwul/gi, "<:schwul:406965196687671297>").replace(/verbessern/gi, "<:verbessern:403900299514740746>").replace(/xd/gi, "<:Xd:424962963095552000>").replace(/perfekt/gi, "<:perfekt:408736206885748736>").replace(/notiz beachten/gi, "<:notizbeachten:402532937221931008>").replace(/null/gi, "<:null:400375286451142656>").replace(/lösc dies/gi, "<:loesc_dies:406958134771580938>").replace(/fick geh zurück/gi, "<:fickgehzurueck:403900299087183872>").replace(/nein/gi, "<:NEIN:440132961338392590>"));
 			} else {
@@ -253,7 +248,6 @@ client.on("message", async message => {
 			};
 		};
 		if (command === "ficken" || command === "toll") {
-			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (/\[.+\] \[.+\]/.test(args.join(" "))) {
 				message.channel.send(`toll\ndieses ding ${args.join(" ").match(/\[.+\] \[/).toString().slice(1, -3)} ab\ndieses ${args.join(" ").match(/\] \[.+\]/).toString().slice(3, -1)}\nFICKen`);
 			} else {
@@ -261,7 +255,6 @@ client.on("message", async message => {
 			};
 		};
 		if (command === "frauen") {
-			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (args && args != "") {
 				message.channel.send(`Frauen stehn auf Männer wo ${args.join(" ")}`);
 			} else {
@@ -273,7 +266,6 @@ client.on("message", async message => {
 			};
 		};
 		if (command === "hab") {
-			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (args && args != "") {
 				message.channel.send(`Hab ${args.join(" ")} gemacht in meine hose skyaa <:donken:400036407697211403>`);
 			} else {
@@ -403,7 +395,6 @@ client.on("message", async message => {
 			});
 		};
 		if (command === "huso" || command === "wie") {
-			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (args && args != "") {
 				message.channel.send(`Wie ${args.join(" ")}, du Hurensohn?`);
 			} else {
@@ -415,7 +406,6 @@ client.on("message", async message => {
 			};
 		};
 		if (command === "ibims") {
-			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (args && args != "") {
 				message.channel.send(`I bims, 1 ${args.join(" ")}!`);
 			} else {
@@ -427,7 +417,6 @@ client.on("message", async message => {
 			};
 		};
 		if (command === "ichmach") {
-			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (args && args != "") {
 				var temp = args.join(" ");
 			} else {
@@ -436,7 +425,6 @@ client.on("message", async message => {
 			message.channel.send(`Bitte Objektiv beurteilen hab jetzt lange dafür gebraucht Stellt euch den Beat vor die Hook ist mit AutoTune\n\ney ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} Ich rappe und mache Krieg wie '39 und bin beim Dealen fleißig Ich hatte mit vielen Frauen Sex und saufe Wodka Bull auf Ex ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} Wer mich fikt den fike ich zurück Eyyyy Brudi mach nicht so auf 31er den ich komm in Haus und mach Schaden mit Waffe yooooohhhooo Wallah ich schiesse mit 5 kancken auf dein Haus ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} Ich mache mit Koks Para und fike und Porsche Pana Ich nehm Drogen ala MDMA HEROIN COCAIN DOPE CRYSTAL und rauche denn Stoff gib mir den J und deine Mutter gibt mir Shoot So habe ich euch gefikkt yea yea Cho`);
 		};
 		if (command === "jemand" || command === "someone") {
-			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			var temp = message.channel.guild.members.random().user;
 			if (message.guild.members.get(temp.id).nickname) {
 				message.channel.send(cool() + " " + message.guild.members.get(temp.id).nickname + " " + args.join(" "));
@@ -445,7 +433,6 @@ client.on("message", async message => {
 			};
 		};
 		if (command === "kerle" || command === "dudes") {
-			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (args && args != "") {
 				message.channel.send(`Es ist ${args.join(" ")}, meine Kerle!`);
 			} else {
@@ -454,7 +441,6 @@ client.on("message", async message => {
 			};
 		};
 		if (command === "klatsch" || command === "clap") {
-			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (args.length > 1) {
 				var temp = args[0];
 				args.shift();
@@ -469,7 +455,6 @@ client.on("message", async message => {
 			};
 		};
 		if (command === "nick") {
-			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (args && args != "") {
 				console.log(`Ändere Bot-Nick zu "${args.join(" ")}".`);
 				message.guild.members.get(client.user.id).setNickname(args.join(" "));
@@ -484,7 +469,6 @@ client.on("message", async message => {
 			message.react("✅");
 		};
 		if (command === "pfosten") {
-			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (args && args != "") {
 				request("https://www.reddit.com/r/" + args.join(" ") + "/random/.json", function (error, response, body) {
 					message.channel.send({
@@ -531,12 +515,10 @@ client.on("message", async message => {
 			};
 		};
 		if (command === "ping") {
-			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			var temp = await message.channel.send("Ping...");
 			temp.edit(`Pong! Latenz: ${temp.createdTimestamp - message.createdTimestamp} ms. API-Latenz: ${Math.round(client.ping)} ms.`);
 		};
 		if (command === "sag") {
-			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (args && args != "") {
 				message.channel.send(`Sag ${args.join(" ")} zurück 🔫 <:uff_kaputt:402413360748036128>`);
 			} else {
@@ -548,7 +530,6 @@ client.on("message", async message => {
 			};
 		};
 		if (command === "spott" || command === "mock") {
-			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (args && args != "") {
 				var temp = args.join(" ").split("");
 				for (indx = 0; indx < temp.length; indx++) {
@@ -578,7 +559,6 @@ client.on("message", async message => {
 			};
 		};
 		if (command === "status") {
-			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (args && args != "") {
 				console.log(`Ändere Bot-Status zu "${args.join(" ")}".`);
 				client.user.setActivity(args.join(" "));
@@ -593,7 +573,6 @@ client.on("message", async message => {
 			message.react("✅");
 		};
 		if (command === "wenndu") {
-			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (args && args != "") {
 				message.channel.send("wenn du ***" + args.join(" ").split("").join(" ").toUpperCase() + " " + args.join(" ").split("")[args.join(" ").split("").length - 1].toUpperCase() + "***");
 			} else {
@@ -601,7 +580,6 @@ client.on("message", async message => {
 			};
 		};
 		if (command === "zalgo") {
-			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 			if (args && args != "") {
 				message.channel.send(zalgo(args.join(" ")));
 			} else {
