@@ -4,23 +4,28 @@ const cool = require("cool-ascii-faces");
 const request = require("request");
 const figlet = require("figlet");
 const zalgo = require("to-zalgo");
+
+const commandList = ["ascii", "avatar", "b", "commands", "deutsch", "english", "ersatz", "ficken", "frauen", "hab", "hilfe", "huso", "ibims", "ichmach", "jemand", "kerle", "klatsch", "name", "nick", "pfosten", "ping", "sag", "spott", "status", "wenndu", "zalgo", "dreizehn"];
+const alias = ["ascii", "avatar", "🅱", "commands", "deutsch", "englisch", "replace", "toll", "frauen", "hab", "help", "wie", "ibims", "ichmach", "someone", "dudes", "clap", "name", "nick", "pfosten", "ping", "sag", "mock", "status", "wenndu", "zalgo", "dreizehn"];
+
+const admin_id = "175877241517899776"; //roesch
+//const admin_id = "142953170396643328"; //mikee
+
 const client = new discord.Client({
 	autoReconnect: true
 });
 const talkedRecently = new Set();
-var talkedTimestamp = {};
-var commandCounts = {};
+let talkedTimestamp = {};
+let commandCounts = {};
 function cycleActivity(){
 	var games = ["Jerrynicki hat den großen Schwul", "/r/anti_iel > /r/ich_iel", "----- unt schw -----", "Ein Bot ausnahmsweise mal nicht von Jerrynicki", "wen du furzt aber notfal psirt :3oest:", "alter ich finde den toMATenmark nicht", "Oh nein habZAHn padra feckel rumter geschmisen", "Sonic sagt: du bsit ein fetter hurensohn halt maul", "Bevor es zu spät ist | Minecraft Kurzfilm", "Coole frau", "Wa", "Hello", "Scheise!!!!!", "www.boris-becker", "Wohin ist satellit abgestuerzt ???", "!!!JETZT bin ich ein NAZI!!!!!", "!!!könnte mir gefallen + schmecken ! ! !", "Gutes Gesicht, magst du Tiere?", "http://www.youtube.com/watch?", "Hello ...ich bin drin !!!"]
 	var cgame = games[Math.floor(Math.random()*games.length)];
 	console.log(`Ändere Bot-Status zu "${cgame}".`);
 	client.user.setActivity(cgame);
 	setTimeout(cycleActivity, 3600000);
-};
+}
 client.login(process.env.TOKEN);
 client.on("ready", () => {
-	// console.log(client);
-	// console.log(``);
 	console.log(`Erfolgreich eingeloggt als ${client.user.username} (ID: ${client.user.id}).`);
 	request({
 		url: "https://api.github.com/repos/TheLastZombie/ich_iel/git/refs/heads/master",
@@ -30,7 +35,6 @@ client.on("ready", () => {
 	}, function(error, response, body) {
 		client.user.setActivity(`v2.0 Pre-Beta | Commit ${JSON.parse(body).object.url.substr(JSON.parse(body).object.url.lastIndexOf("/") + 1, 7)} | ${process.env.PREFIX}hilfe`);
 	});
-	// cycleActivity();
 	request("https://snippets.glot.io/snippets/" + process.env.GLOT_ID, function (error, response, body) {
 		if (error) {
 			console.log("Konnte Command-Counts nicht von glot.io laden. Counter startet von 0.");
@@ -41,82 +45,65 @@ client.on("ready", () => {
 	});
 });
 client.on("message", async message => {
+	let args = message.content.slice(process.env.PREFIX.length).trim().split(/ /g);
+	let command = args.shift().toLowerCase();
+	let content = args.join(" ");
+	let safeUsername = message.author.username.replace("@", "");
+
 	if (message.author.bot || message.content.indexOf(process.env.PREFIX) !== 0) {
 		return;
 	};
-	console.log(`Neue Command-Nachricht von ${message.author.username} (ID: ${message.author.id}).`);
+	console.log(`Neue Command-Nachricht von ${safeUsername} (ID: ${message.author.id}).`);
 	if (talkedRecently.has(message.author.id)) {
 		console.log(`Nachricht von ${client.user.username} (ID: ${client.user.id}) wurde wegen Rate-Limit geblockt (noch ${((talkedTimestamp[message.author.id] - Date.now()) / 1000)} Sekunden).`);
-		message.channel.send("Halt die verdammte " + message.author.username + " für " + ((talkedTimestamp[message.author.id] - Date.now()) / 1000) + " Sekunden");
-	} else {
-		var args = message.content.slice(process.env.PREFIX.length).trim().split(/ /g);
-		var command = args.shift().toLowerCase();
-		if (command == "🅱") {
-			command = "b";
+		message.channel.send("Halt die verdammte " +  + " für " + ((talkedTimestamp[message.author.id] - Date.now()) / 1000) + " Sekunden");
+		return;
+	}
+
+
+	if(commandList.indexOf(command) == -1 && alias.indexOf(command) >= 0){
+		temp = alias.indexOf(command);
+		command = commandList[temp];
+		console.log("Replaced " + alias[temp] + " with " + command);
+	}
+	
+	if (command in commandList) {
+		if (command in commandCounts) {
+			commandCounts[command]++;
+		} else {
+			commandCounts[command] = 1;
 		};
-		if (command == "englisch") {
-			command = "english";
-		};
-		if (command == "replace") {
-			command = "ersatz";
-		};
-		if (command == "toll") {
-			command = "ficken";
-		};
-		if (command == "help") {
-			command = "hilfe";
-		};
-		if (command == "wie") {
-			command = "huso";
-		};
-		if (command == "someone") {
-			command = "jemand";
-		};
-		if (command == "dudes") {
-			command = "kerle";
-		};
-		if (command == "clap") {
-			command = "klatsch";
-		};
-		if (command == "mock") {
-			command = "spott";
-		};
-		if (command == "ascii" || command == "avatar" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "ficken" || command == "frauen" || command == "hab" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "wenndu" || command == "zalgo" || command == "dreizehn") {
-			if (command in commandCounts) {
-				commandCounts[command]++;
+		request({
+			url: "https://snippets.glot.io/snippets/" + process.env.GLOT_ID,
+			method: "PUT",
+			headers: {
+				"Authorization": "Token " + process.env.GLOT_TK
+			},
+			json: {
+				"files": [{"name": "commands.json", "content": JSON.stringify(commandCounts)}]
+			}
+		}, function (error, response, body) {
+			if (error) {
+				console.log("Konnte Command-Counts nicht auf glot.io hochladen.");
 			} else {
-				commandCounts[command] = 1;
+				console.log("Command-Counts erfolgreich auf glot.io hochgeladen.");
 			};
-			request({
-				url: "https://snippets.glot.io/snippets/" + process.env.GLOT_ID,
-				method: "PUT",
-				headers: {
-					"Authorization": "Token " + process.env.GLOT_TK
-				},
-				json: {
-					"files": [{"name": "commands.json", "content": JSON.stringify(commandCounts)}]
-				}
-			}, function (error, response, body) {
-				if (error) {
-					console.log("Konnte Command-Counts nicht auf glot.io hochladen.");
-				} else {
-					console.log("Command-Counts erfolgreich auf glot.io hochgeladen.");
-				};
-			});
-			if (message.author.id != 175877241517899776) {
-				talkedRecently.add(message.author.id);
-				talkedTimestamp[message.author.id] = Date.now() + 5000;
-				setTimeout(() => {
-					talkedRecently.delete(message.author.id);
-					delete talkedTimestamp[message.author.id];
-				}, 5000);
-			};
-			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
+		});
+		if (message.author.id != admin_id) {
+			talkedRecently.add(message.author.id);
+			talkedTimestamp[message.author.id] = Date.now() + 5000;
+			setTimeout(() => {
+				talkedRecently.delete(message.author.id);
+				delete talkedTimestamp[message.author.id];
+			}, 5000);
 		};
-		if (command === "ascii") {
-			if (/\[.+\] \[.+\]/.test(args.join(" "))) {
-				figlet.text(args.join(" ").match(/\] \[.+\]/).toString().slice(3, -1), {
-					font: args.join(" ").match(/\[.+\] \[/).toString().slice(1, -3)
+		console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
+	};
+	switch(command){
+		case "ascii":
+			if (/\[.+\] \[.+\]/.test(content)) {
+				figlet.text(content.match(/\] \[.+\]/).toString().slice(3, -1), {
+					font: content.match(/\[.+\] \[/).toString().slice(1, -3)
 				}, function(err, temp) {
 					if (err) {
 						figlet.fonts(function(err, temp) {
@@ -126,9 +113,9 @@ client.on("message", async message => {
 					};
 					message.channel.send("```" + temp + "```");
 				});
-			};
-		};
-		if (command === "avatar") {
+			}
+			break;
+		case "avatar":
 			if (message.attachments.first()) {
 				console.log("Ändere Avatar zu " + message.attachments.first().url + ".");
 				message.react("✅");
@@ -136,16 +123,16 @@ client.on("message", async message => {
 					message.react("❎");
 				});
 			} else if (args && args != "") {
-				console.log("Ändere Avatar zu " + args.join(" ") + ".");
+				console.log("Ändere Avatar zu " + content + ".");
 				message.react("✅");
-				client.user.setAvatar(args.join(" ")).catch(function(error) {
+				client.user.setAvatar(content).catch(function(error) {
 					message.react("❎");	
 				});
 			} else {
 				message.react("❎");
-			};
-		};
-		if (command === "b" || command === "🅱") {
+			}
+			break;
+		case "b":
 			var temp;
 			if (args && args != "") {
 				temp = args;
@@ -174,8 +161,8 @@ client.on("message", async message => {
 					message.channel.send(temp);
 				});
 			};
-		};
-		if (command === "commands") {
+			break;
+		case "commands":
 			var commandSort = [];
 			for (var commandCurr in commandCounts) {
 				commandSort.push([commandCurr, commandCounts[commandCurr]]);
@@ -189,10 +176,10 @@ client.on("message", async message => {
 				temp += "`" + commandSTmp[0] + "` " + commandSTmp[1] + "\n";
 			};
 			message.channel.send(temp);
-		};
-		if (command === "deutsch") {
+			break;
+		case "deutsch":
 			if (args && args != "") {
-				translate(args.join(" "), {
+				translate(content, {
 					to: "de"
 				}).then(temp => {
 					message.channel.send("**" + message.author.tag + ": **" + temp.text);
@@ -212,10 +199,10 @@ client.on("message", async message => {
 					});
 				});
 			};
-		};
-		if (command === "english" || command === "englisch") {
+			break;
+		case "englisch":
 			if (args && args != "") {
-				translate(args.join(" "), {
+				translate(content, {
 					to: "en"
 				}).then(temp => {
 					message.channel.send("**" + message.author.tag + ": **" + temp.text);
@@ -235,10 +222,10 @@ client.on("message", async message => {
 					});
 				});
 			};
-		};
-		if (command === "ersatz" || command === "replace") {
+			break;
+		case "ersatz":
 			if (args && args != "") {
-				message.channel.send("**" + message.author.tag + ": **" + args.join(" ").replace(/aus/gi, "<:1aus:403611412938620929>").replace(/gel/gi, "<:2gel:403611412586430474>").replace(/öst/gi, "<:3oest:403611413022638081>").replace(/err/gi, "<:2err:406902951064371211>").replace(/eich/gi, "<:3eich:406902925764460544>").replace(/nuss/gi, "<:NUSS:402536220074180609>").replace(/schwul/gi, "<:schwul:406965196687671297>").replace(/verbessern/gi, "<:verbessern:403900299514740746>").replace(/xd/gi, "<:Xd:424962963095552000>").replace(/perfekt/gi, "<:perfekt:408736206885748736>").replace(/notiz beachten/gi, "<:notizbeachten:402532937221931008>").replace(/null/gi, "<:null:400375286451142656>").replace(/lösc dies/gi, "<:loesc_dies:406958134771580938>").replace(/fick geh zurück/gi, "<:fickgehzurueck:403900299087183872>").replace(/nein/gi, "<:NEIN:440132961338392590>"));
+				message.channel.send("**" + message.author.tag + ": **" + content.replace(/aus/gi, "<:1aus:403611412938620929>").replace(/gel/gi, "<:2gel:403611412586430474>").replace(/öst/gi, "<:3oest:403611413022638081>").replace(/err/gi, "<:2err:406902951064371211>").replace(/eich/gi, "<:3eich:406902925764460544>").replace(/nuss/gi, "<:NUSS:402536220074180609>").replace(/schwul/gi, "<:schwul:406965196687671297>").replace(/verbessern/gi, "<:verbessern:403900299514740746>").replace(/xd/gi, "<:Xd:424962963095552000>").replace(/perfekt/gi, "<:perfekt:408736206885748736>").replace(/notiz beachten/gi, "<:notizbeachten:402532937221931008>").replace(/null/gi, "<:null:400375286451142656>").replace(/lösc dies/gi, "<:loesc_dies:406958134771580938>").replace(/fick geh zurück/gi, "<:fickgehzurueck:403900299087183872>").replace(/nein/gi, "<:NEIN:440132961338392590>"));
 			} else {
 				message.channel.fetchMessages({
 					limit: 2
@@ -246,17 +233,17 @@ client.on("message", async message => {
 					message.channel.send("**" + message.author.tag + ": **" + temp.last().content.replace(/aus/gi, "<:1aus:403611412938620929>").replace(/gel/gi, "<:2gel:403611412586430474>").replace(/öst/gi, "<:3oest:403611413022638081>").replace(/err/gi, "<:2err:406902951064371211>").replace(/eich/gi, "<:3eich:406902925764460544>").replace(/nuss/gi, "<:NUSS:402536220074180609>").replace(/schwul/gi, "<:schwul:406965196687671297>").replace(/verbessern/gi, "<:verbessern:403900299514740746>").replace(/xd/gi, "<:Xd:424962963095552000>").replace(/perfekt/gi, "<:perfekt:408736206885748736>").replace(/notiz beachten/gi, "<:notizbeachten:402532937221931008>").replace(/null/gi, "<:null:400375286451142656>").replace(/lösc dies/gi, "<:loesc_dies:406958134771580938>").replace(/fick geh zurück/gi, "<:fickgehzurueck:403900299087183872>").replace(/nein/gi, "<:NEIN:440132961338392590>"));
 				});
 			};
-		};
-		if (command === "ficken" || command === "toll") {
-			if (/\[.+\] \[.+\]/.test(args.join(" "))) {
-				message.channel.send(`toll\ndieses ding ${args.join(" ").match(/\[.+\] \[/).toString().slice(1, -3)} ab\ndieses ${args.join(" ").match(/\] \[.+\]/).toString().slice(3, -1)}\nFICKen`);
+			break;
+		case "ficken":
+			if (/\[.+\] \[.+\]/.test(content)) {
+				message.channel.send(`toll\ndieses ding ${content.match(/\[.+\] \[/).toString().slice(1, -3)} ab\ndieses ${content.match(/\] \[.+\]/).toString().slice(3, -1)}\nFICKen`);
 			} else {
 				message.channel.send(`toll\ndieses ding beim kopfhörer ab\ndieses um das ohr\nFICKen`);
 			};
-		};
-		if (command === "frauen") {
+			break;
+		case "frauen":
 			if (args && args != "") {
-				message.channel.send(`Frauen stehn auf Männer wo ${args.join(" ")}`);
+				message.channel.send(`Frauen stehn auf Männer wo ${content}`);
 			} else {
 				message.channel.fetchMessages({
 					limit: 2
@@ -264,10 +251,10 @@ client.on("message", async message => {
 					message.channel.send(`Frauen stehn auf Männer wo ${temp.last().content}`);
 				});
 			};
-		};
-		if (command === "hab") {
+			break;
+		case "hab":
 			if (args && args != "") {
-				message.channel.send(`Hab ${args.join(" ")} gemacht in meine hose skyaa <:donken:400036407697211403>`);
+				message.channel.send(`Hab ${content} gemacht in meine hose skyaa <:donken:400036407697211403>`);
 			} else {
 				message.channel.fetchMessages({
 					limit: 2
@@ -275,8 +262,8 @@ client.on("message", async message => {
 					message.channel.send(`Hab ${temp.last().content} gemacht in meine hose skyaa <:donken:400036407697211403>`);
 				});
 			};
-		};
-		if (command === "hilfe" || command === "help") {
+			break;
+		case "hilfe":
 			message.channel.send({
 				embed: {
 					author: {
@@ -389,6 +376,10 @@ client.on("message", async message => {
 						{
 							name: `${process.env.PREFIX}zalgo`,
 							value: "Er kommt und so halt, gell?"
+						},
+						{
+							name: `${process.env.PREFIX}dreizehn [Zahl]`,
+							value: "Überprüfe ob eine Zahl 13 ist..."
 						}
 					],
 					footer: {
@@ -397,10 +388,10 @@ client.on("message", async message => {
 					}
 				}
 			});
-		};
-		if (command === "huso" || command === "wie") {
+			break;
+		case "huso":
 			if (args && args != "") {
-				message.channel.send(`Wie ${args.join(" ")}, du Hurensohn?`);
+				message.channel.send(`Wie ${content}, du Hurensohn?`);
 			} else {
 				message.channel.fetchMessages({
 					limit: 2
@@ -408,43 +399,43 @@ client.on("message", async message => {
 					message.channel.send(`Wie ${temp.last().content}, du Hurensohn?`);
 				});
 			};
-		};
-		if (command === "ibims") {
+			break;
+		case "ibims":
 			if (args && args != "") {
-				message.channel.send(`I bims, 1 ${args.join(" ")}!`);
+				message.channel.send(`I bims, 1 ${content}!`);
 			} else {
 				if (message.guild.members.get(message.author.id).nickname) {
 					message.channel.send(`I bims, 1 ${message.guild.members.get(message.author.id).nickname}!`);
 				} else {
-					message.channel.send(`I bims, 1 ${message.author.username}!`);
+					message.channel.send(`I bims, 1 ${safeUsername}!`);
 				};
 			};
-		};
-		if (command === "ichmach") {
+			break;
+		case "ichmach":
 			if (args && args != "") {
-				var temp = args.join(" ");
+				var temp = content;
 			} else {
 				var temp = "Scheine";
 			};
 			message.channel.send(`Bitte Objektiv beurteilen hab jetzt lange dafür gebraucht Stellt euch den Beat vor die Hook ist mit AutoTune\n\ney ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} Ich rappe und mache Krieg wie '39 und bin beim Dealen fleißig Ich hatte mit vielen Frauen Sex und saufe Wodka Bull auf Ex ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} Wer mich fikt den fike ich zurück Eyyyy Brudi mach nicht so auf 31er den ich komm in Haus und mach Schaden mit Waffe yooooohhhooo Wallah ich schiesse mit 5 kancken auf dein Haus ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} ey ey ich mach ${temp} Ich mache mit Koks Para und fike und Porsche Pana Ich nehm Drogen ala MDMA HEROIN COCAIN DOPE CRYSTAL und rauche denn Stoff gib mir den J und deine Mutter gibt mir Shoot So habe ich euch gefikkt yea yea Cho`);
-		};
-		if (command === "jemand" || command === "someone") {
+			break;
+		case "jemand":
 			var temp = message.channel.guild.members.random().user;
 			if (message.guild.members.get(temp.id).nickname) {
-				message.channel.send(cool() + " " + message.guild.members.get(temp.id).nickname + " " + args.join(" "));
+				message.channel.send(cool() + " " + message.guild.members.get(temp.id).nickname + " " + content);
 			} else {
-				message.channel.send(cool() + " " + temp.username + " " + args.join(" "));
+				message.channel.send(cool() + " " + temp.username + " " + content);
 			};
-		};
-		if (command === "kerle" || command === "dudes") {
+			break;
+		case "kerle":
 			if (args && args != "") {
-				message.channel.send(`Es ist ${args.join(" ")}, meine Kerle!`);
+				message.channel.send(`Es ist ${content}, meine Kerle!`);
 			} else {
 				var temp = new Date();
 				message.channel.send(`Es ist ${["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"][temp.getDay()]}, meine Kerle!`);
 			};
-		};
-		if (command === "klatsch" || command === "clap") {
+			break;
+		case "klatsch":
 			if (args.length > 1) {
 				var temp = args[0];
 				args.shift();
@@ -457,25 +448,30 @@ client.on("message", async message => {
 					message.channel.send(temp.last().content.split(/ /g).join(` ${args} `));
 				});
 			};
-		};
-		if (command === "name") {
+			break;
+		case "name":
+			if(message.author.id === admin_id){
+				if (args && args != "") {
+					console.log(`Ändere Bot-Name zu "${content}".`);
+					client.user.setUsername(content);
+				} else {
+					message.channel.fetchMessages({
+						limit: 2
+					}).then(temp => {
+						console.log(`Ändere Bot-Name zu "${temp.last().content}".`);
+						client.user.setUsername(temp.last().content);
+					});
+				}
+				message.react("✅");
+			}else{
+				message.channel.send("$name darf nur vom Bot-Administrator verwendet werden!");
+				message.react("❌");
+			}
+			break;
+		case "nick":
 			if (args && args != "") {
-				console.log(`Ändere Bot-Name zu "${args.join(" ")}".`);
-				client.user.setUsername(args.join(" "));
-			} else {
-				message.channel.fetchMessages({
-					limit: 2
-				}).then(temp => {
-					console.log(`Ändere Bot-Name zu "${temp.last().content}".`);
-					client.user.setUsername(temp.last().content);
-				});
-			};
-			message.react("✅");
-		};
-		if (command === "nick") {
-			if (args && args != "") {
-				console.log(`Ändere Bot-Nick zu "${args.join(" ")}".`);
-				message.guild.members.get(client.user.id).setNickname(args.join(" "));
+				console.log(`Ändere Bot-Nick zu "${content}".`);
+				message.guild.members.get(client.user.id).setNickname(content);
 			} else {
 				message.channel.fetchMessages({
 					limit: 2
@@ -483,12 +479,12 @@ client.on("message", async message => {
 					console.log(`Ändere Bot-Nick zu "${temp.last().content}".`);
 					message.guild.members.get(client.user.id).setNickname(temp.last().content);
 				});
-			};
+			}
 			message.react("✅");
-		};
-		if (command === "pfosten") {
+			break;
+		case "pfosten":
 			if (args && args != "") {
-				request("https://www.reddit.com/r/" + args.join(" ") + "/random/.json", function (error, response, body) {
+				request("https://www.reddit.com/r/" + content + "/random/.json", function (error, response, body) {
 					message.channel.send({
 						"embed": {
 							"title": JSON.parse(body)[0]["data"]["children"][0]["data"]["title"],
@@ -530,33 +526,33 @@ client.on("message", async message => {
 						}
 					});
 				});
-			};
-		};
-		if (command === "ping") {
+			}
+			break;
+		case "ping":
 			var temp = await message.channel.send("Ping...");
 			temp.edit(`Pong! Latenz: ${temp.createdTimestamp - message.createdTimestamp} ms. API-Latenz: ${Math.round(client.ping)} ms.`);
-		};
-		if (command === "sag") {
+			break;
+		case "sag":
 			if (args && args != "") {
-				message.channel.send(`Sag ${args.join(" ")} zurück 🔫 <:uff_kaputt:402413360748036128>`);
+				message.channel.send(`Sag ${content} zurück 🔫 <:uff_kaputt:402413360748036128>`);
 			} else {
 				message.channel.fetchMessages({
 					limit: 2
 				}).then(temp => {
 					message.channel.send(`Sag ${temp.last().content} zurück 🔫 <:uff_kaputt:402413360748036128>`);
 				});
-			};
-		};
-		if (command === "spott" || command === "mock") {
+			}
+			break;
+		case "spott":
 			if (args && args != "") {
-				var temp = args.join(" ").split("");
+				var temp = content.split("");
 				for (indx = 0; indx < temp.length; indx++) {
 					if (indx % 2 == false) {
 						temp[indx] = temp[indx].toUpperCase();
 					} else {
 						temp[indx] = temp[indx].toLowerCase();
-					};
-				};
+					}
+				}
 				temp = temp.join("");
 				message.channel.send(temp);
 			} else {
@@ -569,17 +565,17 @@ client.on("message", async message => {
 							temp[indx] = temp[indx].toUpperCase();
 						} else {
 							temp[indx] = temp[indx].toLowerCase();
-						};
-					};
+						}
+					}
 					temp = temp.join("");
 					message.channel.send(temp);
 				});
-			};
-		};
-		if (command === "status") {
+			}
+			break;
+		case "status":
 			if (args && args != "") {
-				console.log(`Ändere Bot-Status zu "${args.join(" ")}".`);
-				client.user.setActivity(args.join(" "));
+				console.log(`Ändere Bot-Status zu "${content}".`);
+				client.user.setActivity(content);
 			} else {
 				message.channel.fetchMessages({
 					limit: 2
@@ -587,35 +583,37 @@ client.on("message", async message => {
 					console.log(`Ändere Bot-Status zu "${temp.last().content}".`);
 					client.user.setActivity(temp.last().content);
 				});
-			};
+			}
 			message.react("✅");
-		};
-		if (command === "wenndu") {
+			break;
+		case "wenndu":
 			if (args && args != "") {
-				message.channel.send("wenn du ***" + args.join(" ").split("").join(" ").toUpperCase() + " " + args.join(" ").split("")[args.join(" ").split("").length - 1].toUpperCase() + "***");
+				message.channel.send("wenn du ***" + content.split("").join(" ").toUpperCase() + " " + content.split("")[content.split("").length - 1].toUpperCase() + "***");
 			} else {
 				message.channel.send("geht nich du huso");
-			};
-		};
-		if (command === "zalgo") {
+			}
+			break;
+		case "zalgo":
 			if (args && args != "") {
-				message.channel.send(zalgo(args.join(" ")));
+				message.channel.send(zalgo(content));
 			} else {
 				message.channel.fetchMessages({
 					limit: 2
 				}).then(temp => {
 					message.channel.send(zalgo(temp.last().content));
 				});
-			};
-		};
-		if(command === "dreizehn"){
+			}
+			break;
+		case "dreizehn":
 			if(parseInt(args[0]) == 13){
-				message.channel.send("Ja, " + message.author.username.replace("@", "") + ", 13 ist 13.");
+				message.channel.send("Ja, " + safeUsername + ", 13 ist 13.");
 			}else if(isNaN(parseInt(args[0]))){
 				message.channel.send("Nein nur Zahlen die 13 sind können die Zahl dreizehn sein.");
 			}else{
-				message.channel.send("Nein, " + message.author.username.replace("@", "") + ", \""+parseInt(args[0])+"\" ist nicht 13.");
+				message.channel.send("Nein, " + safeUsername + ", \""+parseInt(args[0])+"\" ist nicht 13.");
 			}
-		}
-	};
-});
+			break;
+		default:
+			console.log("Invalid command by " + message.author.id + " command: " + command);
+	}
+})
