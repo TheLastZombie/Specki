@@ -249,7 +249,7 @@ client.on("message", async message => {
 		};
 		if (command === "ficken" || command === "toll") {
 			if (/\[.+\] \[.+\]/.test(args.join(" "))) {
-				message.channel.send(`toll\ndieses ding ${args.join(" ").match(/\[.+\] \[/).toString().slice(1, -3)} ab\ndieses ${args.join(" ").match(/\] \[.+\]/).toString().slice(3, -1)}\nFICKen`);
+				message.channel.send(`toll\ndieses ding beim ${args.join(" ").match(/\[.+\] \[/).toString().slice(1, -3)} ab\ndieses um das ${args.join(" ").match(/\] \[.+\]/).toString().slice(3, -1)}\nFICKen`);
 			} else {
 				message.channel.send(`toll\ndieses ding beim kopfhörer ab\ndieses um das ohr\nFICKen`);
 			};
@@ -316,7 +316,7 @@ client.on("message", async message => {
 						},
 						{
 							name: `${process.env.PREFIX}ficken | ${process.env.PREFIX}toll`,
-							value: "Zwei Argumente in eckigen Klammern: [beim kopfhörer] [um das ohr]. [FICKen](https://discordapp.com/channels/392678434687549440/430838493359636490/431582731239948308)"
+							value: "Zwei Argumente in eckigen Klammern: [kopfhörer] [ohr]. [FICKen](https://discordapp.com/channels/392678434687549440/430838493359636490/431582731239948308)"
 						},
 						{
 							name: `${process.env.PREFIX}frauen`,
