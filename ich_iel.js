@@ -10,6 +10,7 @@ const client = new discord.Client({
 const talkedRecently = new Set();
 var talkedTimestamp = {};
 var commandCounts = {};
+var commandSuccess;
 function cycleActivity(){
 	var games = ["Jerrynicki hat den großen Schwul", "/r/anti_iel > /r/ich_iel", "----- unt schw -----", "Ein Bot ausnahmsweise mal nicht von Jerrynicki", "wen du furzt aber notfal psirt :3oest:", "alter ich finde den toMATenmark nicht", "Oh nein habZAHn padra feckel rumter geschmisen", "Sonic sagt: du bsit ein fetter hurensohn halt maul", "Bevor es zu spät ist | Minecraft Kurzfilm", "Coole frau", "Wa", "Hello", "Scheise!!!!!", "www.boris-becker", "Wohin ist satellit abgestuerzt ???", "!!!JETZT bin ich ein NAZI!!!!!", "!!!könnte mir gefallen + schmecken ! ! !", "Gutes Gesicht, magst du Tiere?", "http://www.youtube.com/watch?", "Hello ...ich bin drin !!!"]
 	var cgame = games[Math.floor(Math.random()*games.length)];
@@ -33,8 +34,10 @@ client.on("ready", () => {
 	// cycleActivity();
 	request("https://snippets.glot.io/snippets/" + process.env.GLOT_ID, function (error, response, body) {
 		if (error) {
-			console.log("Konnte Command-Counts nicht von glot.io laden. Counter startet von 0.");
+			commandSuccess = false;
+			console.log("Konnte Command-Counts nicht von glot.io laden. Counter startet von 0, wird nicht hochgeladen.");
 		} else {
+			commandSuccess = true;
 			console.log("Command-Counts erfolgreich von glot.io heruntergeladen.");
 			commandCounts = JSON.parse(JSON.parse(body).files[0].content);
 		};
@@ -87,22 +90,26 @@ client.on("message", async message => {
 			} else {
 				commandCounts[command] = 1;
 			};
-			request({
-				url: "https://snippets.glot.io/snippets/" + process.env.GLOT_ID,
-				method: "PUT",
-				headers: {
-					"Authorization": "Token " + process.env.GLOT_TK
-				},
-				json: {
-					"files": [{"name": "commands.json", "content": JSON.stringify(commandCounts)}]
-				}
-			}, function (error, response, body) {
-				if (error) {
-					console.log("Konnte Command-Counts nicht auf glot.io hochladen.");
-				} else {
-					console.log("Command-Counts erfolgreich auf glot.io hochgeladen.");
-				};
-			});
+			if (commandSuccess) {
+				request({
+					url: "https://snippets.glot.io/snippets/" + process.env.GLOT_ID,
+					method: "PUT",
+					headers: {
+						"Authorization": "Token " + process.env.GLOT_TK
+					},
+					json: {
+						"files": [{"name": "commands.json", "content": JSON.stringify(commandCounts)}]
+					}
+				}, function (error, response, body) {
+					if (error) {
+						console.log("Konnte Command-Counts nicht auf glot.io hochladen.");
+					} else {
+						console.log("Command-Counts erfolgreich auf glot.io hochgeladen.");
+					};
+				});
+			} else {
+				console.log("Commands konnten beim Starten nicht geladen werden, werden nicht hochgeladen.");
+			};
 			if (message.author.id != 175877241517899776) {
 				talkedRecently.add(message.author.id);
 				talkedTimestamp[message.author.id] = Date.now() + 5000;
