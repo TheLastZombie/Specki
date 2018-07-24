@@ -86,7 +86,7 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command == "ascii" || command == "avatar" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "ficken" || command == "frauen" || command == "hab" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "wenndu" || command == "zalgo") {
+		if (command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "ficken" || command == "frauen" || command == "hab" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "wenndu" || command == "zalgo") {
 			if (command in commandCounts) {
 				commandCounts[command]++;
 			} else {
@@ -152,6 +152,25 @@ client.on("message", async message => {
 				});
 			} else {
 				message.react("❎");
+			};
+		};
+		if (command === "azsh") {
+			if (args && args != "") {
+				if (args.join(" ").match(/www\.amazon\.\w*/) && args.join(" ").match(/[A-Z0-9]{10}/)) {
+					message.channel.send("https://" + args.join(" ").match(/www\.amazon\.\w*/) + "/dp/" + args.join(" ").match(/[A-Z0-9]{10}/));
+				} else {
+					message.react("❎");
+				};
+			} else {
+				message.channel.fetchMessages({
+					limit: 2
+				}).then(temp => {
+					if (temp.last().content.match(/www\.amazon\.\w*/) && temp.last().content.match(/[A-Z0-9]{10}/)) {
+						message.channel.send("https://" + temp.last().content.match(/www\.amazon\.\w*/) + "/dp/" + temp.last().content.match(/[A-Z0-9]{10}/));
+					} else {
+						message.react("❎");
+					};
+				});
 			};
 		};
 		if (command === "b" || command === "🅱") {
@@ -302,6 +321,10 @@ client.on("message", async message => {
 						{
 							name: `${process.env.PREFIX}avatar`,
 							value: "Ähnlich wie " + process.env.PREFIX + "name, " + process.env.PREFIX + "nick und " + process.env.PREFIX + "status. Ändert den Avatar vom Bot zu dem angegebenen Bild."
+						},
+						{
+							name: `${process.env.PREFIX}azsh`,
+							value: "Kurz für Amazon Shortener, kürzt dieser Command Amazon-Links."
 						},
 						{
 							name: `${process.env.PREFIX}b | ${process.env.PREFIX}🅱`,
