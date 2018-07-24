@@ -11,6 +11,7 @@ const talkedRecently = new Set();
 var talkedTimestamp = {};
 var commandCounts = {};
 var commandSuccess;
+var commitId;
 function cycleActivity(){
 	var games = ["Jerrynicki hat den großen Schwul", "/r/anti_iel > /r/ich_iel", "----- unt schw -----", "Ein Bot ausnahmsweise mal nicht von Jerrynicki", "wen du furzt aber notfal psirt :3oest:", "alter ich finde den toMATenmark nicht", "Oh nein habZAHn padra feckel rumter geschmisen", "Sonic sagt: du bsit ein fetter hurensohn halt maul", "Bevor es zu spät ist | Minecraft Kurzfilm", "Coole frau", "Wa", "Hello", "Scheise!!!!!", "www.boris-becker", "Wohin ist satellit abgestuerzt ???", "!!!JETZT bin ich ein NAZI!!!!!", "!!!könnte mir gefallen + schmecken ! ! !", "Gutes Gesicht, magst du Tiere?", "http://www.youtube.com/watch?", "Hello ...ich bin drin !!!"]
 	var cgame = games[Math.floor(Math.random()*games.length)];
@@ -29,7 +30,8 @@ client.on("ready", () => {
 			"User-Agent": "TheLastZombie/ich_iel"
 		}
 	}, function(error, response, body) {
-		client.user.setActivity(`v2.0 Pre-Beta | Commit ${JSON.parse(body).object.url.substr(JSON.parse(body).object.url.lastIndexOf("/") + 1, 7)} | ${process.env.PREFIX}hilfe`);
+		commitId = JSON.parse(body).object.url.substr(JSON.parse(body).object.url.lastIndexOf("/") + 1, 7);
+		client.user.setActivity(`v2.0 Pre-Beta | Commit ${commitId} | ${process.env.PREFIX}hilfe`);
 	});
 	// cycleActivity();
 	request("https://snippets.glot.io/snippets/" + process.env.GLOT_ID, function (error, response, body) {
@@ -406,7 +408,7 @@ client.on("message", async message => {
 					],
 					footer: {
 						icon_url: client.user.avatarURL,
-						text: "v2.0 Pre-Beta | von @roesch#0611 mit discord.js"
+						text: `v2.0 Pre-Beta | Commit ${commitId} | von @roesch#0611 mit discord.js`
 					}
 				}
 			});
