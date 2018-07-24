@@ -413,10 +413,6 @@ client.on("message", async message => {
 						{
 							name: `${process.env.PREFIX}status`,
 							value: "Ähnlich wie " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "name und " + process.env.PREFIX + "nick. Ändert den Status vom Bot zu dem angegebenen Text."
-						},
-						{
-							name: `${process.env.PREFIX}wenndu`,
-							value: "wenn du ***" + process.env.PREFIX + " W E N N D U***"
 						}
 					]
 				}
@@ -424,6 +420,10 @@ client.on("message", async message => {
 			message.channel.send({
 				embed: {
 					fields: [
+						{
+							name: `${process.env.PREFIX}wenndu`,
+							value: "wenn du ***" + process.env.PREFIX + " W E N N D U***"
+						},
 						{
 							name: `${process.env.PREFIX}zalgo`,
 							value: "E̢̟̥̤̻̥̗͕̘̯̮͕̩̫̯ͫ̉̃̒̈́͢͝ͅȐ̟̞̫̦̭̼͈̺̝̾̅ͦͬ̏ͧͫ̄̿̀ ̴̹̩͖͚̭͓͛͛͑̈͛́͊͌̏̋ͫ̀̀̚͟K̶̨̡̛̜̥̻̬̩̟̬͇ͩ̈̂͛̎͛̾͒͝Ȍ̷̪̠͇͕̪̰̼̜̬̺̮̒̍̎͂͊͞M̸̷̛̉ͧ͆̂̈̈́̽̽͢͏̲̦͖͍̟̮͕͖̲̩͇̘̝M̸̶̪̗̲̘̖̗̹̟̦͎̳̜̥̮̲͗̈ͥ̋ͫͨ̋̈́͂ͭͥ̋̐̑ͤ̚͟͟ͅT̴̨̥̜̠̼̮͊̿̿ͧͩ̾ͨ͊ͦͥ͗̽ͤ͐̾ͫͣ̚͜͞.̓͊̈́̎ͫ̈́̊͊́̉͐͑͘҉̙̬̟͉"
