@@ -41,7 +41,6 @@ npm start
 git clone https://github.com/TheLastZombie/ich_iel
 cd ich_iel
 npm install
-npm install dotenv
 ```
 
 Jetzt in `.env` die Umgebungsvariablen `PREFIX` (gewünschter Prefix), `TOKEN` (Discord-Bot-Token), `GLOT_ID` (ID eines glot.io-Pastes) und `GLOT_TK` (glot.io-API-Token) einsetzen.
