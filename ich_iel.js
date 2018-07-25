@@ -49,6 +49,10 @@ client.on("message", async message => {
 	if (message.author.bot || message.content.indexOf(process.env.PREFIX) !== 0) {
 		return;
 	};
+	if (message.author.id == 346295434546774016) {
+		message.channel.send("jerrynicki du bist nen huso");
+		return;
+	};
 	console.log(`Neue Command-Nachricht von ${message.author.username} (ID: ${message.author.id}).`);
 	if (talkedRecently.has(message.author.id)) {
 		console.log(`Nachricht von ${client.user.username} (ID: ${client.user.id}) wurde wegen Rate-Limit geblockt (noch ${((talkedTimestamp[message.author.id] - Date.now()) / 1000)} Sekunden).`);
