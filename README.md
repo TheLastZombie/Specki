@@ -6,9 +6,18 @@ Bot für den ich_iel Discordserver, jetzt mit 200% mehr Insidern, die sonst sowi
 
 ## Zu Server hinzufügen
 
+<details><summary>Invite</summary>
+<p>
+
 https://discordapp.com/api/oauth2/authorize?client_id=405408491969314826&permissions=68608&scope=bot
 
-## Selber laufen lassen (manuell)
+</p>
+</details>
+
+## Selber laufen lassen
+
+<details><summary>Manuell</summary>
+<p>
 
 ```
 git clone https://github.com/TheLastZombie/ich_iel
@@ -22,7 +31,11 @@ npm install
 npm start
 ```
 
-## Selber laufen lassen (dotenv)
+</p>
+</details>
+
+<details><summary>dotenv</summary>
+<p>
 
 ```
 git clone https://github.com/TheLastZombie/ich_iel
@@ -31,18 +44,17 @@ npm install
 npm install dotenv
 ```
 
-Jetzt  eine Datei namens `.env` mit folgendem Inhalt erstellen und die Werte entsprechend einsetzen:
-
-> PREFIX=  
-> TOKEN=  
-> GLOT_ID=  
-> GLOT_TK=
+Jetzt in `.env` die Umgebungsvariablen `PREFIX` (gewünschter Prefix), `TOKEN` (Discord-Bot-Token), `GLOT_ID` (ID eines glot.io-Pastes) und `GLOT_TK` (glot.io-API-Token) einsetzen.
 
 ```
 node -r dotenv/config ich_iel.js
 ```
 
-## Selber laufen lassen (heroku)
+</p>
+</details>
+
+<details><summary>Heroku</summary>
+<p>
 
 ```
 git clone https://github.com/TheLastZombie/ich_iel
@@ -50,13 +62,11 @@ cd ich_iel
 npm install
 ```
 
-Jetzt eine Datei namens `.env` mit folgendem Inhalt erstellen und die Werte entsprechend einsetzen:
-
-> PREFIX=  
-> TOKEN=  
-> GLOT_ID=  
-> GLOT_TK=
+Jetzt in `.env` die Umgebungsvariablen `PREFIX` (gewünschter Prefix), `TOKEN` (Discord-Bot-Token), `GLOT_ID` (ID eines glot.io-Pastes) und `GLOT_TK` (glot.io-API-Token) einsetzen.
 
 ```
 heroku local
 ```
+
+</p>
+</details>
