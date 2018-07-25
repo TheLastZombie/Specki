@@ -22,12 +22,12 @@ https://discordapp.com/api/oauth2/authorize?client_id=405408491969314826&permiss
 ```
 git clone https://github.com/TheLastZombie/ich_iel
 cd ich_iel
+npm install
 ```
 
 Jetzt in `ich_iel.js` die Umgebungsvariablen `PREFIX` (gewünschter Prefix), `TOKEN` (Discord-Bot-Token), `GLOT_ID` (ID eines glot.io-Pastes) und `GLOT_TK` (glot.io-API-Token) einsetzen.
 
 ```
-npm install
 npm start
 ```
 
