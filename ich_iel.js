@@ -49,10 +49,6 @@ client.on("message", async message => {
 	if (message.author.bot || message.content.indexOf(process.env.PREFIX) !== 0) {
 		return;
 	};
-	if (message.author.id == 346295434546774016) {
-		message.channel.send("jerrynicki du bist nen huso");
-		return;
-	};
 	console.log(`Neue Command-Nachricht von ${message.author.username} (ID: ${message.author.id}).`);
 	if (talkedRecently.has(message.author.id)) {
 		console.log(`Nachricht von ${client.user.username} (ID: ${client.user.id}) wurde wegen Rate-Limit geblockt (noch ${((talkedTimestamp[message.author.id] - Date.now()) / 1000)} Sekunden).`);
@@ -91,6 +87,10 @@ client.on("message", async message => {
 			command = "spott";
 		};
 		if (command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "ficken" || command == "frauen" || command == "hab" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "wenndu" || command == "zalgo") {
+			if (message.author.id == 346295434546774016) {
+				message.channel.send("jerrynicki du bist nen huso");
+				return;
+			};
 			if (command in commandCounts) {
 				commandCounts[command]++;
 			} else {
