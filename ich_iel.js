@@ -87,10 +87,6 @@ client.on("message", async message => {
 			command = "spott";
 		};
 		if (command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "ficken" || command == "frauen" || command == "hab" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "wenndu" || command == "zalgo") {
-			if (message.author.id == 346295434546774016) {
-				message.channel.send("jerrynicki du bist nen huso");
-				return;
-			};
 			if (command in commandCounts) {
 				commandCounts[command]++;
 			} else {
