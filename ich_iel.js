@@ -448,10 +448,6 @@ client.on("message", async message => {
 						{
 							name: `${process.env.PREFIX}spott | ${process.env.PREFIX}mock`,
 							value: "Gibt die Nachricht abwechselnd in Groß- und Kleinbuchstaben wieder. [Inspiriert von SpongeBob Schwammkopf.](https://www.imdb.com/title/tt2512000/)"
-						},
-						{
-							name: `${process.env.PREFIX}status`,
-							value: "Ähnlich wie " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "name und " + process.env.PREFIX + "nick. Ändert den Status vom Bot zu dem angegebenen Text."
 						}
 					]
 				}
@@ -459,6 +455,10 @@ client.on("message", async message => {
 			message.channel.send({
 				embed: {
 					fields: [
+						{
+							name: `${process.env.PREFIX}status`,
+							value: "Ähnlich wie " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "name und " + process.env.PREFIX + "nick. Ändert den Status vom Bot zu dem angegebenen Text."
+						},
 						{
 							name: `${process.env.PREFIX}wenndu`,
 							value: "wenn du ***" + process.env.PREFIX + " W E N N D U***"
