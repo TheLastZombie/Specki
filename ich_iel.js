@@ -58,6 +58,7 @@ client.on("message", async message => {
 		var command = args.shift().toLowerCase();
 		if (command == "links") {
 			command = "about";
+		};
 		if (command == "🅱") {
 			command = "b";
 		};
