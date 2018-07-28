@@ -316,9 +316,9 @@ client.on("message", async message => {
 				message.react("❎");
 			} else {
 				try {
-					message.channel.send("```" + String(eval(args.join(" "))) + "```");
+					message.channel.send("```" + JSON.stringify(eval(args.join(" "))) + "```");
 				} catch (err) {
-					message.channel.send("```" + String(err) + "```");
+					message.channel.send("```" + JSON.stringify(err) + "```");
 				};
 			};
 		};
