@@ -56,6 +56,8 @@ client.on("message", async message => {
 	} else {
 		var args = message.content.slice(process.env.PREFIX.length).trim().split(/ /g);
 		var command = args.shift().toLowerCase();
+		if (command == "links") {
+			command = "about";
 		if (command == "🅱") {
 			command = "b";
 		};
@@ -86,7 +88,7 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "ficken" || command == "frauen" || command == "hab" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "wenndu" || command == "zalgo") {
+		if (command == "about" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "ficken" || command == "frauen" || command == "hab" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "wenndu" || command == "zalgo") {
 			if (command in commandCounts) {
 				commandCounts[command]++;
 			} else {
@@ -121,6 +123,39 @@ client.on("message", async message => {
 				}, 5000);
 			};
 			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
+		};
+		if (command === "about" || command === "links") {
+			message.channel.send({
+				embed: {
+					author: {
+						name: client.user.username,
+						icon_url: client.user.avatarURL
+					},
+					url: "https://rsch.neocities.org",
+					description: "Hier sind ein paar Links, die nützlich sein könnten!",
+					fields: [
+						{
+							name: "Webseite",
+							value: "https://rsch.neocities.org",
+							inline: true
+						},
+						{
+							name: "GitHub",
+							value: "https://github.com/TheLastZombie/ich_iel",
+							inline: true
+						},
+						{
+							name: "Invite",
+							value: "https://discordapp.com/api/oauth2/authorize?client_id=405408491969314826&permissions=68608&scope=bot",
+							inline: true
+						}
+					],
+					footer: {
+						icon_url: client.user.avatarURL,
+						text: `v2.0 Pre-Beta | Commit ${commitId} | von @roesch#0611 mit discord.js`
+					}
+				}
+			});
 		};
 		if (command === "ascii") {
 			if (/\[.+\] \[.+\]/.test(args.join(" "))) {
@@ -314,6 +349,10 @@ client.on("message", async message => {
 					url: "https://rsch.neocities.org",
 					description: "Der Roboter exklusiv für den /r/ich_iel Discord. Hier gibt's eine Übersicht über alle Commands.\nFür die meisten Commands gilt: Ist kein Text angegeben, wird die vorherige Nachricht verwendet.",
 					fields: [
+						{
+							name: `${process.env.PREFIX}about | ${process.env.PREFIX}links`,
+							value: "Zeigt Informationen über den Bot und ein paar Links an."
+						},
 						{
 							name: `${process.env.PREFIX}ascii`,
 							value: "Generiert ASCII-Art. Anwendung: [Schrift] [Nachricht]."
