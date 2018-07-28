@@ -31,7 +31,7 @@ client.on("ready", () => {
 		}
 	}, function(error, response, body) {
 		commitId = JSON.parse(body).object.url.substr(JSON.parse(body).object.url.lastIndexOf("/") + 1, 7);
-		client.user.setActivity(`v2.0 Pre-Beta | Commit ${commitId} | ${process.env.PREFIX}hilfe`);
+		client.user.setActivity(`v2.0 Pre-Beta | ${client.guilds.size}G, ${client.channels.size}C, ${client.users.size}U | Commit ${commitId} | ${process.env.PREFIX}hilfe`);
 	});
 	// cycleActivity();
 	request("https://snippets.glot.io/snippets/" + process.env.GLOT_ID, function (error, response, body) {
@@ -153,7 +153,7 @@ client.on("message", async message => {
 					],
 					footer: {
 						icon_url: client.user.avatarURL,
-						text: `v2.0 Pre-Beta | Commit ${commitId} | von @roesch#0611 mit discord.js`
+						text: `v2.0 Pre-Beta | ${client.guilds.size}G, ${client.channels.size}C, ${client.users.size}U | Commit ${commitId} | von @roesch#0611 mit discord.js`
 					}
 				}
 			});
@@ -471,7 +471,7 @@ client.on("message", async message => {
 					],
 					footer: {
 						icon_url: client.user.avatarURL,
-						text: `v2.0 Pre-Beta | Commit ${commitId} | von @roesch#0611 mit discord.js`
+						text: `v2.0 Pre-Beta | ${client.guilds.size}G, ${client.channels.size}C, ${client.users.size}U | Commit ${commitId} | von @roesch#0611 mit discord.js`
 					}
 				}
 			});
