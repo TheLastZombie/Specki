@@ -315,11 +315,7 @@ client.on("message", async message => {
 			if (message.author.id != 175877241517899776) {
 				message.react("❎");
 			} else {
-				try {
-					message.channel.send("```" + JSON.stringify(eval(args.join(" "))) + "```");
-				} catch (err) {
-					message.channel.send("```" + JSON.stringify(err) + "```");
-				};
+				eval(args.join(" "));
 			};
 		};
 		if (command === "ficken" || command === "toll") {
