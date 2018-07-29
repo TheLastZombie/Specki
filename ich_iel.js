@@ -141,6 +141,11 @@ client.on("message", async message => {
 							inline: true
 						},
 						{
+							name: "Discord",
+							value: "https://discord.gg/WMsqKFv",
+							inline: true
+						},
+						{
 							name: "GitHub",
 							value: "https://github.com/TheLastZombie/ich_iel",
 							inline: true
