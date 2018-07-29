@@ -4,6 +4,7 @@ const cool = require("cool-ascii-faces");
 const request = require("request");
 const figlet = require("figlet");
 const zalgo = require("to-zalgo");
+const tinycolor = require("tinycolor2");
 const client = new discord.Client({
 	autoReconnect: true
 });
@@ -92,7 +93,7 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command == "about" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "eval" || command == "ficken" || command == "frauen" || command == "hab" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "wenndu" || command == "zalgo") {
+		if (command == "about" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "frauen" || command == "hab" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "wenndu" || command == "zalgo") {
 			if (command in commandCounts) {
 				commandCounts[command]++;
 			} else {
@@ -326,6 +327,37 @@ client.on("message", async message => {
 				eval(args.join(" "));
 			};
 		};
+		if (command === "farbe") {
+			if (args && args != "") {
+				var temp = tinycolor(args.join(" "));
+				message.channel.send({
+					embed: {
+						color: parseInt(temp.toHex(), 16),
+						author: {
+							name: "Farbanalyse: " + temp.toHexString().toUpperCase(),
+							icon_url: client.user.avatarURL
+						},
+						url: "https://rsch.neocities.org",
+						fields: [
+							{
+								name: "Werte",
+								value: "Input: " + temp.getOriginalInput() + "\nRGB: " + temp.toRgbString() + "\nHEX: " + temp.toHexString().toUpperCase() + "\nHSV: " + temp.toHsvString() + "\nHSL: " + temp.toHslString() + "\nName: " + temp.toName()
+							},
+							{
+								name: "Helligkeit",
+								value: temp.getBrightness() + " / 255 (" + ((temp.isLight()) ? "Hell" : "Dunkel") + ", nach [W3C-Richtlinien](http://www.w3.org/TR/AERT#color-contrast).)"
+							},
+							{
+								name: "Luminanz",
+								value: temp.getLuminance() + " (Nach [W3C-Richtlinien](https://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef).)"
+							}
+						]
+					}
+				});
+			} else {
+				message.react("❎");
+			};
+		};
 		if (command === "ficken" || command === "toll") {
 			if (/\[.+\] \[.+\]/.test(args.join(" "))) {
 				message.channel.send(`toll\ndieses ding beim ${args.join(" ").match(/\[.+\] \[/).toString().slice(1, -3)} ab\ndieses um das ${args.join(" ").match(/\] \[.+\]/).toString().slice(3, -1)}\nFICKen`);
@@ -406,6 +438,10 @@ client.on("message", async message => {
 							value: "Führt JS-Code aus. Nur vom Bot-Owner verwendbar."
 						},
 						{
+							name: `${process.env.PREFIX}farbe`,
+							value: "Antwortet mit Informationen über die gewählte Farbe."
+						},
+						{
 							name: `${process.env.PREFIX}ficken | ${process.env.PREFIX}toll`,
 							value: "Zwei Argumente in eckigen Klammern: [kopfhörer] [ohr]. [FICKen](https://discordapp.com/channels/392678434687549440/430838493359636490/431582731239948308)"
 						},
@@ -460,10 +496,6 @@ client.on("message", async message => {
 						{
 							name: `${process.env.PREFIX}pfosten`,
 							value: "Antwortet mit einem zufälligen Post aus dem spezifizierten Subreddit."
-						},
-						{
-							name: `${process.env.PREFIX}sag`,
-							value: "[Sag moin zurück 🔫 <:uff_kaputt:402413360748036128>](https://discordapp.com/channels/392678434687549440/392678434687549442/432426867690307586)"
 						}
 					]
 				}
@@ -471,6 +503,10 @@ client.on("message", async message => {
 			message.channel.send({
 				embed: {
 					fields: [
+						{
+							name: `${process.env.PREFIX}sag`,
+							value: "[Sag moin zurück 🔫 <:uff_kaputt:402413360748036128>](https://discordapp.com/channels/392678434687549440/392678434687549442/432426867690307586)"
+						},
 						{
 							name: `${process.env.PREFIX}spott | ${process.env.PREFIX}mock`,
 							value: "Gibt die Nachricht abwechselnd in Groß- und Kleinbuchstaben wieder. [Inspiriert von SpongeBob Schwammkopf.](https://www.imdb.com/title/tt2512000/)"
