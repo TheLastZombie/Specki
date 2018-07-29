@@ -46,6 +46,9 @@ client.on("ready", () => {
 	});
 });
 client.on("message", async message => {
+	if (message.isMentioned(client.user)) {
+	    message.channel.send("WESSEN NEGER PINGIERTE");
+	};
 	if (message.author.bot || message.content.indexOf(process.env.PREFIX) !== 0) {
 		return;
 	};
