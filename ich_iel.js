@@ -342,7 +342,7 @@ client.on("message", async message => {
 							fields: [
 								{
 									name: "Werte",
-									value: "Input: " + temp.getOriginalInput() + "\nRGB: " + temp.toRgbString() + "\nHEX: " + temp.toHexString().toUpperCase() + "\nHSV: " + temp.toHsvString() + "\nHSL: " + temp.toHslString() + ((temp.toName()) ? "\nName: " + temp.toName())
+									value: "Input: " + temp.getOriginalInput() + "\nRGB: " + temp.toRgbString() + "\nHEX: " + temp.toHexString().toUpperCase() + "\nHSV: " + temp.toHsvString() + "\nHSL: " + temp.toHslString() + ((temp.toName()) ? "\nName: " + temp.toName() : "")
 								},
 								{
 									name: "Helligkeit",
