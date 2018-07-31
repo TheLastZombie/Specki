@@ -18,6 +18,7 @@
     "dotenv": "^6.0.0",
     "figlet": "^1.2.0",
     "google-translate-api": "^2.3.0",
+    "is-thirteen": "^2.0.0",
     "request": "^2.85.0",
     "safe-eval": "^0.4.0",
     "tinycolor2": "^1.4.1",

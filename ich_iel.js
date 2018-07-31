@@ -5,6 +5,7 @@ const request = require("request");
 const figlet = require("figlet");
 const zalgo = require("to-zalgo");
 const tinycolor = require("tinycolor2");
+const is = require("is-thirteen");
 const client = new discord.Client({
 	autoReconnect: true
 });
@@ -90,7 +91,7 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command == "about" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "text" || command == "wenndu" || command == "zalgo") {
+		if (command == "about" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "text" || command == "dreizehn" || command == "wenndu" || command == "zalgo") {
 			if (command in commandCounts) {
 				commandCounts[command]++;
 			} else {
@@ -282,6 +283,25 @@ client.on("message", async message => {
 				});
 			};
 		};
+		if (command === "dreizehn") {
+			if (args && args != "") {
+				if (is(args.join(" ")).thirteen()) {
+					message.react("✅");
+				} else {
+					message.react("❎");
+				};
+			} else {
+				message.channel.fetchMessages({
+					limit: 2
+				}).then(temp => {
+					if (is(temp.last().content).thirteen()) {
+						message.react("✅");
+					} else {
+						message.react("❎");
+					};
+				});
+			};
+		};
 		if (command === "english" || command === "englisch") {
 			if (args && args != "") {
 				translate(args.join(" "), {
@@ -425,6 +445,10 @@ client.on("message", async message => {
 							value: "Translates a message from any language to German."
 						},
 						{
+							name: `${process.env.PREFIX}dreizehn`,
+							value: "Checks whether a number is equal to thirteen. People wanted this."
+						},
+						{
 							name: `${process.env.PREFIX}english | ${process.env.PREFIX}englisch`,
 							value: "Translates a message from any language to English."
 						},
@@ -491,10 +515,6 @@ client.on("message", async message => {
 						{
 							name: `${process.env.PREFIX}nick`,
 							value: "Similar to " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "name and " + process.env.PREFIX + "status. Changes the bot's nick to the specified text."
-						},
-						{
-							name: `${process.env.PREFIX}ping`,
-							value: "Sends a ping and replies with its latencies."
 						}
 					]
 				}
@@ -502,6 +522,10 @@ client.on("message", async message => {
 			message.channel.send({
 				embed: {
 					fields: [
+						{
+							name: `${process.env.PREFIX}ping`,
+							value: "Sends a ping and replies with its latencies."
+						},
 						{
 							name: `${process.env.PREFIX}pfosten`,
 							value: "Gets a random post from the specified subreddit."
@@ -576,6 +600,10 @@ client.on("message", async message => {
 							value: "Übersetzt eine Nachricht ins Deutsche – mal mehr, mal weniger gut."
 						},
 						{
+							name: `${process.env.PREFIX}dreizehn`,
+							value: "Überprüft, ob eine Nummer 13 ist. Weil ihr das so wolltet."
+						},
+						{
 							name: `${process.env.PREFIX}english | ${process.env.PREFIX}englisch`,
 							value: "Übersetzt eine Nachricht ins Englische – mal mehr, mal weniger gut."
 						},
@@ -642,10 +670,6 @@ client.on("message", async message => {
 						{
 							name: `${process.env.PREFIX}nick`,
 							value: "Ähnlich wie " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "name und " + process.env.PREFIX + "status. Ändert den Nickname vom Bot zu dem angegebenen Text."
-						},
-						{
-							name: `${process.env.PREFIX}ping`,
-							value: "Pingt den Roboter an und antwortet mit den Latenzzeiten."
 						}
 					]
 				}
@@ -653,6 +677,10 @@ client.on("message", async message => {
 			message.channel.send({
 				embed: {
 					fields: [
+						{
+							name: `${process.env.PREFIX}ping`,
+							value: "Pingt den Roboter an und antwortet mit den Latenzzeiten."
+						},
 						{
 							name: `${process.env.PREFIX}pfosten`,
 							value: "Antwortet mit einem zufälligen Post aus dem spezifizierten Subreddit."
