@@ -182,14 +182,16 @@ client.on("message", async message => {
 		if (command === "avatar") {
 			if (message.attachments.first()) {
 				console.log("Ändere Avatar zu " + message.attachments.first().url + ".");
-				message.react("✅");
-				client.user.setAvatar(message.attachments.first().url).catch(function(error) {
+				client.user.setAvatar(message.attachments.first().url).then(function() {
+					message.react("✅");
+				}).catch(function() {
 					message.react("❎");
 				});
 			} else if (args && args != "") {
 				console.log("Ändere Avatar zu " + args.join(" ") + ".");
-				message.react("✅");
-				client.user.setAvatar(args.join(" ")).catch(function(error) {
+				client.user.setAvatar(args.join(" ")).then(function() {
+					message.react("✅");
+				}).catch(function() {
 					message.react("❎");	
 				});
 			} else {
