@@ -156,7 +156,7 @@ client.on("message", async message => {
 						},
 						{
 							name: "Invite",
-							value: "https://discordapp.com/api/oauth2/authorize?client_id=405408491969314826&permissions=68608&scope=bot",
+							value: "https://discordapp.com/api/oauth2/authorize?client_id=405408491969314826&permissions=85056&scope=bot",
 							inline: true
 						}
 					],
