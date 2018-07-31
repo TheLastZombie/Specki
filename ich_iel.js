@@ -146,7 +146,7 @@ client.on("message", async message => {
 						},
 						{
 							name: "Discord",
-							value: "https://discord.gg/WMsqKFv",
+							value: "https://discord.gg/VmPbt3B",
 							inline: true
 						},
 						{
