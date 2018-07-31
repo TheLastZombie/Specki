@@ -32,7 +32,7 @@ client.on("ready", () => {
 		}
 	}, function(error, response, body) {
 		commitId = JSON.parse(body).object.url.substr(JSON.parse(body).object.url.lastIndexOf("/") + 1, 7);
-		client.user.setActivity(`v2.0 Pre-Beta | ${client.guilds.size}G, ${client.channels.size}C, ${client.users.size}U | Commit ${commitId} | ${process.env.PREFIX}hilfe`);
+		client.user.setActivity(`v2.0 Pre-Beta | ${client.guilds.size}G, ${client.channels.size}C, ${client.users.size}U | Commit ${commitId} | ${process.env.PREFIX}help`);
 	});
 	// cycleActivity();
 	request("https://snippets.glot.io/snippets/" + process.env.GLOT_ID, function (error, response, body) {
@@ -74,9 +74,6 @@ client.on("message", async message => {
 		};
 		if (command == "toll") {
 			command = "ficken";
-		};
-		if (command == "help") {
-			command = "hilfe";
 		};
 		if (command == "wie") {
 			command = "huso";
@@ -137,10 +134,9 @@ client.on("message", async message => {
 						icon_url: client.user.avatarURL
 					},
 					url: "https://rsch.neocities.org",
-					description: "Hier sind ein paar Links, die nützlich sein könnten!",
 					fields: [
 						{
-							name: "Webseite",
+							name: "Website",
 							value: "https://rsch.neocities.org",
 							inline: true
 						},
@@ -162,7 +158,7 @@ client.on("message", async message => {
 					],
 					footer: {
 						icon_url: client.user.avatarURL,
-						text: `v2.0 Pre-Beta | ${client.guilds.size}G, ${client.channels.size}C, ${client.users.size}U | Commit ${commitId} | von @roesch#0611 mit discord.js`
+						text: `v2.0 Pre-Beta | ${client.guilds.size}G, ${client.channels.size}C, ${client.users.size}U | Commit ${commitId} | by @roesch#0611 using discord.js`
 					}
 				}
 			});
@@ -391,7 +387,7 @@ client.on("message", async message => {
 				});
 			};
 		};
-		if (command === "hilfe" || command === "help") {
+		if (command === "help") {
 			message.channel.send({
 				embed: {
 					author: {
@@ -399,7 +395,153 @@ client.on("message", async message => {
 						icon_url: client.user.avatarURL
 					},
 					url: "https://rsch.neocities.org",
-					description: "Der Roboter exklusiv für den /r/ich_iel Discord. Hier gibt's eine Übersicht über alle Commands.\nFür die meisten Commands gilt: Ist kein Text angegeben, wird die vorherige Nachricht verwendet.",
+					fields: [
+						{
+							name: `${process.env.PREFIX}about | ${process.env.PREFIX}links`,
+							value: "Shows useful information and a few links such as an invite to the support server."
+						},
+						{
+							name: `${process.env.PREFIX}ascii`,
+							value: "Generates ASCII-Art. Usage: [Font] [Message]."
+						},
+						{
+							name: `${process.env.PREFIX}avatar`,
+							value: "Similar to " + process.env.PREFIX + "name, " + process.env.PREFIX + "nick and " + process.env.PREFIX + "status. Changes the bot's avatar to the specified image."
+						},
+						{
+							name: `${process.env.PREFIX}azsh`,
+							value: "Short for Amazon Shortener. Shortens ridiculously long Amazon URLs."
+						},
+						{
+							name: `${process.env.PREFIX}b | ${process.env.PREFIX}🅱`,
+							value: "🅱"
+						},
+						{
+							name: `${process.env.PREFIX}commands`,
+							value: "Used commands are counted automatically. This command returns the result."
+						},
+						{
+							name: `${process.env.PREFIX}deutsch`,
+							value: "Translates a message from any language to German."
+						},
+						{
+							name: `${process.env.PREFIX}english | ${process.env.PREFIX}englisch`,
+							value: "Translates a message from any language to English."
+						},
+						{
+							name: `${process.env.PREFIX}ersatz | ${process.env.PREFIX}replace`,
+							value: "Replaces \"AUS\", \"GEL\", \"ÖST\", etc. with their respective emotes."
+						},
+						{
+							name: `${process.env.PREFIX}eval`,
+							value: "Runs JavaScript code. Bot owner only."
+						},
+						{
+							name: `${process.env.PREFIX}farbe`,
+							value: "Analyses a color and returns information about it."
+						},
+						{
+							name: `${process.env.PREFIX}ficken | ${process.env.PREFIX}toll`,
+							value: "Two arguments in square brackets: [kopfhörer] [ohr]. [FICKen](https://discordapp.com/channels/392678434687549440/430838493359636490/431582731239948308)"
+						},
+						{
+							name: `${process.env.PREFIX}frauen`,
+							value: "Frauen stehn auf Männer wo beim Sex die Arme kaputt"
+						},
+						{
+							name: `${process.env.PREFIX}hab`,
+							value: "[Hab kacka gemacht in meine hose skyaa 🤔](https://discordapp.com/channels/392678434687549440/392678434687549442/402965723825307668)"
+						},
+						{
+							name: `${process.env.PREFIX}help`,
+							value: "Lists available commands in English."
+						},
+						{
+							name: `${process.env.PREFIX}hilfe`,
+							value: "Lists available commands in German."
+						},
+						{
+							name: `${process.env.PREFIX}huso | ${process.env.PREFIX}wie`,
+							value: "Wie gibt's nicht, du Hurensohn? [Inspired by Ömer.](https://www.facebook.com/KFC.Deutschland/posts/1145486008814468?comment_id=1145949152101487&reply_comment_id=1145955162100886)"
+						},
+						{
+							name: `${process.env.PREFIX}ibims`,
+							value: "I bims, 1 ... I don't know why I added this command."
+						},
+						{
+							name: `${process.env.PREFIX}ichmach`,
+							value: "Ich mach Scheine, ey ey! [Inspired by Gloryholei55.](https://www.gutefrage.net/frage/wie-findet-ihr-meinen-ganster-rap-text)"
+						},
+						{
+							name: `${process.env.PREFIX}jemand | ${process.env.PREFIX}someone`,
+							value: "A replacement for Discord's April Fools' joke (@someone), selects a random user."
+						},
+						{
+							name: `${process.env.PREFIX}kerle | ${process.env.PREFIX}dudes`,
+							value: "It is Wednesday, my dudes! [Inspired by kidpix2.](https://web.archive.org/web/20161007164108/https://kidpix2.tumblr.com/post/104840641707/wednesday-meme)"
+						},
+						{
+							name: `${process.env.PREFIX}klatsch | ${process.env.PREFIX}clap`,
+							value: "Inserts the first word between all others. [Inspired by the \"Ratchet Clap\".](https://www.urbandictionary.com/define.php?term=Ratchet+Clap)"
+						},
+						{
+							name: `${process.env.PREFIX}name`,
+							value: "Similar to " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "nick and " + process.env.PREFIX + "status. Changes the bot's name to the specified text. Bot owner only."
+						},
+						{
+							name: `${process.env.PREFIX}nick`,
+							value: "Similar to " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "name and " + process.env.PREFIX + "status. Changes the bot's nick to the specified text."
+						},
+						{
+							name: `${process.env.PREFIX}ping`,
+							value: "Sends a ping and replies with its latencies."
+						}
+					]
+				}
+			});
+			message.channel.send({
+				embed: {
+					fields: [
+						{
+							name: `${process.env.PREFIX}pfosten`,
+							value: "Gets a random post from the specified subreddit."
+						},
+						{
+							name: `${process.env.PREFIX}sag`,
+							value: "[Sag moin zurück 🔫 <:uff_kaputt:402413360748036128>](https://discordapp.com/channels/392678434687549440/392678434687549442/432426867690307586)"
+						},
+						{
+							name: `${process.env.PREFIX}spott | ${process.env.PREFIX}mock`,
+							value: "Converts text to MiXeD cAsE. [Inspired by SpongeBob SquarePants.](https://www.imdb.com/title/tt2512000/)"
+						},
+						{
+							name: `${process.env.PREFIX}status`,
+							value: "Similar to " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "name and " + process.env.PREFIX + "nick. Changes the bot's status/game to the specified text."
+						},
+						{
+							name: `${process.env.PREFIX}wenndu`,
+							value: "wenn du ***" + process.env.PREFIX + " W E N N D U***"
+						},
+						{
+							name: `${process.env.PREFIX}zalgo`,
+							value: "H̢̡̞̫͖̟̯̜̞̫͕̋̎͒̃̌̈́͐́ͧ̆̈̈ͭ̃̓͢Ẻ̺̘̺̥͉̪͖͔͍̹̙̱̤̦̭̅̇ͤ̍͊̽̃ͩ̔̒͗̐̔ͯͤ̌́͟͟ ̶̙̝̼̩̳̘͚̜̥̝̙͙̗͇̋ͬ̔̌͊̾͞C̴̷ͥ͗͛̀̃́ͥͦ̀ͮ̏͏̸͍̣̻̝̜̘͉̘͕͚͍̬̘̤͕̖͕ͅO̢̧̲̜̼͔̪̰̹͔͖̺̮̯̫͍̖̥̲̮ͧ̍̂̀̐ͭ͊̃̓͑̒̆̎̆̾ͪͧ̀ͅM̵͍͔͈͍̹̭̠̘͍͖̺̪̳̟͉̗͕̃ͯ͌́̑͋̔ͣ̊̏ͮ̅́ͮ͠È͚̘̦̺̲̗̻̥̬̻̫̖̯̹̜̬̞̯̀̇͋̾̂͛̈ͥ̔͂̈́ͤ̈̔͡ͅS̵̡̡͉̯̣̗̬̗͓̖̪̯̹̟͍̠̥͙̝̯̐̈́͑ͪ̽͑ͥ̊̊̂͋͌ͣ̍́̃́.̵̨̨̜̱̺̫̬͍̞̩̦̙̈́ͥ͗ͭ̾͗̾̑̏̿̓̂̓̆͆̈̚͞ͅͅ"
+						}
+					],
+					footer: {
+						icon_url: client.user.avatarURL,
+						text: `v2.0 Pre-Beta | ${client.guilds.size}G, ${client.channels.size}C, ${client.users.size}U | Commit ${commitId} | by @roesch#0611 using discord.js`
+					}
+				}
+			});
+		};
+		if (command === "hilfe") {
+			message.channel.send({
+				embed: {
+					author: {
+						name: client.user.username,
+						icon_url: client.user.avatarURL
+					},
+					url: "https://rsch.neocities.org",
 					fields: [
 						{
 							name: `${process.env.PREFIX}about | ${process.env.PREFIX}links`,
@@ -458,8 +600,12 @@ client.on("message", async message => {
 							value: "[Hab kacka gemacht in meine hose skyaa 🤔](https://discordapp.com/channels/392678434687549440/392678434687549442/402965723825307668)"
 						},
 						{
-							name: `${process.env.PREFIX}hilfe | ${process.env.PREFIX}help`,
-							value: "Wenn du das hier lesen kannst, weißt du bereits, was dieser Command macht."
+							name: `${process.env.PREFIX}help`,
+							value: "Listet alle Commands auf Englisch auf."
+						},
+						{
+							name: `${process.env.PREFIX}hilfe`,
+							value: "Listet alle Commands auf Deutsch auf."
 						},
 						{
 							name: `${process.env.PREFIX}huso | ${process.env.PREFIX}wie`,
@@ -487,7 +633,7 @@ client.on("message", async message => {
 						},
 						{
 							name: `${process.env.PREFIX}name`,
-							value: "Ähnlich wie " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "nick und " + process.env.PREFIX + "status. Ändert den Namen vom Bot zu dem angegebenen Text (global)."
+							value: "Ähnlich wie " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "nick und " + process.env.PREFIX + "status. Ändert den Namen vom Bot zu dem angegebenen Text (global). Nur vom Bot-Owner verwendbar."
 						},
 						{
 							name: `${process.env.PREFIX}nick`,
@@ -496,10 +642,6 @@ client.on("message", async message => {
 						{
 							name: `${process.env.PREFIX}ping`,
 							value: "Pingt den Roboter an und antwortet mit den Latenzzeiten."
-						},
-						{
-							name: `${process.env.PREFIX}pfosten`,
-							value: "Antwortet mit einem zufälligen Post aus dem spezifizierten Subreddit."
 						}
 					]
 				}
@@ -507,6 +649,10 @@ client.on("message", async message => {
 			message.channel.send({
 				embed: {
 					fields: [
+						{
+							name: `${process.env.PREFIX}pfosten`,
+							value: "Antwortet mit einem zufälligen Post aus dem spezifizierten Subreddit."
+						},
 						{
 							name: `${process.env.PREFIX}sag`,
 							value: "[Sag moin zurück 🔫 <:uff_kaputt:402413360748036128>](https://discordapp.com/channels/392678434687549440/392678434687549442/432426867690307586)"
