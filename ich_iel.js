@@ -90,7 +90,7 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command == "about" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "frauen" || command == "hab" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "wenndu" || command == "zalgo") {
+		if (command == "about" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "text" || command == "wenndu" || command == "zalgo") {
 			if (command in commandCounts) {
 				commandCounts[command]++;
 			} else {
@@ -519,6 +519,10 @@ client.on("message", async message => {
 							value: "Similar to " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "name and " + process.env.PREFIX + "nick. Changes the bot's status/game to the specified text."
 						},
 						{
+							name: `${process.env.PREFIX}text`,
+							value: "Returns a webpage as plain text, thanks to [Browsh](https://www.brow.sh/)."
+						},
+						{
 							name: `${process.env.PREFIX}wenndu`,
 							value: "wenn du ***" + process.env.PREFIX + " W E N N D U***"
 						},
@@ -664,6 +668,10 @@ client.on("message", async message => {
 						{
 							name: `${process.env.PREFIX}status`,
 							value: "Ähnlich wie " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "name und " + process.env.PREFIX + "nick. Ändert den Status vom Bot zu dem angegebenen Text."
+						},
+						{
+							name: `${process.env.PREFIX}text`,
+							value: "Gibt eine Webseite mit Hilfe von [Browsh](https://www.brow.sh/) als reinen Text wieder."
 						},
 						{
 							name: `${process.env.PREFIX}wenndu`,
@@ -880,6 +888,27 @@ client.on("message", async message => {
 				});
 			};
 			message.react("✅");
+		};
+		if (command === "text") {
+			if (args && args != "") {
+				request({
+					url: "https://text.brow.sh/" + args.join(" "),
+					method: "GET",
+					rejectUnauthorized: false
+				}, function (error, response, body) {
+					request({
+						url: "https://snippets.glot.io/snippets",
+						method: "POST",
+						json: {
+							"files": [{"content": body}]
+						}
+					}, function (error, response, body) {
+						message.channel.send("https://glot.io/snippets/" + body.id + "/raw");
+					});
+				});
+			} else {
+				message.react("❎");
+			};
 		};
 		if (command === "wenndu") {
 			if (args && args != "") {
