@@ -9,7 +9,7 @@ Bot für den ich_iel Discordserver, jetzt mit 200% mehr Insidern, die sonst sowi
 <details><summary>Invite</summary>
 <p>
 
-https://discordapp.com/api/oauth2/authorize?client_id=405408491969314826&permissions=68608&scope=bot
+https://discordapp.com/api/oauth2/authorize?client_id=405408491969314826&permissions=85056&scope=bot
 
 </p>
 </details>
