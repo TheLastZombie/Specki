@@ -91,7 +91,7 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command == "about" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "text" || command == "dreizehn" || command == "wenndu" || command == "zalgo") {
+		if (command == "about" || command == "archiv" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "text" || command == "dreizehn" || command == "wenndu" || command == "zalgo") {
 			if (command in commandCounts) {
 				commandCounts[command]++;
 			} else {
@@ -163,6 +163,53 @@ client.on("message", async message => {
 					}
 				}
 			});
+		};
+		if (command === "archiv") {
+			if (args && args != "") {
+				var archive1 = false;
+				var archive2 = false;
+				var archive3 = false;
+				request("http://archive.org/wayback/available?url=" + args.join(" "), function (error, response, body) {
+					if (JSON.parse(body).archived_snapshots.closest) {
+						archive1 = JSON.parse(body).archived_snapshots.closest.url;
+					};
+					request("http://archive.is/newest/" + args.join(" "), function (error, response, body) {
+						if (response.statusCode == 200) {
+							archive2 = response.request.href;
+						};
+						request("http://webcache.googleusercontent.com/search?q=cache:" + args.join(" "), function (error, response, body) {
+							if (response.statusCode == 200) {
+								archive3 = response.request.href;
+							};
+							message.channel.send({
+								embed: {
+									author: {
+										name: "Archivsuche: " + args.join(" "),
+										icon_url: client.user.avatarURL
+									},
+									url: "https://rsch.neocities.org",
+									fields: [
+										{
+											name: "Wayback Machine",
+											value: ((archive1) ? "✅ " + archive1 : "❎ Unavailable")
+										},
+										{
+											name: "archive.is",
+											value: ((archive2) ? "✅ " + archive2 : "❎ Unavailable")
+										},
+										{
+											name: "Google Web Cache",
+											value: ((archive3) ? "✅ " + archive3 : "❎ Unavailable")
+										}
+									]
+								}
+							});
+						});
+					});
+				});
+			} else {
+				message.react("❎");
+			};
 		};
 		if (command === "ascii") {
 			if (/\[.+\] \[.+\]/.test(args.join(" "))) {
@@ -423,6 +470,10 @@ client.on("message", async message => {
 							value: "Shows useful information and a few links such as an invite to the support server."
 						},
 						{
+							name: `${process.env.PREFIX}archiv`,
+							value: "Searches multiple web archives for the given URL."
+						},
+						{
 							name: `${process.env.PREFIX}ascii`,
 							value: "Generates ASCII-Art. Usage: [Font] [Message]."
 						},
@@ -513,10 +564,6 @@ client.on("message", async message => {
 						{
 							name: `${process.env.PREFIX}name`,
 							value: "Similar to " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "nick and " + process.env.PREFIX + "status. Changes the bot's name to the specified text. Bot owner only."
-						},
-						{
-							name: `${process.env.PREFIX}nick`,
-							value: "Similar to " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "name and " + process.env.PREFIX + "status. Changes the bot's nick to the specified text."
 						}
 					]
 				}
@@ -524,6 +571,10 @@ client.on("message", async message => {
 			message.channel.send({
 				embed: {
 					fields: [
+						{
+							name: `${process.env.PREFIX}nick`,
+							value: "Similar to " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "name and " + process.env.PREFIX + "status. Changes the bot's nick to the specified text."
+						},
 						{
 							name: `${process.env.PREFIX}ping`,
 							value: "Sends a ping and replies with its latencies."
@@ -576,6 +627,10 @@ client.on("message", async message => {
 						{
 							name: `${process.env.PREFIX}about | ${process.env.PREFIX}links`,
 							value: "Zeigt Informationen über den Bot und ein paar Links an."
+						},
+						{
+							name: `${process.env.PREFIX}archiv`,
+							value: "Durchsucht mehrere Web-Archive nach der angegebenen URL."
 						},
 						{
 							name: `${process.env.PREFIX}ascii`,
@@ -668,10 +723,6 @@ client.on("message", async message => {
 						{
 							name: `${process.env.PREFIX}name`,
 							value: "Ähnlich wie " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "nick und " + process.env.PREFIX + "status. Ändert den Namen vom Bot zu dem angegebenen Text (global). Nur vom Bot-Owner verwendbar."
-						},
-						{
-							name: `${process.env.PREFIX}nick`,
-							value: "Ähnlich wie " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "name und " + process.env.PREFIX + "status. Ändert den Nickname vom Bot zu dem angegebenen Text."
 						}
 					]
 				}
@@ -679,6 +730,10 @@ client.on("message", async message => {
 			message.channel.send({
 				embed: {
 					fields: [
+						{
+							name: `${process.env.PREFIX}nick`,
+							value: "Ähnlich wie " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "name und " + process.env.PREFIX + "status. Ändert den Nickname vom Bot zu dem angegebenen Text."
+						},
 						{
 							name: `${process.env.PREFIX}ping`,
 							value: "Pingt den Roboter an und antwortet mit den Latenzzeiten."
