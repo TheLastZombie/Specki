@@ -15,6 +15,7 @@ var talkedTimestamp = {};
 var commandCounts = {};
 var commandSuccess;
 var commitId;
+var isPlaying = false;
 function cycleActivity(){
 	var games = ["Jerrynicki hat den großen Schwul", "/r/anti_iel > /r/ich_iel", "----- unt schw -----", "Ein Bot ausnahmsweise mal nicht von Jerrynicki", "wen du furzt aber notfal psirt :3oest:", "alter ich finde den toMATenmark nicht", "Oh nein habZAHn padra feckel rumter geschmisen", "Sonic sagt: du bsit ein fetter hurensohn halt maul", "Bevor es zu spät ist | Minecraft Kurzfilm", "Coole frau", "Wa", "Hello", "Scheise!!!!!", "www.boris-becker", "Wohin ist satellit abgestuerzt ???", "!!!JETZT bin ich ein NAZI!!!!!", "!!!könnte mir gefallen + schmecken ! ! !", "Gutes Gesicht, magst du Tiere?", "http://www.youtube.com/watch?", "Hello ...ich bin drin !!!"]
 	var cgame = games[Math.floor(Math.random()*games.length)];
@@ -937,13 +938,19 @@ client.on("message", async message => {
 
 		if (command === "play") {
 			if (args && args != "") {
-				message.member.voiceChannel.join().then(connection => {
-					connection.playFile(__dirname + "/sounds/" + args.join(" ") + ".mp3").on("end", () => {
-						message.member.voiceChannel.leave();
-					});
-				}).catch(err => message.channel.send(err));
+				if (isPlaying) {
+					message.react("❎");
+				} else {
+					message.member.voiceChannel.join().then(connection => {
+						isPlaying = true;
+						connection.playFile(__dirname + "/sounds/" + args.join(" ") + ".mp3").on("end", () => {
+							message.member.voiceChannel.leave();
+							isPlaying = false;
+						});
+					}).catch(err => message.channel.send(err));
+				};
 			} else {
-				message.channel.send("**ich_iel Soundboard**\n\n`ali-a` Ali-A Intro (Ear-Rape)\n`limetten` Frische Limetten\n`neger` Der Titel sagt alles\n`penis` Das hier ist mein Penis\n`penis-lang` So wie \"penis\", nur in länger");
+				message.channel.send("**ich_iel Soundboard**\n\n`ali-a` Ali-A Intro (Ear-Rape)\n`limetten` Frische Limetten\n`neger` Der Titel sagt alles\n`penis` Das hier ist mein Penis\n`penis-lang` So wie \"penis\", nur in länger\n`intro` Intro Donutsen ❤ xD");
 			};
 		};
 
