@@ -938,7 +938,7 @@ client.on("message", async message => {
 		if (command === "play") {
 			if (args && args != "") {
 				message.member.voiceChannel.join().then(connection => {
-					connection.playFile("https://raw.githubusercontent.com/TheLastZombie/ich_iel/master/sounds/" + args.join(" ") + ".mp3").on("end", () => {
+					connection.playFile(__dirname + "/sounds/" + args.join(" ") + ".mp3").on("end", () => {
 						message.member.voiceChannel.leave();
 					});
 				}).catch(err => message.channel.send(err));
