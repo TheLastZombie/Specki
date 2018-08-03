@@ -915,7 +915,7 @@ client.on("message", async message => {
 								}
 							});
 						};
-					};
+					}
 					catch(error) {
 						message.channel.send(error);
 					};
