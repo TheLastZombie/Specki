@@ -870,9 +870,7 @@ client.on("message", async message => {
 		if (command === "pfosten") {
 			if (args && args != "") {
 				request("https://www.reddit.com/r/" + args.join(" ") + "/random/.json", function (error, response, body) {
-					if (response.statusCode != 200) {
-						message.channel.send("Error: Requested **https://www.reddit.com/r/" + args.join(" ") + "/random/.json**, got **" + response.statusCode + "**.");
-					} else {
+					try {
 						if (JSON.parse(body)[0]["data"]["children"][0]["data"]["over_18"] == true && message.channel.nsfw == false) {
 							message.react("🔞");
 						} else {
@@ -917,6 +915,9 @@ client.on("message", async message => {
 								}
 							});
 						};
+					};
+					catch(error) {
+						message.channel.send(error);
 					};
 				});
 			};
