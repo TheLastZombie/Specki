@@ -92,7 +92,7 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command == "about" || command == "archiv" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "text" || command == "dreizehn" || command == "wenndu" || command == "zalgo") {
+		if (command == "about" || command == "archiv" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pfosten" || command == "ping" || command == "play" || command == "sag" || command == "spott" || command == "status" || command == "text" || command == "dreizehn" || command == "wenndu" || command == "zalgo") {
 			if (command in commandCounts) {
 				commandCounts[command]++;
 			} else {
@@ -581,6 +581,10 @@ client.on("message", async message => {
 							value: "Sends a ping and replies with its latencies."
 						},
 						{
+							name: `${process.env.PREFIX}play`,
+							value: "Plays a sound from the soundboard. Without any arguments, this prints all available sounds."
+						},
+						{
 							name: `${process.env.PREFIX}pfosten`,
 							value: "Gets a random post from the specified subreddit."
 						},
@@ -738,6 +742,10 @@ client.on("message", async message => {
 						{
 							name: `${process.env.PREFIX}ping`,
 							value: "Pingt den Roboter an und antwortet mit den Latenzzeiten."
+						},
+						{
+							name: `${process.env.PREFIX}play`,
+							value: "Spielt einen Sound aus dem Soundboard ab. Ohne Argumente werden alle Sounds aufgelistet."
 						},
 						{
 							name: `${process.env.PREFIX}pfosten`,
@@ -926,6 +934,19 @@ client.on("message", async message => {
 			var temp = await message.channel.send("Ping...");
 			temp.edit(`Pong! Latenz: ${temp.createdTimestamp - message.createdTimestamp} ms. API-Latenz: ${Math.round(client.ping)} ms.`);
 		};
+
+		if (command === "play") {
+			if (args && args != "") {
+				message.member.voiceChannel.join().then(connection => {
+					connection.playFile(__dirname + "/sounds/" + args.join(" ") + ".mp3").on("end", () => {
+						message.member.voiceChannel.leave();
+					});
+				}).catch(err => message.channel.send(err));
+			} else {
+				message.channel.send("**ich_iel Soundboard**\n\n`ali-a` Ali-A Intro (Ear-Rape)");
+			};
+		};
+
 		if (command === "sag") {
 			if (args && args != "") {
 				message.channel.send(`Sag ${args.join(" ")} zurück 🔫 <:uff_kaputt:402413360748036128>`);
