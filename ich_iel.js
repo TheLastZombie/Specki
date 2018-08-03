@@ -296,7 +296,12 @@ client.on("message", async message => {
 		};
 		if (command === "cheat") {
 			if (args && args != "") {
-				request("https://cheat.sh/" + args.join(" ") + "?T", function (error, response, body) {
+				request({
+					url: "https://cheat.sh/" + args.join(" ") + "?T",
+					headers: {
+						"Content-Type": "text/plain"
+					}
+				}, function (error, response, body) {
 					message.channel.send("```" + body + "```");
 				});
 			} else {
