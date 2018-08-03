@@ -91,7 +91,7 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command == "about" || command == "archiv" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "cheat" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "text" || command == "dreizehn" || command == "wenndu" || command == "zalgo") {
+		if (command == "about" || command == "archiv" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pfosten" || command == "ping" || command == "sag" || command == "spott" || command == "status" || command == "text" || command == "dreizehn" || command == "wenndu" || command == "zalgo") {
 			if (command in commandCounts) {
 				commandCounts[command]++;
 			} else {
@@ -294,20 +294,6 @@ client.on("message", async message => {
 				});
 			};
 		};
-		if (command === "cheat") {
-			if (args && args != "") {
-				request({
-					url: "https://cheat.sh/" + args.join(" ") + "?T",
-					headers: {
-						"Content-Type": "text/plain"
-					}
-				}, function (error, response, body) {
-					message.channel.send("```" + body + "```");
-				});
-			} else {
-				message.react("❎");
-			};
-		};
 		if (command === "commands") {
 			var commandSort = [];
 			for (var commandCurr in commandCounts) {
@@ -504,10 +490,6 @@ client.on("message", async message => {
 							value: "🅱"
 						},
 						{
-							name: `${process.env.PREFIX}cheat`,
-							value: "Returns help for a command using [cheat.sh](https://cheat.sh/)."
-						},
-						{
 							name: `${process.env.PREFIX}commands`,
 							value: "Used commands are counted automatically. This command returns the result."
 						},
@@ -578,6 +560,10 @@ client.on("message", async message => {
 						{
 							name: `${process.env.PREFIX}klatsch | ${process.env.PREFIX}clap`,
 							value: "Inserts the first word between all others. [Inspired by the \"Ratchet Clap\".](https://www.urbandictionary.com/define.php?term=Ratchet+Clap)"
+						},
+						{
+							name: `${process.env.PREFIX}name`,
+							value: "Similar to " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "nick and " + process.env.PREFIX + "status. Changes the bot's name to the specified text. Bot owner only."
 						}
 					]
 				}
@@ -585,10 +571,6 @@ client.on("message", async message => {
 			message.channel.send({
 				embed: {
 					fields: [
-						{
-							name: `${process.env.PREFIX}name`,
-							value: "Similar to " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "nick and " + process.env.PREFIX + "status. Changes the bot's name to the specified text. Bot owner only."
-						},
 						{
 							name: `${process.env.PREFIX}nick`,
 							value: "Similar to " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "name and " + process.env.PREFIX + "status. Changes the bot's nick to the specified text."
@@ -667,10 +649,6 @@ client.on("message", async message => {
 							value: "🅱"
 						},
 						{
-							name: `${process.env.PREFIX}cheat`,
-							value: "Zeigt Hilfe für einen Command mit Hilfe von [cheat.sh](https://cheat.sh/) an."
-						},
-						{
 							name: `${process.env.PREFIX}commands`,
 							value: "Ausgeführte Commands werden automatisch gezählt, dieser Command gibt die Statistiken wieder."
 						},
@@ -741,6 +719,10 @@ client.on("message", async message => {
 						{
 							name: `${process.env.PREFIX}klatsch | ${process.env.PREFIX}clap`,
 							value: "Fügt das erste Wort zwischen alle anderen ein. [Inspiriert vom \"Ratchet Clap\".](https://www.urbandictionary.com/define.php?term=Ratchet+Clap)"
+						},
+						{
+							name: `${process.env.PREFIX}name`,
+							value: "Ähnlich wie " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "nick und " + process.env.PREFIX + "status. Ändert den Namen vom Bot zu dem angegebenen Text (global). Nur vom Bot-Owner verwendbar."
 						}
 					]
 				}
@@ -748,10 +730,6 @@ client.on("message", async message => {
 			message.channel.send({
 				embed: {
 					fields: [
-						{
-							name: `${process.env.PREFIX}name`,
-							value: "Ähnlich wie " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "nick und " + process.env.PREFIX + "status. Ändert den Namen vom Bot zu dem angegebenen Text (global). Nur vom Bot-Owner verwendbar."
-						},
 						{
 							name: `${process.env.PREFIX}nick`,
 							value: "Ähnlich wie " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "name und " + process.env.PREFIX + "status. Ändert den Nickname vom Bot zu dem angegebenen Text."
