@@ -943,7 +943,7 @@ client.on("message", async message => {
 					});
 				}).catch(err => message.channel.send(err));
 			} else {
-				message.channel.send("**ich_iel Soundboard**\n\n`ali-a` Ali-A Intro (Ear-Rape)");
+				message.channel.send("**ich_iel Soundboard**\n\n`ali-a` Ali-A Intro (Ear-Rape)\n`limetten` Frische Limetten\n`neger` Der Titel sagt alles\n`penis` Das hier ist mein Penis\n`penis-lang` So wie \"penis\", nur in länger");
 			};
 		};
 
