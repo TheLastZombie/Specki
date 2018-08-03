@@ -7,7 +7,8 @@ const zalgo = require("to-zalgo");
 const tinycolor = require("tinycolor2");
 const is = require("is-thirteen");
 const client = new discord.Client({
-	autoReconnect: true
+	autoReconnect: true,
+	disableEveryone: true
 });
 const talkedRecently = new Set();
 var talkedTimestamp = {};
