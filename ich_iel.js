@@ -93,7 +93,7 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command == "about" || command == "archiv" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "deutsch" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pfosten" || command == "ping" || command == "play" || command == "sag" || command == "spott" || command == "status" || command == "text" || command == "dreizehn" || command == "wenndu" || command == "zalgo") {
+		if (command == "about" || command == "archiv" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "deutsch" || command == "dreizehn" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pat" || command == "pfosten" || command == "ping" || command == "play" || command == "sag" || command == "spott" || command == "status" || command == "text" || command == "wenndu" || command == "zalgo") {
 			if (command in commandCounts) {
 				commandCounts[command]++;
 			} else {
@@ -578,6 +578,10 @@ client.on("message", async message => {
 							value: "Similar to " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "name and " + process.env.PREFIX + "status. Changes the bot's nick to the specified text."
 						},
 						{
+							name: `${process.env.PREFIX}pat`,
+							value: "Sends a random headpat from [headp.at](http://headp.at/)."
+						},
+						{
 							name: `${process.env.PREFIX}ping`,
 							value: "Sends a ping and replies with its latencies."
 						},
@@ -741,6 +745,10 @@ client.on("message", async message => {
 							value: "Ähnlich wie " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "name und " + process.env.PREFIX + "status. Ändert den Nickname vom Bot zu dem angegebenen Text."
 						},
 						{
+							name: `${process.env.PREFIX}pat`,
+							value: "Sendet ein zufälliges Bild von [headp.at](http://headp.at/)."
+						},
+						{
 							name: `${process.env.PREFIX}ping`,
 							value: "Pingt den Roboter an und antwortet mit den Latenzzeiten."
 						},
@@ -875,6 +883,17 @@ client.on("message", async message => {
 				});
 			};
 			message.react("✅");
+		};
+		if (command === "pat") {
+			request("http://headp.at/js/pats.json", function (error, response, body) {
+				if (error || response.statusCode != 200) {
+					message.channel.send("pats.json konnte nicht geladen werden... UwU");
+				} else {
+					message.channel.send({
+						files: ["http://headp.at/pats/" + JSON.parse(body)[Math.floor(Math.random()*JSON.parse(body).length)]]
+					});
+				};
+			});
 		};
 		if (command === "pfosten") {
 			if (args && args != "") {
