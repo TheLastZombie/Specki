@@ -312,10 +312,21 @@ client.on("message", async message => {
 			message.channel.send(temp);
 		};
 		if (command === "decrypt" || command === "encrypt") {
-			// Set method
-			// args[0]
-			// Set message
-			// args.shift()
+			var temp = args.shift();
+			if (command == "decrypt") {
+				if (temp == "base64") {
+					message.channel.send(Buffer.from(args.join(" "), "base64").toString("utf8"));
+				} else if (temp == "hex") {
+					message.channel.send(Buffer.from(args.join(" "), "hex").toString("utf8"));
+				};
+			};
+			if (command === "encrypt") {
+				if (temp == "base64") {
+					message.channel.send(Buffer.from(args.join(" "), "utf8").toString("base64"));
+				} else if (temp == "hex") {
+					message.channel.send(Buffer.from(args.join(" "), "utf8").toString("hex"));
+				};
+			};
 		};
 		if (command === "deutsch") {
 			if (args && args != "") {
