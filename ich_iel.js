@@ -969,7 +969,7 @@ client.on("message", async message => {
 					}).catch(err => message.channel.send(err));
 				};
 			} else {
-				message.channel.send("**ich_iel Soundboard**\n\n`ali-a` Ali-A Intro (Ear-Rape)\n`limetten` Frische Limetten\n`neger` Der Titel sagt alles\n`penis` Das hier ist mein Penis\n`penis-lang` So wie \"penis\", nur in länger\n`intro` Intro Donutsen ❤ xD");
+				message.channel.send("**ich_iel Soundboard**\n\n`ali-a` Ali-A Intro (Ear-Rape)\n`limetten` Frische Limetten\n`mountain-dew` Schokobanane YTP / Gelaber\n`neger` Der Titel sagt alles\n`penis` Das hier ist mein Penis\n`penis-lang` So wie \"penis\", nur in länger\n`intro` Intro Donutsen ❤ xD");
 			};
 		};
 
