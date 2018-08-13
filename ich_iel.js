@@ -325,6 +325,8 @@ client.on("message", async message => {
 						outp += String.fromCharCode(parseInt(temp[i], 2));
 					};
 					message.channel.send(outp);
+				} else if (temp == "uri") {
+					message.channel.send(decodeURI(args.join(" ")));
 				};
 			};
 			if (command === "encrypt") {
@@ -339,6 +341,8 @@ client.on("message", async message => {
 						outp += ("00000000" + temp[i].charCodeAt(0).toString(2)).slice(-8) + " ";
 					};
 					message.channel.send(outp);
+				} else if (temp == "uri") {
+					message.channel.send(encodeURI(args.join(" ")));
 				};
 			};
 		};
