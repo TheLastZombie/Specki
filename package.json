@@ -19,6 +19,7 @@
     "figlet": "^1.2.0",
     "google-translate-api": "^2.3.0",
     "is-thirteen": "^2.0.0",
+    "jimp": "^0.3.5",
     "node-opus": "^0.3.0",
     "opusscript": "0.0.6",
     "request": "^2.85.0",

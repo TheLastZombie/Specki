@@ -6,6 +6,8 @@ const figlet = require("figlet");
 const zalgo = require("to-zalgo");
 const tinycolor = require("tinycolor2");
 const is = require("is-thirteen");
+const jimp = require("jimp");
+const fs = require("fs");
 const client = new discord.Client({
 	autoReconnect: true,
 	disableEveryone: true
@@ -93,7 +95,7 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command == "about" || command == "archiv" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "decrypt" || command == "deutsch" || command == "dreizehn" || command == "encrypt" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pat" || command == "pfosten" || command == "ping" || command == "play" || command == "sag" || command == "spott" || command == "status" || command == "text" || command == "wenndu" || command == "zalgo") {
+		if (command == "about" || command == "archiv" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "decrypt" || command == "deutsch" || command == "dreizehn" || command == "encrypt" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "flag" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pat" || command == "pfosten" || command == "ping" || command == "play" || command == "sag" || command == "spott" || command == "status" || command == "text" || command == "wenndu" || command == "zalgo") {
 			if (command in commandCounts) {
 				commandCounts[command]++;
 			} else {
@@ -499,6 +501,39 @@ client.on("message", async message => {
 				message.channel.send(`toll\ndieses ding beim kopfhörer ab\ndieses um das ohr\nFICKen`);
 			};
 		};
+		if (command === "flag") {
+			if (message.attachments.first()) {
+				jimp.read(message.attachments.first().url, (error, temp) => {
+					jimp.read(__dirname + "/images/flag.png", (error, flag) => {
+						flag.resize(temp.bitmap.width, temp.bitmap.height, jimp.RESIZE_NEAREST_NEIGHBOR).opacity(0.5);
+						temp.composite(flag, 0, 0).write(__dirname + "/images/temp.png", function() {
+							message.channel.send({
+								files: [{
+									attachment: __dirname + "/images/temp.png",
+									name: "flag.png"
+								}]
+							});
+						});
+					});
+				});
+			} else if (args && args != "") {
+				jimp.read(args.join(" "), (error, temp) => {
+					jimp.read(__dirname + "/images/flag.png", (error, flag) => {
+						flag.resize(temp.bitmap.width, temp.bitmap.height, jimp.RESIZE_NEAREST_NEIGHBOR).opacity(0.5);
+						temp.composite(flag, 0, 0).write(__dirname + "/images/temp.png", function() {
+							message.channel.send({
+								files: [{
+									attachment: __dirname + "/images/temp.png",
+									name: "flag.png"
+								}]
+							});
+						});
+					});
+				});
+			} else {
+				message.react("❎");
+			};
+		};
 		if (command === "frauen") {
 			if (args && args != "") {
 				message.channel.send(`Frauen stehn auf Männer wo ${args.join(" ")}`);
@@ -595,6 +630,10 @@ client.on("message", async message => {
 							value: "Two arguments in square brackets: [kopfhörer] [ohr]. [FICKen](https://discordapp.com/channels/392678434687549440/430838493359636490/431582731239948308)"
 						},
 						{
+							name: `${process.env.PREFIX}flag`,
+							value: "Puts a German flag over the specified image."
+						},
+						{
 							name: `${process.env.PREFIX}frauen`,
 							value: "Frauen stehn auf Männer wo beim Sex die Arme kaputt"
 						},
@@ -625,10 +664,6 @@ client.on("message", async message => {
 						{
 							name: `${process.env.PREFIX}jemand | ${process.env.PREFIX}someone`,
 							value: "A replacement for Discord's April Fools' joke (@someone), selects a random user."
-						},
-						{
-							name: `${process.env.PREFIX}kerle | ${process.env.PREFIX}dudes`,
-							value: "It is Wednesday, my dudes! [Inspired by kidpix2.](https://web.archive.org/web/20161007164108/https://kidpix2.tumblr.com/post/104840641707/wednesday-meme)"
 						}
 					]
 				}
@@ -636,6 +671,10 @@ client.on("message", async message => {
 			message.channel.send({
 				embed: {
 					fields: [
+						{
+							name: `${process.env.PREFIX}kerle | ${process.env.PREFIX}dudes`,
+							value: "It is Wednesday, my dudes! [Inspired by kidpix2.](https://web.archive.org/web/20161007164108/https://kidpix2.tumblr.com/post/104840641707/wednesday-meme)"
+						},
 						{
 							name: `${process.env.PREFIX}klatsch | ${process.env.PREFIX}clap`,
 							value: "Inserts the first word between all others. [Inspired by the \"Ratchet Clap\".](https://www.urbandictionary.com/define.php?term=Ratchet+Clap)"
@@ -770,6 +809,10 @@ client.on("message", async message => {
 							value: "Zwei Argumente in eckigen Klammern: [kopfhörer] [ohr]. [FICKen](https://discordapp.com/channels/392678434687549440/430838493359636490/431582731239948308)"
 						},
 						{
+							name: `${process.env.PREFIX}flag`,
+							value: "Legt die deutsche Flagge über das angegebene Bild."
+						},
+						{
 							name: `${process.env.PREFIX}frauen`,
 							value: "Frauen stehn auf Männer wo beim Sex die Arme kaputt"
 						},
@@ -800,10 +843,6 @@ client.on("message", async message => {
 						{
 							name: `${process.env.PREFIX}jemand | ${process.env.PREFIX}someone`,
 							value: "Ersetzt Discord's Aprilscherz 2018 (@someone) und erwähnt einen zufälligen User."
-						},
-						{
-							name: `${process.env.PREFIX}kerle | ${process.env.PREFIX}dudes`,
-							value: "Es ist Mittwoch, meine Kerle! [Inspiriert von kidpix2.](https://web.archive.org/web/20161007164108/https://kidpix2.tumblr.com/post/104840641707/wednesday-meme)"
 						}
 					]
 				}
@@ -811,6 +850,10 @@ client.on("message", async message => {
 			message.channel.send({
 				embed: {
 					fields: [
+						{
+							name: `${process.env.PREFIX}kerle | ${process.env.PREFIX}dudes`,
+							value: "Es ist Mittwoch, meine Kerle! [Inspiriert von kidpix2.](https://web.archive.org/web/20161007164108/https://kidpix2.tumblr.com/post/104840641707/wednesday-meme)"
+						},
 						{
 							name: `${process.env.PREFIX}klatsch | ${process.env.PREFIX}clap`,
 							value: "Fügt das erste Wort zwischen alle anderen ein. [Inspiriert vom \"Ratchet Clap\".](https://www.urbandictionary.com/define.php?term=Ratchet+Clap)"
