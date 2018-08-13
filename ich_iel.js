@@ -339,6 +339,8 @@ client.on("message", async message => {
 						};
 					};
 					message.channel.send(outp);
+				} else {
+					message.channel.send("**" + temp + "** is not a valid encoding! Supported are: **base64**, **hex**, **binary**, **uri** and **rot13**.");
 				};
 			};
 			if (command === "encrypt") {
@@ -367,6 +369,8 @@ client.on("message", async message => {
 						};
 					};
 					message.channel.send(outp);
+				} else {
+					message.channel.send("**" + temp + "** is not a valid encoding! Supported are: **base64**, **hex**, **binary**, **uri** and **rot13**.");
 				};
 			};
 		};
