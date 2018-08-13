@@ -71,7 +71,10 @@ client.on("message", async message => {
 		if (command == "🅱") {
 			command = "b";
 		};
-		if (command == "englisch") {
+		if (command == "de") {
+			command = "deutsch";
+		};
+		if (command == "englisch" || command == "en") {
 			command = "english";
 		};
 		if (command == "replace") {
@@ -376,7 +379,7 @@ client.on("message", async message => {
 				};
 			};
 		};
-		if (command === "deutsch") {
+		if (command === "deutsch" || command === "de") {
 			if (args && args != "") {
 				translate(args.join(" "), {
 					to: "de"
@@ -418,7 +421,7 @@ client.on("message", async message => {
 				});
 			};
 		};
-		if (command === "english" || command === "englisch") {
+		if (command === "english" || command === "englisch" || command === "en") {
 			if (args && args != "") {
 				translate(args.join(" "), {
 					to: "en"
@@ -598,7 +601,7 @@ client.on("message", async message => {
 							value: "Decodes a message using the specified method. Also see " + process.env.PREFIX + "encrypt. Example: " + process.env.PREFIX + "decrypt base64 SGVsbG8sIFdvcmxkIQ=="
 						},
 						{
-							name: `${process.env.PREFIX}deutsch`,
+							name: `${process.env.PREFIX}deutsch | ${process.env.PREFIX}de`,
 							value: "Translates a message from any language to German."
 						},
 						{
@@ -610,7 +613,7 @@ client.on("message", async message => {
 							value: "Encodes a message using the specified method. Also see " + process.env.PREFIX + "decrypt. Example: " + process.env.PREFIX + "encrypt base64 Hello, World!"
 						},
 						{
-							name: `${process.env.PREFIX}english | ${process.env.PREFIX}englisch`,
+							name: `${process.env.PREFIX}english | ${process.env.PREFIX}englisch | ${process.env.PREFIX}en`,
 							value: "Translates a message from any language to English."
 						},
 						{
@@ -777,7 +780,7 @@ client.on("message", async message => {
 							value: "Entschlüsselt eine Nachricht mit der gegebenen Methode. Siehe auch " + process.env.PREFIX + "encrypt. Beispiel: " + process.env.PREFIX + "decrypt base64 SGVsbG8sIFdvcmxkIQ=="
 						},
 						{
-							name: `${process.env.PREFIX}deutsch`,
+							name: `${process.env.PREFIX}deutsch | ${process.env.PREFIX}de`,
 							value: "Übersetzt eine Nachricht ins Deutsche – mal mehr, mal weniger gut."
 						},
 						{
@@ -789,7 +792,7 @@ client.on("message", async message => {
 							value: "Verschlüsselt eine Nachricht mit der gegebenen Methode. Siehe auch " + process.env.PREFIX + "decrypt. Beispiel: " + process.env.PREFIX + "encrypt base64 Hello, World!"
 						},
 						{
-							name: `${process.env.PREFIX}english | ${process.env.PREFIX}englisch`,
+							name: `${process.env.PREFIX}english | ${process.env.PREFIX}englisch | ${process.env.PREFIX}en`,
 							value: "Übersetzt eine Nachricht ins Englische – mal mehr, mal weniger gut."
 						},
 						{
