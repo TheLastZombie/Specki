@@ -318,6 +318,13 @@ client.on("message", async message => {
 					message.channel.send(Buffer.from(args.join(" "), "base64").toString("utf8"));
 				} else if (temp == "hex") {
 					message.channel.send(Buffer.from(args.join(" "), "hex").toString("utf8"));
+				} else if (temp == "binary") {
+					var temp = args.join(" ").replace(/\s/g,"").match(/.{8}/g);
+					var outp = "";
+					for (var i = 0; i < temp.length; i++) {
+						outp += String.fromCharCode(parseInt(temp[i], 2));
+					};
+					message.channel.send(outp);
 				};
 			};
 			if (command === "encrypt") {
@@ -325,6 +332,13 @@ client.on("message", async message => {
 					message.channel.send(Buffer.from(args.join(" "), "utf8").toString("base64"));
 				} else if (temp == "hex") {
 					message.channel.send(Buffer.from(args.join(" "), "utf8").toString("hex"));
+				} else if (temp == "binary") {
+					var temp = args.join(" ");
+					var outp = "";
+					for (var i = 0; i < temp.length; i++) {
+						outp += ("00000000" + temp[i].charCodeAt(0).toString(2)).slice(-8) + " ";
+					};
+					message.channel.send(outp);
 				};
 			};
 		};
