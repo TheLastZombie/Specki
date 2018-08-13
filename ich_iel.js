@@ -93,7 +93,7 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command == "about" || command == "archiv" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "deutsch" || command == "dreizehn" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pat" || command == "pfosten" || command == "ping" || command == "play" || command == "sag" || command == "spott" || command == "status" || command == "text" || command == "wenndu" || command == "zalgo") {
+		if (command == "about" || command == "archiv" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "decrypt" || command == "deutsch" || command == "dreizehn" || command == "encrypt" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pat" || command == "pfosten" || command == "ping" || command == "play" || command == "sag" || command == "spott" || command == "status" || command == "text" || command == "wenndu" || command == "zalgo") {
 			if (command in commandCounts) {
 				commandCounts[command]++;
 			} else {
@@ -311,6 +311,69 @@ client.on("message", async message => {
 			};
 			message.channel.send(temp);
 		};
+		if (command === "decrypt" || command === "encrypt") {
+			var temp = args.shift();
+			if (command == "decrypt") {
+				if (temp == "base64") {
+					message.channel.send(Buffer.from(args.join(" "), "base64").toString("utf8"));
+				} else if (temp == "hex") {
+					message.channel.send(Buffer.from(args.join(" "), "hex").toString("utf8"));
+				} else if (temp == "binary") {
+					var temp = args.join(" ").replace(/\s/g,"").match(/.{8}/g);
+					var outp = "";
+					for (var i = 0; i < temp.length; i++) {
+						outp += String.fromCharCode(parseInt(temp[i], 2));
+					};
+					message.channel.send(outp);
+				} else if (temp == "uri") {
+					message.channel.send(decodeURI(args.join(" ")));
+				} else if (temp == "rot13") {
+					var temp = args.join(" ");
+					var outp = "";
+					for (var i = 0; i < temp.length; i++) {
+						var tmpp = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".charAt("NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm".indexOf(temp.charAt(i)));
+						if (tmpp) {
+							outp += tmpp;
+						} else {
+							outp += temp.charAt(i);
+						};
+					};
+					message.channel.send(outp);
+				} else {
+					message.channel.send("**" + temp + "** is not a valid encoding! Supported are: **base64**, **hex**, **binary**, **uri** and **rot13**.");
+				};
+			};
+			if (command === "encrypt") {
+				if (temp == "base64") {
+					message.channel.send(Buffer.from(args.join(" "), "utf8").toString("base64"));
+				} else if (temp == "hex") {
+					message.channel.send(Buffer.from(args.join(" "), "utf8").toString("hex"));
+				} else if (temp == "binary") {
+					var temp = args.join(" ");
+					var outp = "";
+					for (var i = 0; i < temp.length; i++) {
+						outp += ("00000000" + temp[i].charCodeAt(0).toString(2)).slice(-8) + " ";
+					};
+					message.channel.send(outp);
+				} else if (temp == "uri") {
+					message.channel.send(encodeURI(args.join(" ")));
+				} else if (temp == "rot13") {
+					var temp = args.join(" ");
+					var outp = "";
+					for (var i = 0; i < temp.length; i++) {
+						var tmpp = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm".charAt("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".indexOf(temp.charAt(i)));
+						if (tmpp) {
+							outp += tmpp;
+						} else {
+							outp += temp.charAt(i);
+						};
+					};
+					message.channel.send(outp);
+				} else {
+					message.channel.send("**" + temp + "** is not a valid encoding! Supported are: **base64**, **hex**, **binary**, **uri** and **rot13**.");
+				};
+			};
+		};
 		if (command === "deutsch") {
 			if (args && args != "") {
 				translate(args.join(" "), {
@@ -496,12 +559,20 @@ client.on("message", async message => {
 							value: "Used commands are counted automatically. This command returns the result."
 						},
 						{
+							name: `${process.env.PREFIX}decrypt`,
+							value: "Decodes a message using the specified method. Also see " + process.env.PREFIX + "encrypt. Example: " + process.env.PREFIX + "decrypt base64 SGVsbG8sIFdvcmxkIQ=="
+						},
+						{
 							name: `${process.env.PREFIX}deutsch`,
 							value: "Translates a message from any language to German."
 						},
 						{
 							name: `${process.env.PREFIX}dreizehn`,
 							value: "Checks whether a number is equal to thirteen. People wanted this."
+						},
+						{
+							name: `${process.env.PREFIX}encrypt`,
+							value: "Encodes a message using the specified method. Also see " + process.env.PREFIX + "decrypt. Example: " + process.env.PREFIX + "encrypt base64 Hello, World!"
 						},
 						{
 							name: `${process.env.PREFIX}english | ${process.env.PREFIX}englisch`,
@@ -558,14 +629,6 @@ client.on("message", async message => {
 						{
 							name: `${process.env.PREFIX}kerle | ${process.env.PREFIX}dudes`,
 							value: "It is Wednesday, my dudes! [Inspired by kidpix2.](https://web.archive.org/web/20161007164108/https://kidpix2.tumblr.com/post/104840641707/wednesday-meme)"
-						},
-						{
-							name: `${process.env.PREFIX}klatsch | ${process.env.PREFIX}clap`,
-							value: "Inserts the first word between all others. [Inspired by the \"Ratchet Clap\".](https://www.urbandictionary.com/define.php?term=Ratchet+Clap)"
-						},
-						{
-							name: `${process.env.PREFIX}name`,
-							value: "Similar to " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "nick and " + process.env.PREFIX + "status. Changes the bot's name to the specified text. Bot owner only."
 						}
 					]
 				}
@@ -573,6 +636,14 @@ client.on("message", async message => {
 			message.channel.send({
 				embed: {
 					fields: [
+						{
+							name: `${process.env.PREFIX}klatsch | ${process.env.PREFIX}clap`,
+							value: "Inserts the first word between all others. [Inspired by the \"Ratchet Clap\".](https://www.urbandictionary.com/define.php?term=Ratchet+Clap)"
+						},
+						{
+							name: `${process.env.PREFIX}name`,
+							value: "Similar to " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "nick and " + process.env.PREFIX + "status. Changes the bot's name to the specified text. Bot owner only."
+						},
 						{
 							name: `${process.env.PREFIX}nick`,
 							value: "Similar to " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "name and " + process.env.PREFIX + "status. Changes the bot's nick to the specified text."
@@ -663,12 +734,20 @@ client.on("message", async message => {
 							value: "Ausgeführte Commands werden automatisch gezählt, dieser Command gibt die Statistiken wieder."
 						},
 						{
+							name: `${process.env.PREFIX}decrypt`,
+							value: "Entschlüsselt eine Nachricht mit der gegebenen Methode. Siehe auch " + process.env.PREFIX + "encrypt. Beispiel: " + process.env.PREFIX + "decrypt base64 SGVsbG8sIFdvcmxkIQ=="
+						},
+						{
 							name: `${process.env.PREFIX}deutsch`,
 							value: "Übersetzt eine Nachricht ins Deutsche – mal mehr, mal weniger gut."
 						},
 						{
 							name: `${process.env.PREFIX}dreizehn`,
 							value: "Überprüft, ob eine Nummer 13 ist. Weil ihr das so wolltet."
+						},
+						{
+							name: `${process.env.PREFIX}encrypt`,
+							value: "Verschlüsselt eine Nachricht mit der gegebenen Methode. Siehe auch " + process.env.PREFIX + "decrypt. Beispiel: " + process.env.PREFIX + "encrypt base64 Hello, World!"
 						},
 						{
 							name: `${process.env.PREFIX}english | ${process.env.PREFIX}englisch`,
@@ -725,14 +804,6 @@ client.on("message", async message => {
 						{
 							name: `${process.env.PREFIX}kerle | ${process.env.PREFIX}dudes`,
 							value: "Es ist Mittwoch, meine Kerle! [Inspiriert von kidpix2.](https://web.archive.org/web/20161007164108/https://kidpix2.tumblr.com/post/104840641707/wednesday-meme)"
-						},
-						{
-							name: `${process.env.PREFIX}klatsch | ${process.env.PREFIX}clap`,
-							value: "Fügt das erste Wort zwischen alle anderen ein. [Inspiriert vom \"Ratchet Clap\".](https://www.urbandictionary.com/define.php?term=Ratchet+Clap)"
-						},
-						{
-							name: `${process.env.PREFIX}name`,
-							value: "Ähnlich wie " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "nick und " + process.env.PREFIX + "status. Ändert den Namen vom Bot zu dem angegebenen Text (global). Nur vom Bot-Owner verwendbar."
 						}
 					]
 				}
@@ -740,6 +811,14 @@ client.on("message", async message => {
 			message.channel.send({
 				embed: {
 					fields: [
+						{
+							name: `${process.env.PREFIX}klatsch | ${process.env.PREFIX}clap`,
+							value: "Fügt das erste Wort zwischen alle anderen ein. [Inspiriert vom \"Ratchet Clap\".](https://www.urbandictionary.com/define.php?term=Ratchet+Clap)"
+						},
+						{
+							name: `${process.env.PREFIX}name`,
+							value: "Ähnlich wie " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "nick und " + process.env.PREFIX + "status. Ändert den Namen vom Bot zu dem angegebenen Text (global). Nur vom Bot-Owner verwendbar."
+						},
 						{
 							name: `${process.env.PREFIX}nick`,
 							value: "Ähnlich wie " + process.env.PREFIX + "avatar, " + process.env.PREFIX + "name und " + process.env.PREFIX + "status. Ändert den Nickname vom Bot zu dem angegebenen Text."
