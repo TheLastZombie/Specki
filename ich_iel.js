@@ -333,7 +333,7 @@ client.on("message", async message => {
 					for (var i = 0; i < temp.length; i++) {
 						var tmpp = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".charAt("NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm".indexOf(temp.charAt(i)));
 						if (tmpp) {
-							outp += tmpp
+							outp += tmpp;
 						} else {
 							outp += temp.charAt(i);
 						};
@@ -361,7 +361,7 @@ client.on("message", async message => {
 					for (var i = 0; i < temp.length; i++) {
 						var tmpp = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm".charAt("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".indexOf(temp.charAt(i)));
 						if (tmpp) {
-							outp += tmpp
+							outp += tmpp;
 						} else {
 							outp += temp.charAt(i);
 						};
