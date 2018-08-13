@@ -513,12 +513,20 @@ client.on("message", async message => {
 							value: "Used commands are counted automatically. This command returns the result."
 						},
 						{
+							name: `${process.env.PREFIX}decrypt`,
+							value: "Decodes a message using the specified method. Also see " + process.env.PREFIX + "encrypt. Example: " + process.env.PREFIX + "decrypt base64 SGVsbG8sIFdvcmxkIQ=="
+						},
+						{
 							name: `${process.env.PREFIX}deutsch`,
 							value: "Translates a message from any language to German."
 						},
 						{
 							name: `${process.env.PREFIX}dreizehn`,
 							value: "Checks whether a number is equal to thirteen. People wanted this."
+						},
+						{
+							name: `${process.env.PREFIX}encrypt`,
+							value: "Encodes a message using the specified method. Also see " + process.env.PREFIX + "decrypt. Example: " + process.env.PREFIX + "encrypt base64 Hello, World!"
 						},
 						{
 							name: `${process.env.PREFIX}english | ${process.env.PREFIX}englisch`,
@@ -680,12 +688,20 @@ client.on("message", async message => {
 							value: "Ausgeführte Commands werden automatisch gezählt, dieser Command gibt die Statistiken wieder."
 						},
 						{
+							name: `${process.env.PREFIX}decrypt`,
+							value: "Entschlüsselt eine Nachricht mit der gegebenen Methode. Siehe auch " + process.env.PREFIX + "encrypt. Beispiel: " + process.env.PREFIX + "decrypt base64 SGVsbG8sIFdvcmxkIQ=="
+						},
+						{
 							name: `${process.env.PREFIX}deutsch`,
 							value: "Übersetzt eine Nachricht ins Deutsche – mal mehr, mal weniger gut."
 						},
 						{
 							name: `${process.env.PREFIX}dreizehn`,
 							value: "Überprüft, ob eine Nummer 13 ist. Weil ihr das so wolltet."
+						},
+						{
+							name: `${process.env.PREFIX}encrypt`,
+							value: "Verschlüsselt eine Nachricht mit der gegebenen Methode. Siehe auch " + process.env.PREFIX + "decrypt. Beispiel: " + process.env.PREFIX + "encrypt base64 Hello, World!"
 						},
 						{
 							name: `${process.env.PREFIX}english | ${process.env.PREFIX}englisch`,
