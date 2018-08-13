@@ -327,6 +327,18 @@ client.on("message", async message => {
 					message.channel.send(outp);
 				} else if (temp == "uri") {
 					message.channel.send(decodeURI(args.join(" ")));
+				} else if (temp == "rot13") {
+					var temp = args.join(" ");
+					var outp = "";
+					for (var i = 0; i < temp.length; i++) {
+						var tmpp = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".charAt("NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm".indexOf(temp.charAt(i)));
+						if (tmpp) {
+							outp += tmpp
+						} else {
+							outp += temp.charAt(i);
+						};
+					};
+					message.channel.send(outp);
 				};
 			};
 			if (command === "encrypt") {
@@ -343,6 +355,18 @@ client.on("message", async message => {
 					message.channel.send(outp);
 				} else if (temp == "uri") {
 					message.channel.send(encodeURI(args.join(" ")));
+				} else if (temp == "rot13") {
+					var temp = args.join(" ");
+					var outp = "";
+					for (var i = 0; i < temp.length; i++) {
+						var tmpp = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm".charAt("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".indexOf(temp.charAt(i)));
+						if (tmpp) {
+							outp += tmpp
+						} else {
+							outp += temp.charAt(i);
+						};
+					};
+					message.channel.send(outp);
 				};
 			};
 		};
