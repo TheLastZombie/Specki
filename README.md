@@ -14,6 +14,14 @@ https://discordapp.com/oauth2/authorize?client_id=405408491969314826&permissions
 </p>
 </details>
 
+<details><summary>Support</summary>
+<p>
+
+https://discord.gg/VmPbt3B
+
+</p>
+</details>
+
 ## Selber laufen lassen
 
 <details><summary>Manuell</summary>
