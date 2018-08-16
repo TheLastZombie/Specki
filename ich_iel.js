@@ -159,8 +159,13 @@ client.on("message", async message => {
 							inline: true
 						},
 						{
-							name: "Invite",
+							name: "Invite (Neccessary)",
 							value: "https://discordapp.com/oauth2/authorize?client_id=405408491969314826&permissions=70372416&scope=bot",
+							inline: true
+						},
+						{
+							name: "Invite (Future-Proof)",
+							value: "https://discordapp.com/oauth2/authorize?client_id=405408491969314826&permissions=8&scope=bot",
 							inline: true
 						}
 					],
