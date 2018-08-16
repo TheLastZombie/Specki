@@ -998,13 +998,21 @@ client.on("message", async message => {
 		if (command === "nick") {
 			if (args && args != "") {
 				console.log(`Ändere Bot-Nick zu "${args.join(" ")}".`);
-				message.guild.members.get(client.user.id).setNickname(args.join(" "));
+				client.guilds.map(guild => {
+					if (guild.me.hasPermission("CHANGE_NICKNAME")) {
+						guild.me.setNickname(args.join(" "));
+					};
+				});
 			} else {
 				message.channel.fetchMessages({
 					limit: 2
 				}).then(temp => {
 					console.log(`Ändere Bot-Nick zu "${temp.last().content}".`);
-					message.guild.members.get(client.user.id).setNickname(temp.last().content);
+					client.guilds.map(guild => {
+						if (guild.me.hasPermission("CHANGE_NICKNAME")) {
+							guild.me.setNickname(temp.last().content);
+						};
+					});
 				});
 			};
 			message.react("✅");
