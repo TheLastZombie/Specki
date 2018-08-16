@@ -1,3 +1,4 @@
+// jerrynicki war hier
 const discord = require("discord.js");
 const translate = require("google-translate-api");
 const cool = require("cool-ascii-faces");
