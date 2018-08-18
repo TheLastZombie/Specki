@@ -115,7 +115,7 @@ client.on("message", async message => {
 						"Authorization": "Token " + process.env.GLOT_TK
 					},
 					json: {
-						"files": [{"name": "commands.json", "content": JSON.stringify(commandCounts)}]
+						"files": [{"name": "commands.json", "content": JSON.stringify(commandCounts)}, {"name": "status.txt", "content": client.user.presence.game.name}]
 					}
 				}, function (error, response, body) {
 					if (error) {
@@ -1165,7 +1165,7 @@ client.on("message", async message => {
 						"Authorization": "Token " + process.env.GLOT_TK
 					},
 					json: {
-						"files": [{"name": "status.txt", "content": args.join(" ")}]
+						"files": [{"name": "commands.json", "content": JSON.stringify(commandCounts)}, {"name": "status.txt", "content": args.join(" ")}]
 					}
 				}, function (error, response, body) {
 					if (error) {
