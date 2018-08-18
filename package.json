@@ -31,10 +31,10 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ente3000/ich_iel.git"
+    "url": "git+https://github.com/TheLastZombie/ich_iel.git"
   },
   "bugs": {
-    "url": "https://github.com/ente3000/ich_iel/issues"
+    "url": "https://github.com/TheLastZombie/ich_iel/issues"
   },
-  "homepage": "https://github.com/ente3000/ich_iel#readme"
+  "homepage": "https://github.com/TheLastZombie/ich_iel#readme"
 }
