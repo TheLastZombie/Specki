@@ -1110,7 +1110,7 @@ client.on("message", async message => {
 					}).catch(err => message.channel.send(err));
 				};
 			} else {
-				message.channel.send("**ich_iel Soundboard**\n\n`ali-a` Ali-A Intro (Ear-Rape)\n`limetten` Frische Limetten\n`mountain-dew` Schokobanane YTP / Gelaber\n`neger` Der Titel sagt alles\n`penis` Das hier ist mein Penis\n`penis-lang` So wie \"penis\", nur in länger\n`intro` Intro Donutsen ❤ xD\n`bumms` Springii bumms\n`dr-pepper` SpringiiASMR öffnet eine Dose Dr. Pepper\n`gedabbt` Springii hat gedabbt\n`masturbation` Du holst dir einen runter.\n`nein` Springii sagt nein.\n`traktor` fohrn ma mitm traktoa");
+				message.channel.send("**ich_iel Soundboard**\n\n`ali-a` Ali-A Intro (Ear-Rape)\n`alter` Alter, was ist das denn\n`bumms` Springii: Bumms\n`dr-pepper` SpringiiASMR öffnet eine Dose Dr. Pepper\n`gedabbt` Springii hat gedabbt\n`intro` Intro Donutsen ❤ xD\n`limetten` Frische Limetten\n`masturbation` Du holst dir einen runter\n`mountain-dew` Gelaber Intro? / YTP?\n`neger` Der Titel sagt alles\n`nein` Springii sagt \"Nein\".\n`penis-lang` So wie \"penis\", nur in länger\n`penis` Das hier ist mein Penis\n`traktor` Für Ohrenkrebs abspielen");
 			};
 		};
 
