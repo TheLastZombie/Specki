@@ -38,17 +38,19 @@ client.on("ready", () => {
 		}
 	}, function(error, response, body) {
 		commitId = JSON.parse(body).object.url.substr(JSON.parse(body).object.url.lastIndexOf("/") + 1, 7);
-		client.user.setActivity(`v2.0 Pre-Beta | ${client.guilds.size}G, ${client.channels.size}C, ${client.users.size}U | Commit ${commitId} | ${process.env.PREFIX}help`);
+		// client.user.setActivity(`v2.0 Pre-Beta | ${client.guilds.size}G, ${client.channels.size}C, ${client.users.size}U | Commit ${commitId} | ${process.env.PREFIX}help`);
 	});
 	// cycleActivity();
 	request("https://snippets.glot.io/snippets/" + process.env.GLOT_ID, function (error, response, body) {
 		if (error) {
 			commandSuccess = false;
-			console.log("Konnte Command-Counts nicht von glot.io laden. Counter startet von 0, wird nicht hochgeladen.");
+			console.log("Konnte Command-Counts und Status nicht von glot.io laden. Counter startet von 0, wird nicht hochgeladen.");
 		} else {
 			commandSuccess = true;
-			console.log("Command-Counts erfolgreich von glot.io heruntergeladen.");
+			console.log("Command-Counts und Status erfolgreich von glot.io heruntergeladen.");
 			commandCounts = JSON.parse(JSON.parse(body).files[0].content);
+			console.log(`Ändere Bot-Status zu "${JSON.parse(body).files[1].content}".`);
+			client.user.setActivity(JSON.parse(body).files[1].content);
 		};
 	});
 });
@@ -1156,12 +1158,44 @@ client.on("message", async message => {
 			if (args && args != "") {
 				console.log(`Ändere Bot-Status zu "${args.join(" ")}".`);
 				client.user.setActivity(args.join(" "));
+				request({
+					url: "https://snippets.glot.io/snippets/" + process.env.GLOT_ID,
+					method: "PUT",
+					headers: {
+						"Authorization": "Token " + process.env.GLOT_TK
+					},
+					json: {
+						"files": [{"name": "status.txt", "content": args.join(" ")}]
+					}
+				}, function (error, response, body) {
+					if (error) {
+						console.log("Konnte Status nicht auf glot.io hochladen.");
+					} else {
+						console.log("Status erfolgreich auf glot.io hochgeladen.");
+					};
+				});
 			} else {
 				message.channel.fetchMessages({
 					limit: 2
 				}).then(temp => {
 					console.log(`Ändere Bot-Status zu "${temp.last().content}".`);
 					client.user.setActivity(temp.last().content);
+					request({
+						url: "https://snippets.glot.io/snippets/" + process.env.GLOT_ID,
+						method: "PUT",
+						headers: {
+							"Authorization": "Token " + process.env.GLOT_TK
+						},
+						json: {
+							"files": [{"name": "status.txt", "content": temp.last().content}]
+						}
+					}, function (error, response, body) {
+						if (error) {
+							console.log("Konnte Status nicht auf glot.io hochladen.");
+						} else {
+							console.log("Status erfolgreich auf glot.io hochgeladen.");
+						};
+					});
 				});
 			};
 			message.react("✅");
