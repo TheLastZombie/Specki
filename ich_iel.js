@@ -1,4 +1,6 @@
+// unt schw
 // jerrynicki war hier
+// end schw
 const discord = require("discord.js");
 const translate = require("google-translate-api");
 const cool = require("cool-ascii-faces");
