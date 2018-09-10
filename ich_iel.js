@@ -164,6 +164,11 @@ client.on("message", async message => {
 							inline: true
 						},
 						{
+							name: "Wiki",
+							value: "https://github.com/TheLastZombie/ich_iel/wiki",
+							inline: true
+						},
+						{
 							name: "Invite (Neccessary)",
 							value: "https://discordapp.com/oauth2/authorize?client_id=405408491969314826&permissions=70372416&scope=bot",
 							inline: true
