@@ -131,11 +131,11 @@ client.on("message", async message => {
 			};
 			if (message.author.id != 175877241517899776) {
 				talkedRecently.add(message.author.id);
-				talkedTimestamp[message.author.id] = Date.now() + 5000;
+				talkedTimestamp[message.author.id] = Date.now() + 2500;
 				setTimeout(() => {
 					talkedRecently.delete(message.author.id);
 					delete talkedTimestamp[message.author.id];
-				}, 5000);
+				}, 2500);
 			};
 			console.log(`Nachricht wird als ${process.env.PREFIX}${command}-Command verarbeitet.`);
 		};
