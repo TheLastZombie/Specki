@@ -12,12 +12,12 @@ const client = new discord.Client({
 	autoReconnect: true,
 	disableEveryone: true
 });
-const rllist = new Set();
+var rllist = new Set();
 var rltime = {};
 var cmdcnt = {};
 var cmdscc;
 var commid;
-var isPlaying = false;
+var isplay = false;
 client.login(process.env.TOKEN);
 client.on("ready", () => {
 	console.log("Erfolgreich eingeloggt als " + client.user.username + " (ID: " + client.user.id + ").");
@@ -1079,14 +1079,14 @@ client.on("message", async message => {
 
 		if (command === "play") {
 			if (args && args != "") {
-				if (isPlaying) {
+				if (isplay) {
 					message.react("❎");
 				} else {
 					message.member.voiceChannel.join().then(connection => {
-						isPlaying = true;
+						isplay = true;
 						connection.playFile(__dirname + "/sounds/" + args.join(" ") + ".mp3").on("end", () => {
 							message.member.voiceChannel.leave();
-							isPlaying = false;
+							isplay = false;
 						});
 					}).catch(err => message.channel.send(err));
 				};
