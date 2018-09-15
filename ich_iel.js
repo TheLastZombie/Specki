@@ -467,9 +467,9 @@ client.on("message", async message => {
 							}
 						}
 					}).run(args.join(" "));
-					var vmmsg = ((vmout != undefined) ? "Output: \n```" + vmout.replace(/(?<!\\)`/g, "`​") + "```\n\n" : "") + ((vmlog != "") ? "Console: \n```" + vmlog.replace(/(?<!\\)`/g, "`​") + "```" : "");
+					var vmmsg = ((vmout != undefined) ? "Output: \n```" + vmout.toString().replace(/(?<!\\)`/g, "`​") + "```\n\n" : "") + ((vmlog != "") ? "Console: \n```" + vmlog.toString().replace(/(?<!\\)`/g, "`​") + "```" : "");
 					if (vmmsg) {
-						message.channel.send(vmmsg.replace(/(?<!\\)`/g, "`​"));
+						message.channel.send(vmmsg.toString().replace(/(?<!\\)`/g, "`​"));
 					} else {
 						message.channel.send("Nothing returned! ¯\\_(ツ)_/¯");
 					};
@@ -480,7 +480,7 @@ client.on("message", async message => {
 				try {
 					var evout = eval("(" + args.join(" ") + ")");
 					if (evout) {
-						message.channel.send("Output: \n```" + evout.replace(/(?<!\\)`/g, "`​") + "```\n\nNote: Code is not running in a sandbox and thus console output not accessible.");
+						message.channel.send("Output: \n```" + evout.toString().replace(/(?<!\\)`/g, "`​") + "```\n\nNote: Code is not running in a sandbox and thus console output not accessible.");
 					};
 				} catch(err) {
 					message.channel.send("Error: \n```" + err.toString() + "```");
