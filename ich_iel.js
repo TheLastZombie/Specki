@@ -8,6 +8,7 @@ const tinycolor = require("tinycolor2");
 const is = require("is-thirteen");
 const jimp = require("jimp");
 const fs = require("fs");
+const {VM} = require("vm2");
 const client = new discord.Client({
 	autoReconnect: true,
 	disableEveryone: true
@@ -455,9 +456,35 @@ client.on("message", async message => {
 		};
 		if (command === "eval") {
 			if (message.author.id != 175877241517899776) {
-				message.react("❎");
+				var vmlog = "";
+				try {
+					vmout = new VM({
+						sandbox: {
+							console: {
+								log: function(str) {
+									vmlog += str + "\n";
+								}
+							}
+						}
+					}).run(args.join(" "));
+					var vmmsg = ((vmout != undefined) ? "Output: \n```" + vmout + "```\n\n" : "") + ((vmlog != "") ? "Console: \n```" + vmlog + "```" : "");
+					if (vmmsg) {
+						message.channel.send(vmmsg);
+					} else {
+						message.channel.send("Nothing returned! ¯\\_(ツ)_/¯");
+					};
+				} catch(err) {
+					message.channel.send("Error: \n```" + err.toString() + "```");
+				};
 			} else {
-				eval(args.join(" "));
+				try {
+					var evout = eval("(" + args.join(" ") + ")");
+					if (evout) {
+						message.channel.send("Output: \n```" + evout + "```\n\nNote: Code is not running in a sandbox and thus console output not accessible.");
+					};
+				} catch(err) {
+					message.channel.send("Error: \n```" + err.toString() + "```");
+				};
 			};
 		};
 		if (command === "farbe") {
