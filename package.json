@@ -26,8 +26,10 @@
     "opusscript": "0.0.6",
     "request": "^2.85.0",
     "safe-eval": "^0.4.0",
+    "table": "^5.0.2",
     "tinycolor2": "^1.4.1",
     "to-zalgo": "^1.0.1",
+    "unicode": "^11.0.1",
     "vm2": "^3.6.3"
   },
   "devDependencies": {},

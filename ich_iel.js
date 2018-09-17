@@ -9,6 +9,7 @@ const is = require("is-thirteen");
 const jimp = require("jimp");
 const fs = require("fs");
 const {VM} = require("vm2");
+var {table} = require("table");
 const client = new discord.Client({
 	autoReconnect: true,
 	disableEveryone: true
@@ -87,7 +88,7 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command == "about" || command == "archiv" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "decrypt" || command == "deutsch" || command == "dreizehn" || command == "encrypt" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "flag" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pat" || command == "pfosten" || command == "ping" || command == "play" || command == "sag" || command == "spott" || command == "status" || command == "text" || command == "wenndu" || command == "zalgo") {
+		if (command == "about" || command == "archiv" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "decrypt" || command == "deutsch" || command == "dreizehn" || command == "encrypt" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "flag" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pat" || command == "pfosten" || command == "ping" || command == "play" || command == "sag" || command == "spott" || command == "status" || command == "text" || command == "unicode" || command == "wenndu" || command == "zalgo") {
 			if (command in cmdcnt) {
 				cmdcnt[command]++;
 			} else {
@@ -772,6 +773,10 @@ client.on("message", async message => {
 							value: "Returns a webpage as plain text, thanks to [Browsh](https://www.brow.sh/)."
 						},
 						{
+							name: `${process.env.PREFIX}unicode`,
+							value: "Returns Unicode information about each of the sent characters."
+						},
+						{
 							name: `${process.env.PREFIX}wenndu`,
 							value: "wenn du ***" + process.env.PREFIX + " W E N N D U***"
 						},
@@ -949,6 +954,10 @@ client.on("message", async message => {
 						{
 							name: `${process.env.PREFIX}text`,
 							value: "Gibt eine Webseite mit Hilfe von [Browsh](https://www.brow.sh/) als reinen Text wieder."
+						},
+						{
+							name: `${process.env.PREFIX}unicode`,
+							value: "Gibt erweiterte Unicode-Informationen über jeden der gesendeten Buchstaben an."
 						},
 						{
 							name: `${process.env.PREFIX}wenndu`,
@@ -1253,11 +1262,46 @@ client.on("message", async message => {
 				message.react("❎");
 			};
 		};
+		if (command === "unicode") {
+			if (args && args != "") {
+				var temp = [["Character", "Code", "Name"]];
+				for (i = 0; i < args.join(" ").replace(/[\x00-\x1F\x7F-\x9F]/g, "").length; i++) {
+					for (j = 0; j < 29; j++) {
+						var code = require("unicode/category/" + ["Cc", "Cf", "Co", "Cs", "Ll", "Lm", "Lo", "Lt", "Lu", "Mc", "Me", "Mn", "Nd", "Nl", "No", "Pc", "Pd", "Pe", "Pf", "Pi", "Po", "Ps", "Sc", "Sk", "Sm", "So", "Zl", "Zp", "Zs"][j])[args.join(" ").replace(/[\x00-\x1F\x7F-\x9F]/g, "").charCodeAt(i)];
+						if (code) {
+							temp[i + 1] = [args.join(" ").replace(/[\x00-\x1F\x7F-\x9F]/g, "")[i], code.value, code.name];
+							break;
+						};
+					};
+				};
+				message.channel.send("```" + table(temp, {
+					border: {
+						topBody: `─`,
+						topJoin: `┬`,
+						topLeft: `┌`,
+						topRight: `┐`,
+						bottomBody: `─`,
+						bottomJoin: `┴`,
+						bottomLeft: `└`,
+						bottomRight: `┘`,
+						bodyLeft: `│`,
+						bodyRight: `│`,
+						bodyJoin: `│`,
+						joinBody: `─`,
+						joinLeft: `├`,
+						joinRight: `┤`,
+						joinJoin: `┼`
+					}
+				}) + "```");
+			} else {
+				message.react("❎");
+			};
+		};
 		if (command === "wenndu") {
 			if (args && args != "") {
 				message.channel.send("wenn du ***" + args.join(" ").split("").join(" ").toUpperCase() + " " + args.join(" ").split("")[args.join(" ").split("").length - 1].toUpperCase() + "***");
 			} else {
-				message.channel.send("geht nich du huso");
+				message.react("❎");
 			};
 		};
 		if (command === "zalgo") {
