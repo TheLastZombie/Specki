@@ -505,7 +505,7 @@ client.on("message", async message => {
 				try {
 					var evout = eval("(" + args.join(" ") + ")");
 					if (evout) {
-						message.channel.send("Output: \n```" + evout + "```\n\nNote: Code is not running in a sandbox and thus console output not accessible.");
+						message.channel.send("Output: \n```" + JSON.stringify(evout) + "```\n\nNote: Code is not running in a sandbox and thus console output not accessible.");
 					};
 				} catch(err) {
 					message.channel.send("Error: \n```" + err.toString() + "```");
