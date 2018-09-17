@@ -343,8 +343,20 @@ client.on("message", async message => {
 						};
 					};
 					message.channel.send(outp);
+				} else if (temp == "atbash") {
+					var temp = args.join(" ");
+					var outp = "";
+					for (var i = 0; i < temp.length; i++) {
+						var tmpp = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".charAt("ZYXWVUTSRQPONMLKJIHGFEDCBAzyxwvutsrqponmlkjihgfedcba".indexOf(temp.charAt(i)));
+						if (tmpp) {
+							outp += tmpp;
+						} else {
+							outp += temp.charAt(i);
+						};
+					};
+					message.channel.send(outp);
 				} else {
-					message.channel.send("**" + temp + "** is not a valid encoding! Supported are: **base64**, **hex**, **binary**, **uri** and **rot13**.");
+					message.channel.send("**" + temp + "** is not a valid encoding! Supported are: **base64**, **hex**, **binary**, **uri**, **rot13** and **atbash**.");
 				};
 			};
 			if (command === "encrypt") {
@@ -373,8 +385,20 @@ client.on("message", async message => {
 						};
 					};
 					message.channel.send(outp);
+				} else if (temp == "atbash") {
+					var temp = args.join(" ");
+					var outp = "";
+					for (var i = 0; i < temp.length; i++) {
+						var tmpp = "ZYXWVUTSRQPONMLKJIHGFEDCBAzyxwvutsrqponmlkjihgfedcba".charAt("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".indexOf(temp.charAt(i)));
+						if (tmpp) {
+							outp += tmpp;
+						} else {
+							outp += temp.charAt(i);
+						};
+					};
+					message.channel.send(outp);
 				} else {
-					message.channel.send("**" + temp + "** is not a valid encoding! Supported are: **base64**, **hex**, **binary**, **uri** and **rot13**.");
+					message.channel.send("**" + temp + "** is not a valid encoding! Supported are: **base64**, **hex**, **binary**, **uri**, **rot13** and **atbash**.");
 				};
 			};
 		};
