@@ -487,12 +487,12 @@ client.on("message", async message => {
 						sandbox: {
 							console: {
 								log: function(str) {
-									vmlog += str + "\n";
+									vmlog += JSON.stringify(str) + "\n";
 								}
 							}
 						}
 					}).run(args.join(" "));
-					var vmmsg = ((vmout != undefined) ? "Output: \n```" + vmout + "```\n\n" : "") + ((vmlog != "") ? "Console: \n```" + vmlog + "```" : "");
+					var vmmsg = ((vmout != undefined) ? "Output: \n```" + JSON.stringify(vmout) + "```\n\n" : "") + ((vmlog != "") ? "Console: \n```" + vmlog + "```" : "");
 					if (vmmsg) {
 						message.channel.send(vmmsg);
 					} else {
