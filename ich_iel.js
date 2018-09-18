@@ -861,7 +861,7 @@ client.on("message", async message => {
 					}).catch(err => message.channel.send(err));
 				};
 			} else {
-				message.channel.send("Eine Liste von Sounds kann unter https://github.com/TheLastZombie/ich_iel/wiki/Sounds gefunden werden.");
+				message.channel.send("Eine Liste von Sounds kann unter https://github.com/TheLastZombie/ich_iel/wiki/Sounds-🇩🇪 gefunden werden.");
 			};
 		};
 
