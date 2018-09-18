@@ -88,7 +88,7 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command == "about" || command == "archiv" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "decrypt" || command == "deutsch" || command == "dreizehn" || command == "encrypt" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "flag" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pat" || command == "pfosten" || command == "ping" || command == "play" || command == "sag" || command == "spott" || command == "status" || command == "text" || command == "unicode" || command == "wenndu" || command == "zalgo") {
+		if (command == "about" || command == "archiv" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "decrypt" || command == "deutsch" || command == "dreizehn" || command == "eh" || command == "encrypt" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "flag" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pat" || command == "pfosten" || command == "ping" || command == "play" || command == "sag" || command == "spott" || command == "status" || command == "text" || command == "unicode" || command == "wenndu" || command == "zalgo") {
 			if (command in cmdcnt) {
 				cmdcnt[command]++;
 			} else {
@@ -445,6 +445,76 @@ client.on("message", async message => {
 				});
 			};
 		};
+		if (command === "eh") {
+			if (message.channel.nsfw == false) {
+				message.react("🔞");
+			} else {
+				if (args && args != "") {
+					request("https://e-hentai.org/?f_search=" + encodeURIComponent(args.join(" ")), function (error, response, body) {
+						try {
+							var temp = body.match(/https:\/\/e-hentai\.org\/g\/[0-9]{7}\/[0-9a-f]{10}/g)[Math.floor(Math.random() * body.match(/https:\/\/e-hentai\.org\/g\/[0-9]{7}\/[0-9a-f]{10}/g).length)];
+							if (temp) {
+								request({
+									url: "https://api.e-hentai.org/api.php",
+									method: "POST",
+									headers: {
+										"Content-Type": "application/json"
+									},
+									json: {
+										"method": "gdata",
+										"gidlist": [
+											[temp.match(/[0-9]{7}/).toString(), temp.match(/[0-9a-f]{10}/).toString()]
+										],
+										"namespace": 1
+									}
+								}, function (error, response, body) {
+									message.channel.send({
+										"embed": {
+											"title": body.gmetadata[0].title,
+											"description": body.gmetadata[0].tags.join(", "),
+											"fields": [{
+													"name": "Uploader",
+													"value": body.gmetadata[0].uploader,
+													"inline": true
+												},
+												{
+													"name": "Posted",
+													"value": new Date(body.gmetadata[0].posted * 1000).toISOString().replace(/T/, " ").replace(/\..+/, ""),
+													"inline": true
+												},
+												{
+													"name": "Rating",
+													"value": body.gmetadata[0].rating + " / 5",
+													"inline": true
+												},
+												{
+													"name": "Category",
+													"value": body.gmetadata[0].category,
+													"inline": true
+												},
+												{
+													"name": "Link",
+													"value": "https://e-hentai.org/g/" + body.gmetadata[0].gid + "/" + body.gmetadata[0].token,
+													"inline": true
+												}
+											],
+											"image": {
+												"url": body.gmetadata[0].thumb
+											}
+										}
+									});
+								});
+							} else {
+								message.react("❎");
+							};
+						}
+						catch(error) {
+							message.channel.send(error);
+						};
+					});
+				};
+			};
+		};
 		if (command === "english" || command === "englisch" || command === "en") {
 			if (args && args != "") {
 				translate(args.join(" "), {
@@ -659,6 +729,10 @@ client.on("message", async message => {
 							value: "Checks whether a number is equal to thirteen. People wanted this."
 						},
 						{
+							name: `${process.env.PREFIX}eh`,
+							value. "Searches E-Hentai and returns a random result."
+						},
+						{
 							name: `${process.env.PREFIX}encrypt`,
 							value: "Encodes a message using the specified method. Also see " + process.env.PREFIX + "decrypt. Example: " + process.env.PREFIX + "encrypt base64 Hello, World!"
 						},
@@ -713,10 +787,6 @@ client.on("message", async message => {
 						{
 							name: `${process.env.PREFIX}ichmach`,
 							value: "Ich mach Scheine, ey ey! [Inspired by Gloryholei55.](https://www.gutefrage.net/frage/wie-findet-ihr-meinen-ganster-rap-text)"
-						},
-						{
-							name: `${process.env.PREFIX}jemand | ${process.env.PREFIX}someone`,
-							value: "A replacement for Discord's April Fools' joke (@someone), selects a random user."
 						}
 					]
 				}
@@ -724,6 +794,10 @@ client.on("message", async message => {
 			message.channel.send({
 				embed: {
 					fields: [
+						{
+							name: `${process.env.PREFIX}jemand | ${process.env.PREFIX}someone`,
+							value: "A replacement for Discord's April Fools' joke (@someone), selects a random user."
+						},
 						{
 							name: `${process.env.PREFIX}kerle | ${process.env.PREFIX}dudes`,
 							value: "It is Wednesday, my dudes! [Inspired by kidpix2.](https://web.archive.org/web/20161007164108/https://kidpix2.tumblr.com/post/104840641707/wednesday-meme)"
@@ -842,6 +916,10 @@ client.on("message", async message => {
 							value: "Überprüft, ob eine Nummer 13 ist. Weil ihr das so wolltet."
 						},
 						{
+							name: `${process.env.PREFIX}eh`,
+							value. "Durchsucht E-Hentai und antwortet mit einer zufälligen Galerie."
+						},
+						{
 							name: `${process.env.PREFIX}encrypt`,
 							value: "Verschlüsselt eine Nachricht mit der gegebenen Methode. Siehe auch " + process.env.PREFIX + "decrypt. Beispiel: " + process.env.PREFIX + "encrypt base64 Hello, World!"
 						},
@@ -896,10 +974,6 @@ client.on("message", async message => {
 						{
 							name: `${process.env.PREFIX}ichmach`,
 							value: "Ich mach Scheine, ey ey! [Inspiriert von Gloryholei55.](https://www.gutefrage.net/frage/wie-findet-ihr-meinen-ganster-rap-text)"
-						},
-						{
-							name: `${process.env.PREFIX}jemand | ${process.env.PREFIX}someone`,
-							value: "Ersetzt Discord's Aprilscherz 2018 (@someone) und erwähnt einen zufälligen User."
 						}
 					]
 				}
@@ -907,6 +981,10 @@ client.on("message", async message => {
 			message.channel.send({
 				embed: {
 					fields: [
+						{
+							name: `${process.env.PREFIX}jemand | ${process.env.PREFIX}someone`,
+							value: "Ersetzt Discord's Aprilscherz 2018 (@someone) und erwähnt einen zufälligen User."
+						},
 						{
 							name: `${process.env.PREFIX}kerle | ${process.env.PREFIX}dudes`,
 							value: "Es ist Mittwoch, meine Kerle! [Inspiriert von kidpix2.](https://web.archive.org/web/20161007164108/https://kidpix2.tumblr.com/post/104840641707/wednesday-meme)"
