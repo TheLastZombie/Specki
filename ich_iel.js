@@ -730,7 +730,7 @@ client.on("message", async message => {
 						},
 						{
 							name: `${process.env.PREFIX}eh`,
-							value. "Searches E-Hentai and returns a random result."
+							value: "Searches E-Hentai and returns a random result."
 						},
 						{
 							name: `${process.env.PREFIX}encrypt`,
@@ -917,7 +917,7 @@ client.on("message", async message => {
 						},
 						{
 							name: `${process.env.PREFIX}eh`,
-							value. "Durchsucht E-Hentai und antwortet mit einer zufälligen Galerie."
+							value: "Durchsucht E-Hentai und antwortet mit einer zufälligen Galerie."
 						},
 						{
 							name: `${process.env.PREFIX}encrypt`,
