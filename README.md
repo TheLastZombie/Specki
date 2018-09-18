@@ -2,9 +2,11 @@
 
 # ich_iel Roboter
 
-Bot für den ich_iel Discordserver, jetzt mit 200% mehr Insidern, die sonst sowieso keiner kapiert.
+Bot for the German ich_iel Discord server, now with 200% more inside jokes!
 
-## Zu Server hinzufügen
+Below, you can find everything you usually need to get started. For advanced documentation, visit the [wiki](../../wiki)!
+
+## Inviting to your Server
 
 <details><summary>Invite (Neccessary)</summary>
 <p>
@@ -30,9 +32,9 @@ https://discord.gg/VmPbt3B
 </p>
 </details>
 
-## Selber laufen lassen
+## Running on your Machine
 
-<details><summary>Manuell</summary>
+<details><summary>Manually</summary>
 <p>
 
 ```
@@ -41,7 +43,7 @@ cd ich_iel
 npm install
 ```
 
-Jetzt in `ich_iel.js` die Umgebungsvariablen `PREFIX` (gewünschter Prefix), `TOKEN` (Discord-Bot-Token), `GLOT_ID` (ID eines glot.io-Pastes) und `GLOT_TK` (glot.io-API-Token) einsetzen.
+In `ich_iel.js`, replace the enviroment variables `PREFIX` (desired prefix), `TOKEN` (Discord bot token), `GLOT_ID` (glot.io paste ID) und `GLOT_TK` (glot.io API token).
 
 ```
 npm start
@@ -59,7 +61,7 @@ cd ich_iel
 npm install
 ```
 
-Jetzt in `.env` die Umgebungsvariablen `PREFIX` (gewünschter Prefix), `TOKEN` (Discord-Bot-Token), `GLOT_ID` (ID eines glot.io-Pastes) und `GLOT_TK` (glot.io-API-Token) einsetzen.
+In `.env`, replace the enviroment variables `PREFIX` (desired prefix), `TOKEN` (Discord bot token), `GLOT_ID` (glot.io paste ID) und `GLOT_TK` (glot.io API token).
 
 ```
 node -r dotenv/config ich_iel.js
@@ -77,7 +79,7 @@ cd ich_iel
 npm install
 ```
 
-Jetzt in `.env` die Umgebungsvariablen `PREFIX` (gewünschter Prefix), `TOKEN` (Discord-Bot-Token), `GLOT_ID` (ID eines glot.io-Pastes) und `GLOT_TK` (glot.io-API-Token) einsetzen.
+In `.env`, replace the enviroment variables `PREFIX` (desired prefix), `TOKEN` (Discord bot token), `GLOT_ID` (glot.io paste ID) und `GLOT_TK` (glot.io API token).
 
 ```
 heroku local
