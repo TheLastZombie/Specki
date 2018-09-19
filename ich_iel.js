@@ -451,11 +451,8 @@ client.on("message", async message => {
 			} else {
 				if (args && args != "") {
 					request("https://e-hentai.org/?f_search=" + encodeURIComponent(args.join(" ")), function (error, response, body) {
-						console.log(body);
-						console.log(error);
 						try {
 							var temp = body.match(/https:\/\/e-hentai\.org\/g\/[0-9]{7}\/[0-9a-f]{10}/g)[Math.floor(Math.random() * body.match(/https:\/\/e-hentai\.org\/g\/[0-9]{7}\/[0-9a-f]{10}/g).length)];
-							console.log(temp);
 							if (temp) {
 								request({
 									url: "https://api.e-hentai.org/api.php",
@@ -471,8 +468,6 @@ client.on("message", async message => {
 										"namespace": 1
 									}
 								}, function (error, response, body) {
-									console.log(body);
-									console.log(error);
 									message.channel.send({
 										"embed": {
 											"title": body.gmetadata[0].title,
