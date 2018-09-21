@@ -88,7 +88,7 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command == "about" || command == "archiv" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "decrypt" || command == "deutsch" || command == "dreizehn" || command == "eh" || command == "encrypt" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "flag" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pat" || command == "pfosten" || command == "ping" || command == "play" || command == "sag" || command == "spott" || command == "status" || command == "text" || command == "unicode" || command == "wenndu" || command == "zalgo") {
+		if (command == "about" || command == "archiv" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "decrypt" || command == "deutsch" || command == "dreizehn" || command == "eh" || command == "encrypt" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "flag" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pat" || command == "pfosten" || command == "ping" || command == "play" || command == "sag" || command == "sankaku" || command == "spott" || command == "status" || command == "text" || command == "unicode" || command == "wenndu" || command == "zalgo") {
 			if (command in cmdcnt) {
 				cmdcnt[command]++;
 			} else {
@@ -874,6 +874,47 @@ client.on("message", async message => {
 				}).then(temp => {
 					message.channel.send("Sag " + temp.last().content + " zurück 🔫 <:uff_kaputt:402413360748036128>");
 				});
+			};
+		};
+		if (command === "sankaku") {
+			if (message.channel.nsfw == false) {
+				message.react("🔞");
+			} else {
+				if (args && args != "") {
+					request("https://capi-beta.sankakucomplex.com/post/index.json?tags=" + encodeURIComponent(args.join("+")), function (error, response, body) {
+						try {
+							var temp = JSON.parse(body)[Math.floor(Math.random() * JSON.parse(body).length)];
+							message.channel.send({
+								"embed": {
+									"title": temp.title,
+									"description": temp.tags.map(x => x.name).join(", "),
+									"fields": [{
+											"name": "Uploader",
+											"value": temp.author,
+											"inline": true
+										},
+										{
+											"name": "Posted",
+											"value": new Date(temp.created_at.s * 1000).toISOString().replace(/T/, " ").replace(/\..+/, ""),
+											"inline": true
+										},
+										{
+											"name": "Link",
+											"value": "https://chan.sankakucomplex.com/post/show/" + temp.id,
+											"inline": true
+										}
+									],
+									"image": {
+										"url": temp.preview_url
+									}
+								}
+							});
+						}
+						catch(error) {
+							message.channel.send(error);
+						};
+					});
+				};
 			};
 		};
 		if (command === "spott" || command === "mock") {
