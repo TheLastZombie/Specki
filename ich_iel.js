@@ -88,7 +88,7 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command == "about" || command == "archiv" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "decrypt" || command == "deutsch" || command == "dreizehn" || command == "eh" || command == "encrypt" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "flag" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pat" || command == "pfosten" || command == "ping" || command == "play" || command == "sag" || command == "sankaku" || command == "spott" || command == "status" || command == "text" || command == "unicode" || command == "wenndu" || command == "zalgo") {
+		if (command == "about" || command == "archiv" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "decrypt" || command == "deutsch" || command == "dreizehn" || command == "eh" || command == "encrypt" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "flag" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "name" || command == "nick" || command == "pat" || command == "pfosten" || command == "ping" || command == "play" || command == "rms" || command == "sag" || command == "sankaku" || command == "spott" || command == "status" || command == "text" || command == "unicode" || command == "wenndu" || command == "zalgo") {
 			if (command in cmdcnt) {
 				cmdcnt[command]++;
 			} else {
@@ -846,7 +846,6 @@ client.on("message", async message => {
 			var temp = await message.channel.send("Ping...");
 			temp.edit("Pong! Latenz: " + (temp.createdTimestamp - message.createdTimestamp) + " ms. API-Latenz: " + Math.round(client.ping) + " ms.");
 		};
-
 		if (command === "play") {
 			if (args && args != "") {
 				if (isplay) {
@@ -864,7 +863,17 @@ client.on("message", async message => {
 				message.channel.send("Eine Liste von Sounds kann unter https://github.com/TheLastZombie/ich_iel/wiki/Sounds-🇩🇪 gefunden werden.");
 			};
 		};
-
+		if (command === "rms") {
+			request("https://rms.sexy/?images", function (error, response, body) {
+				if (error || response.statusCode != 200) {
+					message.channel.send("?images konnte nicht geladen werden... :(");
+				} else {
+					message.channel.send({
+						files: ["https://rms.sexy" + JSON.parse(body)[Math.floor(Math.random()*JSON.parse(body).length)]]
+					});
+				};
+			});
+		};
 		if (command === "sag") {
 			if (args && args != "") {
 				message.channel.send("Sag " + args.join(" ") + " zurück 🔫 <:uff_kaputt:402413360748036128>");
