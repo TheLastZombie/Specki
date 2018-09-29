@@ -410,7 +410,7 @@ client.on("message", async message => {
 				}).then(temp => {
 					message.channel.send("**" + message.author.tag + ": **" + temp.text);
 				}).catch(err => {
-					message.channel.send("```" + err + "```");
+					message.channel.send("```" + String(err) + "```");
 				});
 			} else {
 				message.channel.fetchMessages({
@@ -421,7 +421,7 @@ client.on("message", async message => {
 					}).then(temp => {
 						message.channel.send("**" + message.author.tag + ": **" + temp.text);
 					}).catch(err => {
-						message.channel.send("```" + err + "```");
+						message.channel.send("```" + String(err) + "```");
 					});
 				});
 			};
@@ -522,7 +522,7 @@ client.on("message", async message => {
 				}).then(temp => {
 					message.channel.send("**" + message.author.tag + ": **" + temp.text);
 				}).catch(err => {
-					message.channel.send("```" + err + "```");
+					message.channel.send("```" + String(err) + "```");
 				});
 			} else {
 				message.channel.fetchMessages({
@@ -533,7 +533,7 @@ client.on("message", async message => {
 					}).then(temp => {
 						message.channel.send("**" + message.author.tag + ": **" + temp.text);
 					}).catch(err => {
-						message.channel.send("```" + err + "```");
+						message.channel.send("```" + String(err) + "```");
 					});
 				});
 			};
