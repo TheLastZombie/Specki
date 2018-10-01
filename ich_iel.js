@@ -9,7 +9,8 @@ const is = require("is-thirteen");
 const jimp = require("jimp");
 const fs = require("fs");
 const {VM} = require("vm2");
-var {table} = require("table");
+const {table} = require("table");
+const breakdance = require("breakdance");
 const client = new discord.Client({
 	autoReconnect: true,
 	disableEveryone: true
@@ -55,6 +56,9 @@ client.on("message", async message => {
 	} else {
 		var args = message.content.slice(process.env.PREFIX.length).trim().split(/ /g);
 		var command = args.shift().toLowerCase();
+		if (command == "4") {
+			command = "4chan";
+		};
 		if (command == "links" || command == "invite") {
 			command = "about";
 		};
@@ -88,7 +92,7 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command == "about" || command == "archiv" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "decrypt" || command == "deutsch" || command == "dreizehn" || command == "eh" || command == "encrypt" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "flag" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "mc" || command == "name" || command == "nick" || command == "pat" || command == "pfosten" || command == "ping" || command == "play" || command == "rms" || command == "sag" || command == "sankaku" || command == "spott" || command == "status" || command == "text" || command == "unicode" || command == "wenndu" || command == "zalgo") {
+		if (command == "4chan" || command == "about" || command == "archiv" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "decrypt" || command == "deutsch" || command == "dreizehn" || command == "eh" || command == "encrypt" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "flag" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "mc" || command == "name" || command == "nick" || command == "pat" || command == "pfosten" || command == "ping" || command == "play" || command == "rms" || command == "sag" || command == "sankaku" || command == "spott" || command == "status" || command == "text" || command == "unicode" || command == "wenndu" || command == "zalgo") {
 			if (command in cmdcnt) {
 				cmdcnt[command]++;
 			} else {
@@ -123,6 +127,37 @@ client.on("message", async message => {
 				}, 2500);
 			};
 			console.log("Nachricht wird als " + process.env.PREFIX + command + "-Command verarbeitet.");
+		};
+		if (command === "4chan" || command === "4") {
+			var temp;
+			request("https://a.4cdn.org/boards.json", function (error, response, body) {
+				if (JSON.parse(body).boards.some(temp => temp.board == args.join(" "))) {
+					board = args.join(" ");
+				} else {
+					board = JSON.parse(body).boards[Math.floor(Math.random() * JSON.parse(body).boards.length)].board;
+				};
+				request("https://a.4cdn.org/" + board + "/catalog.json", function (error, response, body) {
+					temp = JSON.parse(body)[Math.floor(Math.random() * JSON.parse(body).length)].threads;
+					temp = temp[Math.floor(Math.random() * temp.length)];
+					message.channel.send({
+						embed: {
+							title: (temp.sub ? temp.sub : "/" + board + "/ – Thread #" + temp.no),
+							description: breakdance(temp.com),
+							url: "https://boards.4chan.org/" + board + "/thread/" + temp.no,
+							timestamp: temp.tim,
+							author: {
+								"name": temp.name
+							},
+							thumbnail: {
+								url: "https://i.4cdn.org/" + board + "/" + temp.tim + temp.ext
+							},
+							footer: {
+								text: temp.replies + " replies, " + temp.images + " images"
+							}
+						}
+					});
+				});
+			});
 		};
 		if (command === "about" || command === "links" || command === "invite") {
 			message.channel.send({
