@@ -144,7 +144,7 @@ client.on("message", async message => {
 							title: (temp.sub ? temp.sub : "/" + board + "/ – Thread #" + temp.no),
 							description: breakdance(temp.com),
 							url: "https://boards.4chan.org/" + board + "/thread/" + temp.no,
-							timestamp: temp.tim,
+							timestamp: new Date(temp.tim).toISOString(),
 							author: {
 								"name": temp.name
 							},
