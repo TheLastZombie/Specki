@@ -837,6 +837,11 @@ client.on("message", async message => {
 										"name": "Runtime",
 										"value": temp.Runtime,
 										"inline": true
+									},
+									{
+										"name": "Awards",
+										"value": temp.Awards,
+										"inline": true
 									}
 								]
 							}
