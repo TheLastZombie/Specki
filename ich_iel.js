@@ -797,8 +797,8 @@ client.on("message", async message => {
 		};
 		if (command === "movie") {
 			if (args && args != "") {
-				try {
-					request("https://www.omdbapi.com/?apikey=" + process.env.OMDB_TK + "&s=" + args.join(" "), function (error, response, body) {
+				request("https://www.omdbapi.com/?apikey=" + process.env.OMDB_TK + "&s=" + args.join(" "), function (error, response, body) {
+					if (JSON.parse(body).Search) {
 						request("https://www.omdbapi.com/?apikey=" + process.env.OMDB_TK + "&i=" + JSON.parse(body).Search[0].imdbID, function (error, response, body) {
 							var temp = JSON.parse(body);
 							message.channel.send({
@@ -847,10 +847,10 @@ client.on("message", async message => {
 								}
 							});
 						});
-					});
-				} catch(err) {
-					message.react("❎");	
-				};
+					} else {
+						message.react("❎");
+					};
+				});
 			} else {
 				message.react("❎");
 			};
