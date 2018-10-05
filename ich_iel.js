@@ -92,7 +92,7 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command == "4chan" || command == "about" || command == "archiv" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "decrypt" || command == "deutsch" || command == "dreizehn" || command == "eh" || command == "encrypt" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "flag" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "mc" || command == "name" || command == "nick" || command == "pat" || command == "pfosten" || command == "ping" || command == "play" || command == "rms" || command == "sag" || command == "sankaku" || command == "spott" || command == "status" || command == "text" || command == "unicode" || command == "wenndu" || command == "zalgo") {
+		if (command == "4chan" || command == "about" || command == "archiv" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "decrypt" || command == "deutsch" || command == "dreizehn" || command == "eh" || command == "encrypt" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "flag" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "mc" || command == "movie" || command == "name" || command == "nick" || command == "pat" || command == "pfosten" || command == "ping" || command == "play" || command == "rms" || command == "sag" || command == "sankaku" || command == "spott" || command == "status" || command == "text" || command == "unicode" || command == "wenndu" || command == "zalgo") {
 			if (command in cmdcnt) {
 				cmdcnt[command]++;
 			} else {
@@ -790,6 +790,70 @@ client.on("message", async message => {
 							}
 						});
 					};
+				});
+			} else {
+				message.react("❎");
+			};
+		};
+		if (command === "movie") {
+			if (args && args != "") {
+				request("https://www.omdbapi.com/?apikey=" + process.env.OMDB_TK + "&s=" + args.join(" "), function (error, response, body) {
+					request("https://www.omdbapi.com/?apikey=" + process.env.OMDB_TK + "&i=" + JSON.parse(body).Search[0].imdbID, function (error, response, body) {
+						var temp = JSON.parse(body);
+						var ratings = temp.Ratings.map(function (elem) {
+							return elem.Source + ": " + elem.Value;
+						}).join(", ");
+						message.channel.send({
+							"embed": {
+								"title": temp.Title + " (" + temp.Year + ")",
+								"description": temp.Plot,
+								"url": temp.Website,
+								"thumbnail": {
+									"url": temp.Poster
+								},
+								"fields": [
+									{
+										"name": "Director",
+										"value": temp.Director,
+										"inline": true
+									},
+									{
+										"name": "Release Date",
+										"value": temp.Released,
+										"inline": true
+									},
+									{
+										"name": "Actors",
+										"value": temp.Actors
+									},
+									{
+										"name": "Genre",
+										"value": temp.Genre,
+										"inline": true
+									},
+									{
+										"name": "Rating",
+										"value": temp.Rated,
+										"inline": true
+									},
+									{
+										"name": "Runtime",
+										"value": temp.Runtime,
+										"inline": true
+									},
+									{
+										"name": "Awards",
+										"value": temp.Awards,
+										"inline": true
+									},
+									{
+										"name": "Ratings",
+										"value": temp.Ratings
+									}
+								]
+							}
+						});
+					});
 				});
 			} else {
 				message.react("❎");
