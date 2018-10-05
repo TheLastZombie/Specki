@@ -800,9 +800,6 @@ client.on("message", async message => {
 				request("https://www.omdbapi.com/?apikey=" + process.env.OMDB_TK + "&s=" + args.join(" "), function (error, response, body) {
 					request("https://www.omdbapi.com/?apikey=" + process.env.OMDB_TK + "&i=" + JSON.parse(body).Search[0].imdbID, function (error, response, body) {
 						var temp = JSON.parse(body);
-						var ratings = temp.Ratings.map(function (elem) {
-							return elem.Source + ": " + elem.Value;
-						}).join(", ");
 						message.channel.send({
 							"embed": {
 								"title": temp.Title + " (" + temp.Year + ")",
@@ -840,15 +837,6 @@ client.on("message", async message => {
 										"name": "Runtime",
 										"value": temp.Runtime,
 										"inline": true
-									},
-									{
-										"name": "Awards",
-										"value": temp.Awards,
-										"inline": true
-									},
-									{
-										"name": "Ratings",
-										"value": temp.Ratings
 									}
 								]
 							}
