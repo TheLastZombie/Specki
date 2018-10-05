@@ -804,7 +804,6 @@ client.on("message", async message => {
 							"embed": {
 								"title": temp.Title + " (" + temp.Year + ")",
 								"description": temp.Plot,
-								"url": (temp.Website ? temp.Website : "https://www.imdb.com/title/" + temp.imdbID),
 								"thumbnail": {
 									"url": temp.Poster
 								},
