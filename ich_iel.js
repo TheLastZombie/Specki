@@ -1196,3 +1196,4 @@ client.on("message", async message => {
 		};
 	};
 });
+//jerry schw lol
