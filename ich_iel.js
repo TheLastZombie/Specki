@@ -1,5 +1,5 @@
 const discord = require("discord.js");
-const translate = require("google-translate-api");
+const gtranslate = require("google-translate-api");
 const cool = require("cool-ascii-faces");
 const request = require("request");
 const figlet = require("figlet");
