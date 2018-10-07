@@ -11,6 +11,7 @@ const fs = require("fs");
 const {VM} = require("vm2");
 const {table} = require("table");
 const breakdance = require("breakdance");
+const ytranslate = require("yandex-translate")(process.env.YNDX_TK);
 const client = new discord.Client({
 	autoReconnect: true,
 	disableEveryone: true
@@ -440,23 +441,27 @@ client.on("message", async message => {
 		};
 		if (command === "deutsch" || command === "de") {
 			if (args && args != "") {
-				translate(args.join(" "), {
+				ytranslate.translate(args.join(" "), {
 					to: "de"
-				}).then(temp => {
-					message.channel.send("**" + message.author.tag + ": **" + temp.text);
-				}).catch(err => {
-					message.channel.send("```" + String(err) + "```");
+				}, function(err, res) {
+					if (err) {
+						message.channel.send("```" + String(err) + "```");
+						return;
+					};
+					message.channel.send("**" + message.author.tag + ": **" + res.text);
 				});
 			} else {
 				message.channel.fetchMessages({
 					limit: 2
 				}).then(temp => {
-					translate(temp.last().content, {
+					ytranslate.translate(temp.last().content, {
 						to: "de"
-					}).then(temp => {
-						message.channel.send("**" + message.author.tag + ": **" + temp.text);
-					}).catch(err => {
-						message.channel.send("```" + String(err) + "```");
+					}, function(err, res) {
+						if (err) {
+							message.channel.send("```" + String(err) + "```");
+							return;
+						};
+						message.channel.send("**" + message.author.tag + ": **" + res.text);
 					});
 				});
 			};
@@ -552,23 +557,27 @@ client.on("message", async message => {
 		};
 		if (command === "english" || command === "englisch" || command === "en") {
 			if (args && args != "") {
-				translate(args.join(" "), {
+				ytranslate.translate(args.join(" "), {
 					to: "en"
-				}).then(temp => {
-					message.channel.send("**" + message.author.tag + ": **" + temp.text);
-				}).catch(err => {
-					message.channel.send("```" + String(err) + "```");
+				}, function(err, res) {
+					if (err) {
+						message.channel.send("```" + String(err) + "```");
+						return;
+					};
+					message.channel.send("**" + message.author.tag + ": **" + res.text);
 				});
 			} else {
 				message.channel.fetchMessages({
 					limit: 2
 				}).then(temp => {
-					translate(temp.last().content, {
+					ytranslate.translate(temp.last().content, {
 						to: "en"
-					}).then(temp => {
-						message.channel.send("**" + message.author.tag + ": **" + temp.text);
-					}).catch(err => {
-						message.channel.send("```" + String(err) + "```");
+					}, function(err, res) {
+						if (err) {
+							message.channel.send("```" + String(err) + "```");
+							return;
+						};
+						message.channel.send("**" + message.author.tag + ": **" + res.text);
 					});
 				});
 			};
