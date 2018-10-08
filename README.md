@@ -43,7 +43,7 @@ cd ich_iel
 npm install
 ```
 
-In `ich_iel.js`, replace the enviroment variables `PREFIX` (desired prefix), `TOKEN` (Discord bot token), `GLOT_ID` (glot.io paste ID), `GLOT_TK` (glot.io API token) and `OMDB_TK` (omdbapi.com API token).
+In `ich_iel.js`, replace the enviroment variables `PREFIX` (desired prefix), `TOKEN` (Discord bot token), `GLOT_ID` (glot.io paste ID), `GLOT_TK` (glot.io API token), `OMDB_TK` (omdbapi.com API token) and `YNDX_TK` (Yandex API token).
 
 ```
 npm start
@@ -61,7 +61,7 @@ cd ich_iel
 npm install
 ```
 
-In `.env`, replace the enviroment variables `PREFIX` (desired prefix), `TOKEN` (Discord bot token), `GLOT_ID` (glot.io paste ID), `GLOT_TK` (glot.io API token) and `OMDB_TK` (omdbapi.com API token).
+In `.env`, replace the enviroment variables `PREFIX` (desired prefix), `TOKEN` (Discord bot token), `GLOT_ID` (glot.io paste ID), `GLOT_TK` (glot.io API token), `OMDB_TK` (omdbapi.com API token) and `YNDX_TK` (Yandex API token).
 
 ```
 node -r dotenv/config ich_iel.js
@@ -79,7 +79,7 @@ cd ich_iel
 npm install
 ```
 
-In `.env`, replace the enviroment variables `PREFIX` (desired prefix), `TOKEN` (Discord bot token), `GLOT_ID` (glot.io paste ID), `GLOT_TK` (glot.io API token) and `OMDB_TK` (omdbapi.com API token).
+In `.env`, replace the enviroment variables `PREFIX` (desired prefix), `TOKEN` (Discord bot token), `GLOT_ID` (glot.io paste ID), `GLOT_TK` (glot.io API token), `OMDB_TK` (omdbapi.com API token) and `YNDX_TK` (Yandex API token).
 
 ```
 heroku local
