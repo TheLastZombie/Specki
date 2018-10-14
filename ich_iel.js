@@ -819,7 +819,7 @@ client.on("message", async message => {
 			if (args && args != "") {
 				var temp = args.join(" ");
 			} else {
-				var temp = guild.member(message.author).displayName;
+				var temp = message.guild.member(message.author).displayName;
 			};
 			name = temp.replace(/\s+/g, "");
 			if (Math.random() > 0.5) {
