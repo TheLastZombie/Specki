@@ -93,7 +93,7 @@ client.on("message", async message => {
 		if (command == "mock") {
 			command = "spott";
 		};
-		if (command == "4chan" || command == "about" || command == "archiv" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "decrypt" || command == "deutsch" || command == "dreizehn" || command == "eh" || command == "encrypt" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "flag" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "link" || command == "mc" || command == "mcname" || command == "movie" || command == "name" || command == "nick" || command == "pat" || command == "pfosten" || command == "ping" || command == "play" || command == "rms" || command == "sag" || command == "sankaku" || command == "spott" || command == "status" || command == "text" || command == "unicode" || command == "wenndu" || command == "zalgo") {
+		if (command == "4chan" || command == "about" || command == "archiv" || command == "ascii" || command == "avatar" || command == "azsh" || command == "b" || command == "commands" || command == "decrypt" || command == "deutsch" || command == "dreizehn" || command == "eh" || command == "encrypt" || command == "english" || command == "ersatz" || command == "eval" || command == "farbe" || command == "ficken" || command == "flag" || command == "frauen" || command == "hab" || command == "help" || command == "hilfe" || command == "huso" || command == "ibims" || command == "ichmach" || command == "jemand" || command == "kerle" || command == "klatsch" || command == "link" || command == "mc" || command == "mcname" || command == "movie" || command == "name" || command == "nick" || command == "pat" || command == "pfosten" || command == "ping" || command == "play" || command == "rms" || command == "sag" || command == "sankaku" || command == "schuss" || command == "spott" || command == "status" || command == "text" || command == "unicode" || command == "wenndu" || command == "zalgo") {
 			if (command in cmdcnt) {
 				cmdcnt[command]++;
 			} else {
@@ -1090,6 +1090,14 @@ client.on("message", async message => {
 						};
 					});
 				};
+			};
+		};
+		if (command === "schuss") {
+			var temp = [" und stirbt sofort.", " und stirbt wenig später im Krankenhaus.", ", fällt ins Koma ... und stirbt 3 Wochen später.", ", fällt ins Koma ... und stirbt 3 Monate später.", ", fällt ins Koma ... und stirbt 3 Jahre später.", ", fällt ins Koma ... und wacht 3 Wochen später wieder auf.", ", fällt ins Koma ... und wacht 3 Monate später wieder auf.", ", fällt ins Koma ... und wacht 3 Jahre später wieder auf.", " und kommt ins Krankenhaus, aber überlebt.", " und wird nur leicht verletzt.", ", wird aber verfehlt."];
+			if (args && args != "") {
+				message.channel.send("**" + args.join(" ") + "** wird von **" + message.guild.member(message.author).displayName + "** angeschossen" + temp[Math.floor(Math.random() * temp.length)]);
+			} else {
+				message.channel.send("**" + message.guild.member(message.author).displayName + "** schießt auf sich selbst" + temp[Math.floor(Math.random() * temp.length)]);
 			};
 		};
 		if (command === "spott" || command === "mock") {
