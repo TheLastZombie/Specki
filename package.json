@@ -21,7 +21,7 @@
     "figlet": "^1.2.0",
     "google-translate-api": "^2.3.0",
     "is-thirteen": "^2.0.0",
-    "jimp": "^0.3.5",
+    "jimp": "^0.5.4",
     "jpgjs": "git+https://git@github.com/makr28/jpgjs.git",
     "node-opus": "^0.3.0",
     "opusscript": "0.0.6",
