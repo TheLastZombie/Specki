@@ -18,7 +18,7 @@
     "cryptiles": "^4.1.2",
     "discord.js": "^11.4.2",
     "dotenv": "^6.0.0",
-    "figlet": "^1.2.0",
+    "figlet": "^1.2.1",
     "google-translate-api": "^2.3.0",
     "is-thirteen": "^2.0.0",
     "jimp": "^0.3.5",
