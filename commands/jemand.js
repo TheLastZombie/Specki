@@ -1,0 +1,1 @@
+message.channel.send(cool() + " " + message.guild.members.random().displayName + " " + args.join(" "));

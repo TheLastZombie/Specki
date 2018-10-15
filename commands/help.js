@@ -1,0 +1,1 @@
+message.channel.send("A list of commands can be found at https://github.com/TheLastZombie/ich_iel/wiki/Commands-🇺🇸.");
