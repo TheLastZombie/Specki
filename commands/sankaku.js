@@ -2,7 +2,12 @@ if (message.channel.nsfw == false) {
 	message.react("🔞");
 } else {
 	if (args && args != "") {
-		request("https://capi-beta.sankakucomplex.com/post/index.json?tags=" + encodeURIComponent(args.join("+")), function (error, response, body) {
+		request({
+			url: "https://capi-beta.sankakucomplex.com/post/index.json?tags=" + encodeURIComponent(args.join("+")),
+			headers: {
+				"User-Agent": "TheLastZombie/ich_iel"
+			}
+		}, function (error, response, body) {
 			try {
 				var temp = JSON.parse(body)[Math.floor(Math.random() * JSON.parse(body).length)];
 				message.channel.send({
