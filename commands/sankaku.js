@@ -5,9 +5,10 @@ if (message.channel.nsfw == false) {
 		request({
 			url: "https://capi-beta.sankakucomplex.com/post/index.json?tags=" + encodeURIComponent(args.join("+")),
 			headers: {
-				"User-Agent": "TheLastZombie/ich_iel"
+				"User-Agent": "ich_iel"
 			}
 		}, function (error, response, body) {
+			console.log(body);
 			try {
 				var temp = JSON.parse(body)[Math.floor(Math.random() * JSON.parse(body).length)];
 				message.channel.send({
