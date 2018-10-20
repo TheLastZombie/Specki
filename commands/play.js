@@ -4,7 +4,7 @@ if (args && args != "") {
 	} else {
 		message.member.voiceChannel.join().then(connection => {
 			isplay = true;
-			connection.playFile(__dirname + "/sounds/" + args.join(" ") + ".mp3").on("end", () => {
+			connection.playFile(__dirname + "/sounds/" + args.join(" ").toLowerCase() + ".mp3").on("end", () => {
 				message.member.voiceChannel.leave();
 				isplay = false;
 			});
