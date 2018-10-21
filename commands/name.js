@@ -1,6 +1,4 @@
 if (ownerIds.includes(message.author.id)) {
-	message.react("❎");
-} else {
 	if (args && args != "") {
 		console.log("Ändere Bot-Name zu \"" + args.join(" ") + "\".");
 		client.user.setUsername(args.join(" "));
@@ -13,4 +11,6 @@ if (ownerIds.includes(message.author.id)) {
 		});
 	};
 	message.react("✅");
+} else {
+	message.react("❎");
 };
