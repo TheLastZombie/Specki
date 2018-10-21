@@ -1,4 +1,4 @@
-if (message.author.id != 175877241517899776) {
+if (ownerIds.includes(message.author.id)) {
 	message.react("❎");
 } else {
 	if (args && args != "") {
