@@ -1,4 +1,4 @@
-if (message.author.id != 175877241517899776) {
+if (ownerIds.includes(message.author.id)) {
 	var vmlog = "";
 	try {
 		vmout = new VM({
