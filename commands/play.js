@@ -1,12 +1,12 @@
 if (args && args != "") {
-	if (isplay || fs.existsSync(__dirname + "/sounds/" + args.join(" ").toLowerCase() + ".mp3") == false) {
+	if (isplay.has(message.guild.id) || fs.existsSync(__dirname + "/sounds/" + args.join(" ").toLowerCase() + ".mp3") == false) {
 		message.react("❎");
 	} else {
 		message.member.voiceChannel.join().then(connection => {
-			isplay = true;
+			isplay.add(message.guild.id);
 			connection.playFile(__dirname + "/sounds/" + args.join(" ").toLowerCase() + ".mp3").on("end", () => {
 				message.member.voiceChannel.leave();
-				isplay = false;
+				isplay.delete(message.guild.id);
 			});
 		}).catch(err => message.channel.send(err));
 	};
