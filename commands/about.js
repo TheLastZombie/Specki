@@ -39,7 +39,7 @@ message.channel.send({
 		],
 		footer: {
 			icon_url: client.user.avatarURL,
-			text: "v2.0 Pre-Beta | " + client.guilds.size + "G, " + client.channels.size + "C, " + client.users.size + "U | Commit " + commid + " | by @roesch#0611 using discord.js"
+			text: "v2.1.0 | " + client.guilds.size + "G, " + client.channels.size + "C, " + client.users.size + "U | Commit " + commid + " | by @roesch#0611 using discord.js"
 		}
 	}
 });
