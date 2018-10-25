@@ -11,6 +11,7 @@ if (ownerIds.includes(message.author.id)) {
 	var vmlog = "";
 	try {
 		vmout = new VM({
+			timeout: 5000,
 			sandbox: {
 				console: {
 					log: function(str) {
