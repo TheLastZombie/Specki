@@ -108,7 +108,9 @@ client.on("message", async message => {
 			};
 			console.log("Nachricht wird als " + process.env.PREFIX + command + "-Command verarbeitet.");
 			fs.readFile("./commands/" + command + ".js", "utf8", function (err, data) {
+				message.channel.startTyping();
 				eval(data);
+				message.channel.stopTyping();
 			});
 		};
 	};
