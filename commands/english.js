@@ -1,5 +1,5 @@
 if (args && args != "") {
-	translate(args.join(" "), {
+	gtranslate(args.join(" "), {
 		to: "en"
 	}).then(temp => {
 		message.channel.send("**" + message.author.tag + ": **" + temp.text);
@@ -10,7 +10,7 @@ if (args && args != "") {
 	message.channel.fetchMessages({
 		limit: 2
 	}).then(temp => {
-		ytranslate.translate(temp.last().content, {
+		gtranslate(temp.last().content, {
 			to: "en"
 		}).then(temp => {
 			message.channel.send("**" + message.author.tag + ": **" + temp.text);
