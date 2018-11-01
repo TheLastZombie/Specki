@@ -1,12 +1,10 @@
 if (args && args != "") {
-	ytranslate.translate(args.join(" "), {
+	translate(args.join(" "), {
 		to: "en"
-	}, function(err, res) {
-		if (err) {
-			message.channel.send("```" + String(err) + "```");
-			return;
-		};
-		message.channel.send("**" + message.author.tag + ": **" + res.text);
+	}).then(temp => {
+		message.channel.send("**" + message.author.tag + ": **" + temp.text);
+	}).catch(err => {
+		message.channel.send("```" + String(err) + "```");
 	});
 } else {
 	message.channel.fetchMessages({
@@ -14,12 +12,10 @@ if (args && args != "") {
 	}).then(temp => {
 		ytranslate.translate(temp.last().content, {
 			to: "en"
-		}, function(err, res) {
-			if (err) {
-				message.channel.send("```" + String(err) + "```");
-				return;
-			};
-			message.channel.send("**" + message.author.tag + ": **" + res.text);
+		}).then(temp => {
+			message.channel.send("**" + message.author.tag + ": **" + temp.text);
+		}).catch(err => {
+			message.channel.send("```" + String(err) + "```");
 		});
 	});
 };
