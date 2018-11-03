@@ -12,6 +12,8 @@ const {VM} = require("vm2");
 const {table} = require("table");
 const breakdance = require("breakdance");
 const ytranslate = require("yandex-translate")(process.env.YNDX_TK);
+const exec = require("child_process").exec;
+const path = require("path");
 const client = new discord.Client({
 	autoReconnect: true,
 	disableEveryone: true
@@ -108,7 +110,9 @@ client.on("message", async message => {
 			};
 			console.log("Nachricht wird als " + process.env.PREFIX + command + "-Command verarbeitet.");
 			fs.readFile("./commands/" + command + ".js", "utf8", function (err, data) {
+				message.channel.startTyping();
 				eval(data);
+				message.channel.stopTyping();
 			});
 		};
 	};

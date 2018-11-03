@@ -1,10 +1,16 @@
 if (args && args != "") {
 	var temp = args.join(" ").split("");
-	for (indx = 0; indx < temp.length; indx++) {
-		if (indx % 2 == false) {
-			temp[indx] = temp[indx].toUpperCase();
+	var swch = true;
+	for (var i = 0; i < temp.length; i++) {
+		if (temp[i].match(/\s/)) {
+			continue;
 		} else {
-			temp[indx] = temp[indx].toLowerCase();
+			if (swch) {
+				temp[i] = temp[i].toUpperCase();
+			} else {
+				temp[i] = temp[i].toLowerCase();
+			};
+			swch = !swch;
 		};
 	};
 	temp = temp.join("");
@@ -14,11 +20,17 @@ if (args && args != "") {
 		limit: 2
 	}).then(temp => {
 		var temp = temp.last().content.split("");
-		for (indx = 0; indx < temp.length; indx++) {
-			if (indx % 2 == false) {
-				temp[indx] = temp[indx].toUpperCase();
+		var swch = true;
+		for (var i = 0; i < temp.length; i++) {
+			if (temp[i].match(/\s/)) {
+				continue;
 			} else {
-				temp[indx] = temp[indx].toLowerCase();
+				if (swch) {
+					temp[i] = temp[i].toUpperCase();
+				} else {
+					temp[i] = temp[i].toLowerCase();
+				};
+				swch = !swch;
 			};
 		};
 		temp = temp.join("");
