@@ -11,5 +11,7 @@ if (args && args != "") {
 		}).catch(err => message.channel.send(err));
 	};
 } else {
-	message.channel.send("Eine Liste von Sounds kann unter https://github.com/TheLastZombie/ich_iel/wiki/Sounds-🇩🇪 gefunden werden.");
+	fs.readdir(__dirname + "/sounds/", (err, files) => {
+		message.channel.send("**Verfügbare Sounds:**\n" + files.map(x => path.parse(x).name).join(", ") + "\n\n**Mehr Informationen:**\nhttps://github.com/TheLastZombie/ich_iel/wiki/Sounds-🇩🇪")
+	});
 };
