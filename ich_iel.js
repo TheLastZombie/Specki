@@ -13,6 +13,7 @@ const {table} = require("table");
 const breakdance = require("breakdance");
 const ytranslate = require("yandex-translate")(process.env.YNDX_TK);
 const exec = require("child_process").exec;
+const path = require("path");
 const client = new discord.Client({
 	autoReconnect: true,
 	disableEveryone: true
