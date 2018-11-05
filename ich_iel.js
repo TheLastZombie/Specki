@@ -73,6 +73,7 @@ client.on("message", async message => {
 		if (command == "someone") { command = "jemand"; };
 		if (command == "dudes") { command = "kerle"; };
 		if (command == "clap") { command = "klatsch"; };
+		if (command == "osu!") { command = "osu"; };
 		if (command == "mock") { command = "spott"; };
 		if (fs.existsSync("./commands/" + command + ".js")) {
 			if (command in cmdcnt) {
