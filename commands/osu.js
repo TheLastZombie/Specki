@@ -46,7 +46,7 @@ if (args && args != "") {
 					},
 					{
 						"name": "Country",
-						"value": temp.country,
+						"value": temp.country.split("").map(x => String.fromCodePoint(x.charCodeAt(0) + 127397)).join(""),
 						"inline": true
 					}
 				]
