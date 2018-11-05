@@ -1,1 +1,3 @@
-message.channel.send("Eine Liste von Commands kann unter https://github.com/TheLastZombie/ich_iel/wiki/Commands-🇩🇪 gefunden werden.");
+fs.readdir(__dirname + "/commands/", (err, files) => {
+	message.channel.send("**Verfügbare Commands:**\n" + files.map(x => path.parse(x).name).join(", ") + "\n\n**Mehr Informationen:**\n<https://github.com/TheLastZombie/ich_iel/wiki/Commands-🇩🇪>")
+});
