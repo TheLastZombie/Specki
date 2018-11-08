@@ -25,6 +25,7 @@ var cmdcnt = {};
 var cmdscc;
 var commid;
 var isplay = new Set();
+var offline = false;
 client.login(process.env.TOKEN);
 client.on("ready", () => {
 	console.log("Erfolgreich eingeloggt als " + client.user.username + " (ID: " + client.user.id + ").");
