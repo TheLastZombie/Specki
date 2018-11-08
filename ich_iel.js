@@ -51,7 +51,7 @@ client.on("ready", () => {
 	});
 });
 client.on("message", async message => {
-	if (message.author.bot || message.content.indexOf(process.env.PREFIX) !== 0) {
+	if (message.author.bot || message.content.indexOf(process.env.PREFIX) !== 0 || (offline && ownerIds.includes(message.author.id) == false)) {
 		return;
 	};
 	console.log("Neue Command-Nachricht von " + message.author.username + " (ID: " + message.author.id + ").");
@@ -102,7 +102,7 @@ client.on("message", async message => {
 			} else {
 				console.log("Commands konnten beim Starten nicht geladen werden, werden nicht hochgeladen.");
 			};
-			if (message.author.id != 175877241517899776) {
+			if (ownerIds.includes(message.author.id) == false) {
 				rllist.add(message.author.id);
 				rltime[message.author.id] = Date.now() + 2500;
 				setTimeout(() => {
