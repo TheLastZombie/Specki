@@ -4,12 +4,12 @@ if (args && args != "") {
 		if (temp) {
 			var best = "";
 			request("https://osu.ppy.sh/api/get_user_best?k=" + process.env.OSU_TK + "&u=" + args.join(" ") + "&limit=5", function (error, response, body) {
-				var temp = JSON.parse(body);
+				var tbest = JSON.parse(body);
 				getmap(0);
 				function getmap(i) {
-					if (temp[i]) {
+					if (tbest[i]) {
 						request("https://osu.ppy.sh/api/get_beatmaps?k=" + process.env.OSU_TK + "&b=" + JSON.parse(body)[i].beatmap_id, function (error, reponse, body) {
-							best += "[" + JSON.parse(body)[0].artist + " – " + JSON.parse(body)[0].title + "](https://osu.ppy.sh/beatmapsets/" + JSON.parse(body)[0].beatmap_id + ") (Rank: " + temp[i].rank + " · " + temp[i].pp + " PP · Score: " + temp[i].score + ")\n";
+							best += "[" + JSON.parse(body)[0].artist + " – " + JSON.parse(body)[0].title + "](https://osu.ppy.sh/beatmapsets/" + JSON.parse(body)[0].beatmap_id + ") (Rank: " + tbest[i].rank + " · " + tbest[i].pp + " PP · Score: " + tbest[i].score + ")\n";
 							getmap(i + 1);
 						});
 					} else {
