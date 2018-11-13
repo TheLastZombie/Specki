@@ -26,7 +26,7 @@ if (args && args != "") {
 								} else {
 									message.channel.send({
 										"embed": {
-											"color": "13390472",
+											"color": 13390472,
 											"author": {
 												"name": temp.username,
 												"url": "https://osu.ppy.sh/users/" + temp.user_id,
