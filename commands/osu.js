@@ -9,7 +9,7 @@ if (args && args != "") {
 				function getmap(i) {
 					if (tbest[i]) {
 						request("https://osu.ppy.sh/api/get_beatmaps?k=" + process.env.OSU_TK + "&b=" + JSON.parse(body)[i].beatmap_id, function (error, reponse, body) {
-							best += "[" + JSON.parse(body)[0].artist + " – " + JSON.parse(body)[0].title + " \\[" + JSON.parse(body)[0].version + "\\]" + "](https://osu.ppy.sh/beatmaps/" + JSON.parse(body)[0].beatmap_id + ") (Rank: " + tbest[i].rank + " · " + tbest[i].pp + " PP · Score: " + tbest[i].score + ")\n";
+							best += "[" + JSON.parse(body)[0].artist + " – " + JSON.parse(body)[0].title + " \\[" + JSON.parse(body)[0].version + "\\]" + "](https://osu.ppy.sh/beatmaps/" + JSON.parse(body)[0].beatmap_id + ") (Rank: " + tbest[i].rank + " · " + tbest[i].pp + " PP)\n";
 							getmap(i + 1);
 						});
 					} else {
@@ -20,7 +20,7 @@ if (args && args != "") {
 							function getmapr(i) {
 								if (trecent[i]) {
 									request("https://osu.ppy.sh/api/get_beatmaps?k=" + process.env.OSU_TK + "&b=" + JSON.parse(body)[i].beatmap_id, function (error, reponse, body) {
-										recent += "[" + JSON.parse(body)[0].artist + " – " + JSON.parse(body)[0].title + " [" + JSON.parse(body)[0].version + "]" + "](https://osu.ppy.sh/beatmaps/" + JSON.parse(body)[0].beatmap_id + ") (Rank: " + trecent[i].rank + " · Score: " + trecent[i].score + ")\n";
+										recent += "[" + JSON.parse(body)[0].artist + " – " + JSON.parse(body)[0].title + " [" + JSON.parse(body)[0].version + "]" + "](https://osu.ppy.sh/beatmaps/" + JSON.parse(body)[0].beatmap_id + ") (Rank: " + trecent[i].rank + ")\n";
 										getmapr(i + 1);
 									});
 								} else {
