@@ -52,11 +52,12 @@ if (args && args != "") {
 	message.channel.fetchMessages({
 		limit: 2
 	}).then(temp => {
-		for (i = 0; i < temp.last().content.length; i++) {
-			if (temp[temp.last().content[i].toLowerCase()]) {
-				regional += temp[temp.last().content[i].toLowerCase()];
+		var last = temp.last().content
+		for (i = 0; i < last.length; i++) {
+			if (temp[last[i].toLowerCase()]) {
+				regional += temp[last[i].toLowerCase()];
 			} else {
-				regional += temp.last().content[i];
+				regional += last[i];
 			};
 		};
 		message.channel.send(regional);
