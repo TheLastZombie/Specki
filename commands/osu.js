@@ -75,11 +75,11 @@ if (args && args != "") {
 												},
 												{
 													"name": "Best",
-													"value": best
+													"value": ((best) ? best : "❎ No best beatmaps found!")
 												},
 												{
 													"name": "Recent",
-													"value": recent
+													"value": ((recent) ? recent : "❎ No recent beatmaps found!")
 												}
 											]
 										}
