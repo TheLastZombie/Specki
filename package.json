@@ -20,6 +20,7 @@
     "dotenv": "^6.1.0",
     "figlet": "^1.2.1",
     "google-translate-api": "^2.3.0",
+    "google-tts-api": "0.0.3",
     "is-thirteen": "^2.0.0",
     "jimp": "^0.3.11",
     "jpgjs": "git+https://git@github.com/makr28/jpgjs.git",
