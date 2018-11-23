@@ -1,5 +1,5 @@
 if (args && args != "") {
-	if (isplay.has(message.guild.id)) {
+	if (isplay.has(message.guild.id) || args.join(" ").length > 200) {
 		message.react("❎");
 	} else {
 		message.member.voiceChannel.join().then(connection => {
