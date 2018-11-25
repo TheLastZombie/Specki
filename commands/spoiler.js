@@ -22,11 +22,11 @@ if (/<.+>/.test(args.join(" "))) {
 					temp = temp.replace(match[i], "[" + "█".repeat(text[i].length) + "](" + urls[i] + " '" + text[i] + "')");
 				};
 				message.channel.send({
-					author: {
-						name: message.author.username,
-						icon_url: message.author.avatarURL
-					},
 					embed: {
+						author: {
+							name: message.author.username,
+							icon_url: message.author.avatarURL
+						},
 						description: temp
 					}
 				});
