@@ -19,9 +19,13 @@ if (/<.+>/.test(args.join(" "))) {
 				});
 			} else {
 				for (var i = 0; i < match.length; i++) {
-					temp = temp.replace(match[i], "[Hover to View](" + urls[i] + " '" + text[i] + "')");
+					temp = temp.replace(match[i], "[" + "█".repeat(text[i].length) + "](" + urls[i] + " '" + text[i] + "')");
 				};
 				message.channel.send({
+					author: {
+						name: message.author.username,
+						icon_url: message.author.avatarURL
+					},
 					embed: {
 						description: temp
 					}
