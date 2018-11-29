@@ -64,6 +64,7 @@ client.on("message", async message => {
 		var command = args.shift().toLowerCase();
 		if (command == "4") { command = "4chan"; };
 		if (command == "links" || command == "invite") { command = "about"; };
+		if (command == "arch") { command = "aur"; };
 		if (command == "🅱") { command = "b"; };
 		if (command == "decode") { command = "decrypt"; };
 		if (command == "de") { command = "deutsch"; };
