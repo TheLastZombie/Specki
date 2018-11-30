@@ -78,7 +78,7 @@ client.on("message", async message => {
 		if (command == "clap") { command = "klatsch"; };
 		if (command == "osu!") { command = "osu"; };
 		if (command == "mock") { command = "spott"; };
-		if (fs.existsSync("./commands/" + command + ".js")) {
+		if (fs.existsSync("./commands/" + command.replace(/.*\//, "") + ".js")) {
 			if (command in cmdcnt) {
 				cmdcnt[command]++;
 			} else {
@@ -113,7 +113,7 @@ client.on("message", async message => {
 				}, 2500);
 			};
 			console.log("Nachricht wird als " + process.env.PREFIX + command + "-Command verarbeitet.");
-			fs.readFile("./commands/" + command + ".js", "utf8", function (err, data) {
+			fs.readFile("./commands/" + command.replace(/.*\//, "") + ".js", "utf8", function (err, data) {
 				message.channel.startTyping();
 				eval(data);
 				message.channel.stopTyping();
