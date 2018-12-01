@@ -1,7 +1,12 @@
 var temp = args.shift();
 var endp = ["accessories", "characters", "companies", "concepts", "dlcs", "franchises", "games", "genres", "locations", "objects", "people", "platforms", "rating_boards", "regions", "releases", "videos", "video_categories"];
 if (endp.includes(temp)) {
-    request("https://www.giantbomb.com/api/" + temp + "/?api_key=" + process.env.BOMB_TK + "&format=json&field_list=deck,image,name,site_detail_url&limit=1&filter=name:" + args.join(" "), function (error, response, body) {
+    request({
+        url: "https://www.giantbomb.com/api/" + temp + "/?api_key=" + process.env.BOMB_TK + "&format=json&field_list=deck,image,name,site_detail_url&limit=1&filter=name:" + args.join(" "),
+        headers: {
+            "User-Agent": "TheLastZombie/ich_iel"
+        }
+    }, function (error, response, body) {
         if (JSON.parse(body).results.length > 0) {
             message.channel.send({
                 embed: {
