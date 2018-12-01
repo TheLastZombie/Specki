@@ -39,7 +39,7 @@ if (temp == "base64") {
 } else if (temp == "morse") {
 	message.channel.send(xmorse.encode(args.join(" ")));
 } else if (temp == "ascii85") {
-	message.channel.send(ascii85.encode(args.join(" ").toString()));
+	message.channel.send(ascii85.encode(args.join(" ")).toString());
 } else {
 	message.channel.send("**" + temp + "** is not a valid encoding! Supported are: **base64**, **hex**, **binary**, **uri**, **rot13**, **atbash**, **morse** and **ascii85**.");
 };
