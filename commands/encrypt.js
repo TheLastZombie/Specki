@@ -36,6 +36,8 @@ if (temp == "base64") {
 		};
 	};
 	message.channel.send(outp);
+} else if (temp == "morse") {
+	message.channel.send(xmorse.encode(args.join(" ")));
 } else {
-	message.channel.send("**" + temp + "** is not a valid encoding! Supported are: **base64**, **hex**, **binary**, **uri**, **rot13** and **atbash**.");
+	message.channel.send("**" + temp + "** is not a valid encoding! Supported are: **base64**, **hex**, **binary**, **uri**, **rot13**, **atbash** and **morse**.");
 };
