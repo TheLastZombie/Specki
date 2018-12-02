@@ -27,7 +27,6 @@
     "jpgjs": "git+https://git@github.com/makr28/jpgjs.git",
     "node-opus": "^0.3.0",
     "opusscript": "0.0.6",
-    "ping": "^0.2.2",
     "request": "^2.88.0",
     "safe-eval": "^0.4.1",
     "table": "^5.1.0",
