@@ -1,8 +1,8 @@
 if (args && args != "") {
 	if (Math.round(Math.random())) {
-		message.channel.send(":" + args[0] + ": :thumbsup:");
+		message.channel.send(message.guild.emojis.find("name", args[0]) + " :thumbsup:");
 	} else {
-		message.channel.send(":" + args[0] + ": :thumbsdown:");
+		message.channel.send(message.guild.emojis.find("name", args[0]) + " :thumbsdown:");
 	};
 } else {
 	if (Math.round(Math.random())) {
