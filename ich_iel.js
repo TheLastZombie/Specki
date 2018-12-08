@@ -62,7 +62,7 @@ client.on("message", async message => {
 		console.log("Nachricht von " + client.user.username + " (ID: " + client.user.id + ") wurde wegen Rate-Limit geblockt (noch " + ((rltime[message.author.id] - Date.now()) / 1000) + " Sekunden).");
 		message.channel.send("Halt die verdammte " + message.author.username + " für " + ((rltime[message.author.id] - Date.now()) / 1000) + " Sekunden");
 	} else {
-		var args = message.content.slice(process.env.PREFIX.length).trim().split(/ /g);
+		var args = message.content.slice(process.env.PREFIX.length).trim().split(/\s/g);
 		var command = args.shift().toLowerCase();
 		if (command == "4") { command = "4chan"; };
 		if (command == "links" || command == "invite") { command = "about"; };
