@@ -55,7 +55,7 @@ client.on("ready", () => {
 	});
 });
 client.on("message", async message => {
-	if (message.content == "🎩\n🦆") {
+	if (message.content.match(/🎩\s*🦆/)) {
 		message.channel.send("Yeah digga");
 	};
 	if (message.author.bot || message.content.indexOf(process.env.PREFIX) !== 0 || (offline && ownerIds.includes(message.author.id) == false)) {
