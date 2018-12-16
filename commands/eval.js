@@ -1,6 +1,6 @@
 if (ownerIds.includes(message.author.id)) {
 	try {
-		var evout = eval("(" + args.join(" ") + ")");
+		var evout = eval(args.join(" "));
 		if (evout) {
 			message.channel.send("Output: \n```" + JSON.stringify(evout) + "```\n\nNote: Code is not running in a sandbox and thus console output not accessible.");
 		};
