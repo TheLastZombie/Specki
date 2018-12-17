@@ -63,51 +63,62 @@ client.on("message", async message => {
 	} else {
 		var args = message.content.slice(process.env.PREFIX.length).trim().split(/\s/g);
 		var command = args.shift().toLowerCase();
-		fs.readFile("./alias.json", "utf8", function (err, data) {
-			if (JSON.parse(data)[command]) {
-				command = data[command];
+		if (command == "4") { command = "4chan"; };
+		if (command == "links" || command == "invite") { command = "about"; };
+		if (command == "arch") { command = "aur"; };
+		if (command == "🅱") { command = "b"; };
+		if (command == "decode") { command = "decrypt"; };
+		if (command == "de") { command = "deutsch"; };
+		if (command == "encode") { command = "encrypt"; };
+		if (command == "englisch" || command == "en") { command = "english"; };
+		if (command == "replace") { command = "ersatz"; };
+		if (command == "toll") { command = "ficken"; };
+		if (command == "wie") { command = "huso"; };
+		if (command == "someone") { command = "jemand"; };
+		if (command == "dudes") { command = "kerle"; };
+		if (command == "clap") { command = "klatsch"; };
+		if (command == "osu!") { command = "osu"; };
+		if (command == "mock") { command = "spott"; };
+		if (fs.existsSync("./commands/" + command.replace(/.*\//, "") + ".js")) {
+			if (command in cmdcnt) {
+				cmdcnt[command]++;
+			} else {
+				cmdcnt[command] = 1;
 			};
-			if (fs.existsSync("./commands/" + command.replace(/.*\//, "") + ".js")) {
-				if (command in cmdcnt) {
-					cmdcnt[command]++;
-				} else {
-					cmdcnt[command] = 1;
-				};
-				if (cmdscc) {
-					request({
-						url: "https://snippets.glot.io/snippets/" + process.env.GLOT_ID,
-						method: "PUT",
-						headers: {
-							"Authorization": "Token " + process.env.GLOT_TK
-						},
-						json: {
-							"files": [{"name": "commands.json", "content": JSON.stringify(cmdcnt)}, {"name": "status.txt", "content": client.user.presence.game.name}]
-						}
-					}, function (error, response, body) {
-						if (error) {
-							console.log("Konnte Command-Counts nicht auf glot.io hochladen.");
-						} else {
-							console.log("Command-Counts erfolgreich auf glot.io hochgeladen.");
-						};
-					});
-				} else {
-					console.log("Commands konnten beim Starten nicht geladen werden, werden nicht hochgeladen.");
-				};
-				if (ownerIds.includes(message.author.id) == false) {
-					rllist.add(message.author.id);
-					rltime[message.author.id] = Date.now() + 2500;
-					setTimeout(() => {
-						rllist.delete(message.author.id);
-						delete rltime[message.author.id];
-					}, 2500);
-				};
-				console.log("Nachricht wird als " + process.env.PREFIX + command + "-Command verarbeitet.");
-				fs.readFile("./commands/" + command.replace(/.*\//, "") + ".js", "utf8", function (err, data) {
-					message.channel.startTyping();
-					eval(data);
-					message.channel.stopTyping();
+			if (cmdscc) {
+				request({
+					url: "https://snippets.glot.io/snippets/" + process.env.GLOT_ID,
+					method: "PUT",
+					headers: {
+						"Authorization": "Token " + process.env.GLOT_TK
+					},
+					json: {
+						"files": [{"name": "commands.json", "content": JSON.stringify(cmdcnt)}, {"name": "status.txt", "content": client.user.presence.game.name}]
+					}
+				}, function (error, response, body) {
+					if (error) {
+						console.log("Konnte Command-Counts nicht auf glot.io hochladen.");
+					} else {
+						console.log("Command-Counts erfolgreich auf glot.io hochgeladen.");
+					};
 				});
+			} else {
+				console.log("Commands konnten beim Starten nicht geladen werden, werden nicht hochgeladen.");
 			};
-		});
+			if (ownerIds.includes(message.author.id) == false) {
+				rllist.add(message.author.id);
+				rltime[message.author.id] = Date.now() + 2500;
+				setTimeout(() => {
+					rllist.delete(message.author.id);
+					delete rltime[message.author.id];
+				}, 2500);
+			};
+			console.log("Nachricht wird als " + process.env.PREFIX + command + "-Command verarbeitet.");
+			fs.readFile("./commands/" + command.replace(/.*\//, "") + ".js", "utf8", function (err, data) {
+				message.channel.startTyping();
+				eval(data);
+				message.channel.stopTyping();
+			});
+		};
 	};
 });
