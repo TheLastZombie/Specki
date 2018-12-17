@@ -67,47 +67,47 @@ client.on("message", async message => {
 			if (JSON.parse(data)[command]) {
 				command = data[command];
 			};
-		});
-		if (fs.existsSync("./commands/" + command.replace(/.*\//, "") + ".js")) {
-			if (command in cmdcnt) {
-				cmdcnt[command]++;
-			} else {
-				cmdcnt[command] = 1;
-			};
-			if (cmdscc) {
-				request({
-					url: "https://snippets.glot.io/snippets/" + process.env.GLOT_ID,
-					method: "PUT",
-					headers: {
-						"Authorization": "Token " + process.env.GLOT_TK
-					},
-					json: {
-						"files": [{"name": "commands.json", "content": JSON.stringify(cmdcnt)}, {"name": "status.txt", "content": client.user.presence.game.name}]
-					}
-				}, function (error, response, body) {
-					if (error) {
-						console.log("Konnte Command-Counts nicht auf glot.io hochladen.");
-					} else {
-						console.log("Command-Counts erfolgreich auf glot.io hochgeladen.");
-					};
+			if (fs.existsSync("./commands/" + command.replace(/.*\//, "") + ".js")) {
+				if (command in cmdcnt) {
+					cmdcnt[command]++;
+				} else {
+					cmdcnt[command] = 1;
+				};
+				if (cmdscc) {
+					request({
+						url: "https://snippets.glot.io/snippets/" + process.env.GLOT_ID,
+						method: "PUT",
+						headers: {
+							"Authorization": "Token " + process.env.GLOT_TK
+						},
+						json: {
+							"files": [{"name": "commands.json", "content": JSON.stringify(cmdcnt)}, {"name": "status.txt", "content": client.user.presence.game.name}]
+						}
+					}, function (error, response, body) {
+						if (error) {
+							console.log("Konnte Command-Counts nicht auf glot.io hochladen.");
+						} else {
+							console.log("Command-Counts erfolgreich auf glot.io hochgeladen.");
+						};
+					});
+				} else {
+					console.log("Commands konnten beim Starten nicht geladen werden, werden nicht hochgeladen.");
+				};
+				if (ownerIds.includes(message.author.id) == false) {
+					rllist.add(message.author.id);
+					rltime[message.author.id] = Date.now() + 2500;
+					setTimeout(() => {
+						rllist.delete(message.author.id);
+						delete rltime[message.author.id];
+					}, 2500);
+				};
+				console.log("Nachricht wird als " + process.env.PREFIX + command + "-Command verarbeitet.");
+				fs.readFile("./commands/" + command.replace(/.*\//, "") + ".js", "utf8", function (err, data) {
+					message.channel.startTyping();
+					eval(data);
+					message.channel.stopTyping();
 				});
-			} else {
-				console.log("Commands konnten beim Starten nicht geladen werden, werden nicht hochgeladen.");
 			};
-			if (ownerIds.includes(message.author.id) == false) {
-				rllist.add(message.author.id);
-				rltime[message.author.id] = Date.now() + 2500;
-				setTimeout(() => {
-					rllist.delete(message.author.id);
-					delete rltime[message.author.id];
-				}, 2500);
-			};
-			console.log("Nachricht wird als " + process.env.PREFIX + command + "-Command verarbeitet.");
-			fs.readFile("./commands/" + command.replace(/.*\//, "") + ".js", "utf8", function (err, data) {
-				message.channel.startTyping();
-				eval(data);
-				message.channel.stopTyping();
-			});
-		};
+		});
 	};
 });
