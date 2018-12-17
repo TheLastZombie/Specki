@@ -65,22 +65,11 @@ client.on("message", async message => {
 	} else {
 		var args = message.content.slice(process.env.PREFIX.length).trim().split(/\s/g);
 		var command = args.shift().toLowerCase();
-		if (command == "4") { command = "4chan"; };
-		if (command == "links" || command == "invite") { command = "about"; };
-		if (command == "arch") { command = "aur"; };
-		if (command == "🅱") { command = "b"; };
-		if (command == "decode") { command = "decrypt"; };
-		if (command == "de") { command = "deutsch"; };
-		if (command == "encode") { command = "encrypt"; };
-		if (command == "englisch" || command == "en") { command = "english"; };
-		if (command == "replace") { command = "ersatz"; };
-		if (command == "toll") { command = "ficken"; };
-		if (command == "wie") { command = "huso"; };
-		if (command == "someone") { command = "jemand"; };
-		if (command == "dudes") { command = "kerle"; };
-		if (command == "clap") { command = "klatsch"; };
-		if (command == "osu!") { command = "osu"; };
-		if (command == "mock") { command = "spott"; };
+		fs.readFile("./alias.json", "utf8", function (err, data) {
+			if (JSON.parse(data)[command]) {
+				command = data[command];
+			};
+		});
 		if (fs.existsSync("./commands/" + command.replace(/.*\//, "") + ".js")) {
 			if (command in cmdcnt) {
 				cmdcnt[command]++;
