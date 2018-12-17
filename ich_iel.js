@@ -1,5 +1,4 @@
 const discord = require("discord.js");
-const gtranslate = require("google-translate-api");
 const cool = require("cool-ascii-faces");
 const request = require("request");
 const figlet = require("figlet");
@@ -15,7 +14,6 @@ const ytranslate = require("yandex-translate")(process.env.YNDX_TK);
 const googleTTS = require("google-tts-api");
 const xmorse = require("xmorse");
 const ascii85 = require("ascii85");
-const {translate, detectLanguage, wordAlternatives, translateWithAlternatives} = require("deepl-translator");
 const exec = require("child_process").exec;
 const path = require("path");
 const client = new discord.Client({
