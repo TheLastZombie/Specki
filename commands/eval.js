@@ -20,9 +20,9 @@ if (ownerIds.includes(message.author.id)) {
 				}
 			}
 		}).run(args.join(" "));
-		var vmmsg = ((vmout != undefined) ? "Output: \n```" + JSON.stringify(vmout) + "```\n\n" : "") + ((vmlog != "") ? "Console: \n```" + vmlog + "```\n\n" : "");
+		var vmmsg = ((vmout != undefined) ? "Output: \n```" + JSON.stringify(vmout).replace(/`/g, "") + "```\n\n" : "") + ((vmlog != "") ? "Console: \n```" + vmlog.replace(/`/g, "") + "```\n\n" : "");
 		if (vmmsg) {
-			message.channel.send(vmmsg.replace(/`/g, "") + "Note: " + vmmsg.match(/`/g) || []).length + " occurrences of the \"`\" character have been removed due to security reasons.");
+			message.channel.send(vmmsg);
 		} else {
 			message.channel.send("Nothing returned! ¯\\_(ツ)_/¯");
 		};
