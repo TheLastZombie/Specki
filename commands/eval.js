@@ -22,7 +22,7 @@ if (ownerIds.includes(message.author.id)) {
 		}).run(args.join(" "));
 		var vmmsg = ((vmout != undefined) ? "Output: \n```" + JSON.stringify(vmout) + "```\n\n" : "") + ((vmlog != "") ? "Console: \n```" + vmlog + "```" : "");
 		if (vmmsg) {
-			message.channel.send(vmmsg.replace(/`/g, "`​"));
+			message.channel.send(vmmsg.replace(/`/g, "​`​"));
 		} else {
 			message.channel.send("Nothing returned! ¯\\_(ツ)_/¯");
 		};
