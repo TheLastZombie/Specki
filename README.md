@@ -4,6 +4,8 @@
 
 Bot for the German ich_iel Discord server, now with 200% more inside jokes!
 
+It is home to many original commands so awesome that [another Discord bot](https://github.com/M3IY0U/Meiyounaise) copies them.
+
 Below, you can find everything you usually need to get started. For advanced documentation, visit the [wiki](../../wiki)!
 
 ## Inviting to your Server
