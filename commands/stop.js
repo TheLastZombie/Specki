@@ -3,7 +3,7 @@ if (ownerIds.includes(message.author.id)) {
 		message.guild.me.voiceChannel.leave();
 		message.channel.send("Found and left voice channel.");
 	};
-	if (isplay.has(message.guild.id) {
+	if (isplay.has(message.guild.id)) {
 		isplay.delete(message.guild.id);
 		message.channel.send("Found and removed guild ID from isplay.");
 	};
