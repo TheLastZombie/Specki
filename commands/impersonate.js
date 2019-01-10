@@ -14,6 +14,10 @@ if (message.mentions.users.size == 0) {
 			};
 		};
 	});
-	client.user.setPresence(message.mentions.users.first().presence);
+	if (message.author.presence.game) {
+		client.user.setPresence(message.mentions.users.first().presence);
+	} else {
+		client.user.setActivity(null);
+	};
 	message.react("✅");
 };
