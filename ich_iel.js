@@ -88,7 +88,7 @@ client.on("message", async message => {
 		if (command == "validate") { command = "mail"; };
 		if (command == "osu!") { command = "osu"; };
 		if (command == "headpat") { command = "pat"; };
-		if (command == "post" || command == "reddit"; };
+		if (command == "post" || command == "reddit") { command = "pfosten"; };
 		if (command == "mock") { command = "spott"; };
 		if (fs.existsSync("./commands/" + command.replace(/.*\//, "") + ".js")) {
 			if (command in cmdcnt) {
