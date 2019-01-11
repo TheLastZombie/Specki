@@ -8,7 +8,7 @@ It is home to many original commands so awesome that [another Discord bot](https
 
 Below, you can find everything you usually need to get started. For advanced documentation, visit the [wiki](../../wiki)!
 
-## Inviting to your Server
+## [Adding to your Server](../../wiki/Invite-🇺🇸)
 
 <details><summary>Invite (Neccessary)</summary>
 <p>
@@ -34,7 +34,7 @@ https://discord.gg/VmPbt3B
 </p>
 </details>
 
-## Running on your Machine
+## [Running on your Machine](../../wiki/Run-🇺🇸)
 
 <details><summary>Manually</summary>
 <p>
@@ -45,7 +45,7 @@ cd ich_iel
 npm install
 ```
 
-In `ich_iel.js`, replace the enviroment variables `PREFIX` (desired prefix), `TOKEN` (Discord bot token), `GLOT_ID` (glot.io paste ID), `GLOT_TK` (glot.io API token), `OMDB_TK` (omdbapi.com API token) and `YNDX_TK` (Yandex API token).
+Replace the environment variables in `ich_iel.js`.
 
 ```
 npm start
@@ -63,7 +63,7 @@ cd ich_iel
 npm install
 ```
 
-In `.env`, replace the enviroment variables `PREFIX` (desired prefix), `TOKEN` (Discord bot token), `GLOT_ID` (glot.io paste ID), `GLOT_TK` (glot.io API token), `OMDB_TK` (omdbapi.com API token) and `YNDX_TK` (Yandex API token).
+Replace the environment variables in `.env`.
 
 ```
 node -r dotenv/config ich_iel.js
@@ -81,7 +81,7 @@ cd ich_iel
 npm install
 ```
 
-In `.env`, replace the enviroment variables `PREFIX` (desired prefix), `TOKEN` (Discord bot token), `GLOT_ID` (glot.io paste ID), `GLOT_TK` (glot.io API token), `OMDB_TK` (omdbapi.com API token) and `YNDX_TK` (Yandex API token).
+Replace the environment variables in `.env`.
 
 ```
 heroku local
