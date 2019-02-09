@@ -21,7 +21,7 @@ const client = new discord.Client({
 	autoReconnect: true,
 	disableEveryone: true
 });
-var ownerIds = ["175877241517899776"];
+var ownerIds = ["175877241517899776", "421371986824921109"];
 var rllist = new Set();
 var rltime = {};
 var cmdcnt = {};
