@@ -28,12 +28,12 @@ message.channel.send({
 			},
 			{
 				name: "Invite (Neccessary)",
-				value: "https://discordapp.com/oauth2/authorize?client_id=405408491969314826&permissions=70380641&scope=bot",
+				value: "https://discordapp.com/oauth2/authorize?client_id=548801516828491777&permissions=70380641&scope=bot",
 				inline: true
 			},
 			{
 				name: "Invite (Future-Proof)",
-				value: "https://discordapp.com/oauth2/authorize?client_id=405408491969314826&permissions=8&scope=bot",
+				value: "https://discordapp.com/oauth2/authorize?client_id=548801516828491777&permissions=8&scope=bot",
 				inline: true
 			}
 		],
