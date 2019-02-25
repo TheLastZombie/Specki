@@ -8,6 +8,6 @@ commandSort.sort(function(a, b) {
 var temp = "**Command-Counter**\n\n";
 for (var indx in commandSort.reverse()) {
 	var commandSTmp = commandSort[indx].toString().split(",");
-	temp += "`" + commandSTmp[0] + "` " + commandSTmp[1] + "\n";
+	temp += commandSTmp[0] + ": " + commandSTmp[1] + ", ";
 };
-message.channel.send(temp);
+message.channel.send(temp.slice(0, -2));
