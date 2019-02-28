@@ -3,7 +3,7 @@ if (args && args != "") {
 	var lgen;
 	request("https://xfmro77i3lixucja.onion.to/search/?q=" + args.join(" ") + "&fmt=json", function (error, response, body) {
 		if (JSON.parse(body).found > 0) {
-			ilot = "https://xfmro77i3lixucja.onion.to" + JSON.parse(body).books[0].download.replace(" ", "%20");
+			ilot = "https://xfmro77i3lixucja.onion.to" + JSON.parse(body).books[0].download.replace(/ /g, "%20");
 		};
 		request("http://gen.lib.rus.ec/search.php?req=" + args.join(" "), function (error, response, body) {
 			if (cheerio.load(body)(".c tr:nth-child(2)") != null) {
