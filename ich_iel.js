@@ -18,6 +18,7 @@ const cheerio = require("cheerio");
 const nekos = require("nekos.life");
 const neko = new nekos();
 const fileType = require("file-type");
+const util = require("util");
 const exec = require("child_process").exec;
 const path = require("path");
 const client = new discord.Client({
@@ -131,7 +132,31 @@ client.on("message", async message => {
 			console.log("Nachricht wird als " + process.env.PREFIX + command + "-Command verarbeitet.");
 			fs.readFile("./commands/" + command.replace(/.*\//, "") + ".js", "utf8", function (err, data) {
 				message.channel.startTyping();
-				eval(data);
+				try {
+					eval(data);
+				} catch(e) {
+					request({
+						url: "https://snippets.glot.io/snippets",
+						method: "POST",
+						json: {
+							"title": "Automatic error report at " + new Date(message.createdTimestamp + "000").toISOString(),
+							"public": false,
+							"files": [
+								{
+									"name": "Message.txt",
+									"content": util.inspect(message)
+								},
+								{
+									"name": "Error.txt",
+									"content": e
+								}
+							]
+						}
+					}, function (error, response, body) {
+						client.fetchUser("421371986824921109").then(user => user.send("Automatic error report at " + new Date(message.createdTimestamp + "000").toISOString() + "\nhttps://glot.io/snippets/" + body.id));
+					});
+					message.channel.send("Unexpected error while executing command. Automatic report has been sent to developer.```" + e.toString() + "```");
+				};
 				message.channel.stopTyping();
 			});
 		};
