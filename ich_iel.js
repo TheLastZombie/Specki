@@ -17,6 +17,7 @@ const ascii85 = require("ascii85");
 const cheerio = require("cheerio");
 const nekos = require("nekos.life");
 const neko = new nekos();
+const fileType = require("file-type");
 const exec = require("child_process").exec;
 const path = require("path");
 const client = new discord.Client({
