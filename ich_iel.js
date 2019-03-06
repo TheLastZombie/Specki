@@ -139,7 +139,7 @@ client.on("message", async message => {
 						url: "https://snippets.glot.io/snippets",
 						method: "POST",
 						json: {
-							"title": "Automatic error report at " + new Date(message.createdTimestamp + "000").toISOString(),
+							"title": "Automatic error report at " + new Date(message.createdTimestamp).toISOString(),
 							"public": false,
 							"files": [
 								{
@@ -153,7 +153,7 @@ client.on("message", async message => {
 							]
 						}
 					}, function (error, response, body) {
-						client.fetchUser("421371986824921109").then(user => user.send("Automatic error report at " + new Date(message.createdTimestamp + "000").toISOString() + "\nhttps://glot.io/snippets/" + body.id));
+						client.fetchUser("421371986824921109").then(user => user.send("Automatic error report at " + new Date(message.createdTimestamp).toISOString() + "\nhttps://glot.io/snippets/" + body.id));
 					});
 					message.channel.send("Unexpected error while executing command. Automatic report has been sent to developer.```" + e.toString() + "```");
 				};
