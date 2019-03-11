@@ -11,8 +11,13 @@ if (args && args != "") {
 		limit: 10,
 		handlers: {
 			success: function (data) {
-				var msg = "**Top tracks listened to by " + args[0] + " (" + period + ")**\n" + data.toptracks.track.map(x => "[" + x.artist.name + " – " + x.name + "](" + x.url + ") (played " + x.playcount + " times)").join("\n");
-				message.channel.send((msg.length > 2000 ? msg.substring(0, 1999) + "…" : msg));
+				var msg = data.toptracks.track.map(x => "[" + x.artist.name + " – " + x.name + "](" + x.url + ") (played " + x.playcount + " times)").join("\n");
+				message.channel.send({
+	               			embed: {
+	                    			title: "Top tracks listened to by " + args[0] + " (" + period + ")",
+	                   			description: (msg.length > 2048 ? msg.substring(0, 2047) + "…" : msg)
+	                		}
+	            		});
 			},
 			error: function (error) {
 				message.channel.send("Last.fm error: " + error.message);
