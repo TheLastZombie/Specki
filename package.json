@@ -26,6 +26,7 @@
     "is-thirteen": "^2.0.0",
     "jimp": "^0.3.11",
     "jpgjs": "git+https://git@github.com/makr28/jpgjs.git",
+    "lastfm": "^0.9.3",
     "lyricist": "^2.2.2",
     "nekos.life": "^2.0.4",
     "opusscript": "0.0.6",

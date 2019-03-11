@@ -20,6 +20,11 @@ const neko = new nekos();
 const fileType = require("file-type");
 const Lyricist = require("lyricist");
 const lyricist = new Lyricist(process.env.GENIUS_TK);
+const LastFmNode = require("lastfm").LastFmNode;
+const lastfm = new LastFmNode({
+	api_key: process.env.FM_KEY,
+	secret: process.env.FM_SECRET,
+});
 const util = require("util");
 const exec = require("child_process").exec;
 const path = require("path");
