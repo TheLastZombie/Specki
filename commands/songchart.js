@@ -8,11 +8,11 @@ if (args && args != "") {
 	lastfm.request("user.getTopTracks", {
 		user: args[0],
 		period: period,
-		limit: 25,
+		limit: 10,
 		handlers: {
 			success: function (data) {
 				var msg = "**Top tracks listened to by " + args[0] + " (" + period + ")**\n" + data.toptracks.track.map(x => "[" + x.artist.name + " – " + x.name + "](" + x.url + ") (played " + x.playcount + " times)").join("\n");
-				message.channel.send((msg.length > 2048 ? msg.substring(0, 2047) + "…" : msg));
+				message.channel.send((msg.length > 2000 ? msg.substring(0, 1999) + "…" : msg));
 			},
 			error: function (error) {
 				message.channel.send("Last.fm error: " + error.message);
