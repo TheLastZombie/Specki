@@ -1,6 +1,6 @@
 if (args && args != "") {
 	var period;
-	if (["overall", "7day", "1month", "3month", "6month", "12month"].contains(args[1])) {
+	if (["overall", "7day", "1month", "3month", "6month", "12month"].includes(args[1])) {
 		period = args[1];
 	} else {
 		period = "overall";
