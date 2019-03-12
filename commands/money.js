@@ -1,6 +1,6 @@
 if (args.length == 3) {
-	var from = args[0];
-	var to = args[1];
+	var from = args[0].toUpperCase();
+	var to = args[1].toUpperCase();
 	var amount = args[2];
 	request("https://api.exchangeratesapi.io/latest", function (error, response, body) {
 		var currencies = Object.keys(JSON.parse(body).rates);
