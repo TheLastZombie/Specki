@@ -1,4 +1,4 @@
-if (args.length == 2) {
+if (args.length == 3) {
 	var from = args[0];
 	var to = args[1];
 	var amount = args[2];
