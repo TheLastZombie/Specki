@@ -15,9 +15,9 @@ if (args.length == 3) {
 				});
 			};
 		} else {
-			message.channel.send("Invalid currencies supplied! Supported are **" + currencies.join("**, **") + "**.");
+			message.channel.send("Invalid currencies supplied! Supported are **" + currencies.sort().join("**, **") + "**.");
 		};
 	});
 } else {
-	message.channel.send("Too many or not enough arguments supplied!\n\nUsage: `" + process.env.PREFIX + command + " [From] [To] [Amount]`\Example: `" + process.env.PREFIX + command + " USD EUR 24.99`");
+	message.channel.send("Too many or not enough arguments supplied!\n\nUsage: `" + process.env.PREFIX + command + " [From] [To] [Amount]`\nExample: `" + process.env.PREFIX + command + " USD EUR 24.99`");
 };
