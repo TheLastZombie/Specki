@@ -5,7 +5,7 @@ if (args.length == 3) {
 	request("https://api.exchangeratesapi.io/latest", function (error, response, body) {
 		var currencies = Object.keys(JSON.parse(body).rates);
 		currencies.push(JSON.parse(body).base);
-		if (currencies.includes(from) && currencies.includes(to)) {
+		if ((currencies.includes(from) && currencies.includes(to)) || (from == to)) {
 			amount = Number(amount.replace(",", "."));
 			if (isNaN(amount)) {
 				message.channel.send("Invalid amount supplied (was NaN)!");
