@@ -4,7 +4,7 @@ if (/\[.+\] \[.+\]/.test(args.join(" "))) {
 	}, function(err, temp) {
 		if (err) {
 			figlet.fonts(function(err, temp) {
-				message.channel.send("Fehler: Schrift wurde nicht gefunden.\n\nAnwendung: `" + process.env.PREFIX + command + " [Schrift] [Nachricht]`\nBeispiel: `" + process.env.PREFIX + command + " [Ghost] [Hallo, Welt!]`\n\nFür eine Liste der verfügbaren Schriften siehe http://www.figlet.org/examples.html.");
+				message.channel.send("Error: Font not found!\n\nUsage: `" + process.env.PREFIX + command + " [Font] [Message]`\nExample: `" + process.env.PREFIX + command + " [Ghost] [Hello, World!]`\n\nA complete list of fonts can be found at http://www.figlet.org/examples.html.");
 			});
 			return;
 		};
