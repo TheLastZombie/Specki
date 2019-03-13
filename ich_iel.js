@@ -43,7 +43,7 @@ var isplay = new Set();
 var offline = false;
 client.login(process.env.TOKEN);
 client.on("ready", () => {
-	console.log("Erfolgreich eingeloggt als " + client.user.username + " (ID: " + client.user.id + ").");
+	console.log("Successfully logged in as " + client.user.username + " (ID: " + client.user.id + ").");
 	request({
 		url: "https://api.github.com/repos/TheLastZombie/ich_iel/git/refs/heads/master",
 		headers: {
@@ -55,12 +55,12 @@ client.on("ready", () => {
 	request("https://snippets.glot.io/snippets/" + process.env.GLOT_ID, function (error, response, body) {
 		if (error) {
 			cmdscc = false;
-			console.log("Konnte Command-Counts und Status nicht von glot.io laden. Counter startet von 0, wird nicht hochgeladen.");
+			console.log("Couldn't load data from glot.io. Count will start from zero and will not be uploaded.");
 		} else {
 			cmdscc = true;
-			console.log("Command-Counts und Status erfolgreich von glot.io heruntergeladen.");
+			console.log("Successfully loaded data from glot.io.");
 			cmdcnt = JSON.parse(JSON.parse(body).files[0].content);
-			console.log("Ändere Bot-Status zu \"" + JSON.parse(body).files[1].content + "\".");
+			console.log("Changing activity to \"" + JSON.parse(body).files[1].content + "\".");
 			client.user.setActivity(JSON.parse(body).files[1].content);
 		};
 	});
@@ -69,9 +69,9 @@ client.on("message", async message => {
 	if (message.author.bot || message.content.indexOf(process.env.PREFIX) !== 0 || (offline && ownerIds.includes(message.author.id) == false)) {
 		return;
 	};
-	console.log("Neue Command-Nachricht von " + message.author.username + " (ID: " + message.author.id + ").");
+	console.log("New command message from " + message.author.username + " (ID: " + message.author.id + ").");
 	if (rllist.has(message.author.id)) {
-		console.log("Nachricht von " + client.user.username + " (ID: " + client.user.id + ") wurde wegen Rate-Limit geblockt (noch " + ((rltime[message.author.id] - Date.now()) / 1000) + " Sekunden).");
+		console.log("Message from " + client.user.username + " (ID: " + client.user.id + ") ignored because of rate limiting (" + ((rltime[message.author.id] - Date.now()) / 1000) + " seconds left).");
 		message.channel.send("Halt die verdammte " + message.author.username + " für " + ((rltime[message.author.id] - Date.now()) / 1000) + " Sekunden");
 	} else {
 		var args = message.content.slice(process.env.PREFIX.length).trim().split(/\s/g);
@@ -121,13 +121,13 @@ client.on("message", async message => {
 					}
 				}, function (error, response, body) {
 					if (error) {
-						console.log("Konnte Command-Counts nicht auf glot.io hochladen.");
+						console.log("Couldn't upload data to glot.io.");
 					} else {
-						console.log("Command-Counts erfolgreich auf glot.io hochgeladen.");
+						console.log("Successfully uploaded data to glot.io.");
 					};
 				});
 			} else {
-				console.log("Commands konnten beim Starten nicht geladen werden, werden nicht hochgeladen.");
+				console.log("Data could not be loaded and thus won't be uploaded.");
 			};
 			if (ownerIds.includes(message.author.id) == false) {
 				rllist.add(message.author.id);
@@ -137,7 +137,7 @@ client.on("message", async message => {
 					delete rltime[message.author.id];
 				}, 2500);
 			};
-			console.log("Nachricht wird als " + process.env.PREFIX + command + "-Command verarbeitet.");
+			console.log("Processing message as " + process.env.PREFIX + command + " command.");
 			fs.readFile("./commands/" + command.replace(/.*\//, "") + ".js", "utf8", function (err, data) {
 				message.channel.startTyping();
 				try {

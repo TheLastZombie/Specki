@@ -5,7 +5,7 @@ for (var commandCurr in cmdcnt) {
 commandSort.sort(function(a, b) {
 	return a[1] - b[1];
 });
-var temp = "**Command-Counter**\n\n";
+var temp = "**Command Counter:**\n";
 for (var indx in commandSort.reverse()) {
 	var commandSTmp = commandSort[indx].toString().split(",");
 	temp += commandSTmp[0] + ": " + commandSTmp[1] + ", ";

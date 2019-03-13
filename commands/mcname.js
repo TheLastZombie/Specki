@@ -22,4 +22,4 @@ if (Math.random() > 0.5) {
 if (Math.random() > 0.5 || name == temp.replace(/\s+/g, "")) {
 	name = "xXx_" + name + "_xXx";
 };
-message.channel.send("**" + temp.replace(/\s+/g, " ") + "**s neuer, cooler Minecraft-Name ist ab jetzt **" + name + "**!");
+message.channel.send("**" + temp.replace(/\s+/g, " ") + "**s new Minecraft nickname is now **" + name + "**!");

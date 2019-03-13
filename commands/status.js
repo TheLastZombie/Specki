@@ -1,5 +1,5 @@
 if (args && args != "") {
-	console.log("Ändere Bot-Status zu \"" + args.join(" ") + "\".");
+	console.log("Changing activity to \"" + args.join(" ") + "\".");
 	client.user.setActivity(args.join(" "));
 	request({
 		url: "https://snippets.glot.io/snippets/" + process.env.GLOT_ID,
@@ -12,16 +12,16 @@ if (args && args != "") {
 		}
 	}, function (error, response, body) {
 		if (error) {
-			console.log("Konnte Status nicht auf glot.io hochladen.");
+			console.log("Couldn't upload data to glot.io.");
 		} else {
-			console.log("Status erfolgreich auf glot.io hochgeladen.");
+			console.log("Successfully uploaded data to glot.io.");
 		};
 	});
 } else {
 	message.channel.fetchMessages({
 		limit: 2
 	}).then(temp => {
-		console.log("Ändere Bot-Status zu \"" + temp.last().content + "\".");
+		console.log("Changing activity to \"" + temp.last().content + "\".");
 		client.user.setActivity(temp.last().content);
 		request({
 			url: "https://snippets.glot.io/snippets/" + process.env.GLOT_ID,
@@ -34,9 +34,9 @@ if (args && args != "") {
 			}
 		}, function (error, response, body) {
 			if (error) {
-				console.log("Konnte Status nicht auf glot.io hochladen.");
+				console.log("Couldn't upload data to glot.io.");
 			} else {
-				console.log("Status erfolgreich auf glot.io hochgeladen.");
+				console.log("Successfully uploaded data to glot.io.");
 			};
 		});
 	});

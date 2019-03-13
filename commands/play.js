@@ -12,6 +12,6 @@ if (args && args != "") {
 	};
 } else {
 	fs.readdir(__dirname + "/sounds/", (err, files) => {
-		message.channel.send("**Verfügbare Sounds:**\n" + files.map(x => path.parse(x).name).join(", ") + "\n\n**Mehr Informationen:**\n<https://github.com/TheLastZombie/ich_iel/wiki/Sounds-🇩🇪>")
+		message.channel.send("**Available Sounds:**\n" + files.map(x => path.parse(x).name).join(", ") + "\n\n**More Information:**\n<https://github.com/TheLastZombie/ich_iel/wiki/Sounds-🇺🇸>")
 	});
 };
