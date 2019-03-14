@@ -12,6 +12,11 @@ message.channel.send({
 				inline: true
 			},
 			{
+				name: "Bot List",
+				value: "https://discordbots.org/bot/548801589079572497",
+				inline: true
+			},
+			{
 				name: "Discord",
 				value: "https://discord.gg/VmPbt3B",
 				inline: true
