@@ -156,7 +156,7 @@ client.on("message", async message => {
 								},
 								{
 									"name": "Error.txt",
-									"content": e
+									"content": util.inspect(e)
 								}
 							]
 						}
