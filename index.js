@@ -45,9 +45,9 @@ client.login(process.env.TOKEN);
 client.on("ready", () => {
 	console.log("Successfully logged in as " + client.user.username + " (ID: " + client.user.id + ").");
 	request({
-		url: "https://api.github.com/repos/TheLastZombie/ich_iel/git/refs/heads/master",
+		url: "https://api.github.com/repos/TheLastZombie/Specki/git/refs/heads/master",
 		headers: {
-			"User-Agent": "TheLastZombie/ich_iel"
+			"User-Agent": "TheLastZombie/Specki"
 		}
 	}, function(error, response, body) {
 		commid = JSON.parse(body).object.url.substr(JSON.parse(body).object.url.lastIndexOf("/") + 1, 7);

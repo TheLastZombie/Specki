@@ -23,12 +23,12 @@ message.channel.send({
 			},
 			{
 				name: "GitHub",
-				value: "https://github.com/TheLastZombie/ich_iel",
+				value: "https://github.com/TheLastZombie/Specki",
 				inline: true
 			},
 			{
 				name: "Wiki",
-				value: "https://github.com/TheLastZombie/ich_iel/wiki",
+				value: "https://github.com/TheLastZombie/Specki/wiki",
 				inline: true
 			},
 			{

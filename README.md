@@ -1,6 +1,6 @@
 <img src="https://forthebadge.com/images/badges/you-didnt-ask-for-this.svg" width="100%">
 
-# ich_iel Roboter
+# Specki
 
 Bot for the German ich_iel Discord server, now with 200% more inside jokes!
 
@@ -45,7 +45,7 @@ cd ich_iel
 npm install
 ```
 
-Replace the environment variables in `ich_iel.js`.
+Replace the environment variables in `index.js`.
 
 ```
 npm start
