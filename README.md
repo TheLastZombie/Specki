@@ -41,7 +41,7 @@ https://discord.gg/VmPbt3B
 
 ```
 git clone https://github.com/TheLastZombie/Specki
-cd ich_iel
+cd Specki
 npm install
 ```
 
@@ -59,14 +59,14 @@ npm start
 
 ```
 git clone https://github.com/TheLastZombie/Specki
-cd ich_iel
+cd Specki
 npm install
 ```
 
 Replace the environment variables in `.env`.
 
 ```
-node -r dotenv/config ich_iel.js
+node -r dotenv/config index.js
 ```
 
 </p>
@@ -77,7 +77,7 @@ node -r dotenv/config ich_iel.js
 
 ```
 git clone https://github.com/TheLastZombie/Specki
-cd ich_iel
+cd Specki
 npm install
 ```
 
