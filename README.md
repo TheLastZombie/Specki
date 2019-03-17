@@ -40,7 +40,7 @@ https://discord.gg/VmPbt3B
 <p>
 
 ```
-git clone https://github.com/TheLastZombie/ich_iel
+git clone https://github.com/TheLastZombie/Specki
 cd ich_iel
 npm install
 ```
@@ -58,7 +58,7 @@ npm start
 <p>
 
 ```
-git clone https://github.com/TheLastZombie/ich_iel
+git clone https://github.com/TheLastZombie/Specki
 cd ich_iel
 npm install
 ```
@@ -76,7 +76,7 @@ node -r dotenv/config ich_iel.js
 <p>
 
 ```
-git clone https://github.com/TheLastZombie/ich_iel
+git clone https://github.com/TheLastZombie/Specki
 cd ich_iel
 npm install
 ```
