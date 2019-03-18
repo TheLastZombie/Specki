@@ -30,7 +30,7 @@
     "lastfm": "^0.9.3",
     "lyricist": "^2.2.2",
     "nekos.life": "^2.0.4",
-    "opusscript": "0.0.6",
+    "node-opus": "^0.3.1",
     "request": "^2.88.0",
     "safe-eval": "^0.4.1",
     "table": "^5.2.3",
