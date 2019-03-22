@@ -10,7 +10,7 @@ if (args && args != "") {
 				},
 				url: "https://rsch.neocities.org",
 				thumbnail: {
-					url: "https://via.placeholder.com/512/" + temp.toHexString() + "?text=+"
+					url: "https://via.placeholder.com/512/" + temp.toHex() + "?text=+"
 				},
 				fields: [
 					{
