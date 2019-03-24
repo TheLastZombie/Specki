@@ -1,0 +1,15 @@
+{
+  "name": "ich_iel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ich_iel.js",
+  "scripts": {
+    "start": "node ich_iel.js",
+    "test": "node iel_test.js"
+  },
+  "author": "Eric Rösch",
+  "license": "ISC",
+  "dependencies": {
+    "discord.io": "github:woor/discord.io#gateway_v6"
+  }
+}
