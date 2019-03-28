@@ -13,6 +13,7 @@
   "author": "Eric Rösch",
   "license": "ISC",
   "dependencies": {
+    "@vitalets/google-translate-api": "^2.8.0",
     "ascii85": "^1.0.2",
     "breakdance": "^3.0.1",
     "cheerio": "^1.0.0-rc.2",
@@ -37,8 +38,7 @@
     "to-zalgo": "^1.0.1",
     "unicode": "^11.0.1",
     "vm2": "^3.6.10",
-    "xmorse": "0.0.4",
-    "yandex-translate": "^2.1.1"
+    "xmorse": "0.0.4"
   },
   "devDependencies": {},
   "repository": {
