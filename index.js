@@ -25,6 +25,7 @@ const lastfm = new LastFmNode({
 	secret: process.env.FM_SECRET,
 });
 const Decimal = require("decimal.js");
+const Fuse = require("fuse.js");
 const util = require("util");
 const exec = require("child_process").exec;
 const path = require("path");
