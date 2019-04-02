@@ -11,7 +11,7 @@ if (args && args != "") {
 		limit: 10,
 		handlers: {
 			success: function (data) {
-				var msg = data.toptracks.track.map(x => "[" + x.artist.name + " – " + x.name + "](" + x.url + ") (played " + x.playcount + " times)").join("\n");
+				var msg = data.toptracks.track.map(x => "[" + x.artist.name + " – " + x.name + "](" + x.url.replace(/\)/g, "\\)") + ") (played " + x.playcount + " times)").join("\n");
 				message.channel.send({
 	               			embed: {
 	                    			title: "Top tracks listened to by " + args[0] + " (" + period + ")",
