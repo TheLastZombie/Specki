@@ -1,25 +1,21 @@
 if (args && args != "") {
-	ytranslate.translate(args.join(" "), {
+	translate(args.join(" "), {
 		to: "de"
-	}, function(err, res) {
-		if (err) {
-			message.channel.send("```" + String(err) + "```");
-			return;
-		};
+	}).then(res => {
 		message.channel.send("**" + message.author.tag + ": **" + res.text);
+	}).catch(err => {
+		message.channel.send("```" + err.toString() + "```");
 	});
 } else {
 	message.channel.fetchMessages({
 		limit: 2
 	}).then(temp => {
-		ytranslate.translate(temp.last().content, {
+		translate(temp.last().content, {
 			to: "de"
-		}, function(err, res) {
-			if (err) {
-				message.channel.send("```" + String(err) + "```");
-				return;
-			};
+		}).then(res => {
 			message.channel.send("**" + message.author.tag + ": **" + res.text);
+		}).catch(err => {
+			message.channel.send("```" + err.toString() + "```");
 		});
 	});
-}; 
+};

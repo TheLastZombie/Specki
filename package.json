@@ -1,49 +1,53 @@
 {
-  "name": "ich_iel",
+  "name": "specki",
   "version": "2.0.0",
-  "description": "Der Roboter exklusiv für den /r/ich_iel Discord.",
-  "main": "ich_iel.js",
+  "description": "Bot for the German ich_iel Discord server, now with 200% more inside jokes!",
+  "main": "index.js",
   "engines": {
     "node": "9.x",
     "npm": "*"
   },
   "scripts": {
-    "start": "node ich_iel.js"
+    "start": "node index.js"
   },
   "author": "Eric Rösch",
   "license": "ISC",
   "dependencies": {
+    "@vitalets/google-translate-api": "^2.8.0",
     "ascii85": "^1.0.2",
     "breakdance": "^3.0.1",
+    "cheerio": "^1.0.0-rc.2",
     "cool-ascii-faces": "^1.3.4",
     "cryptiles": "^4.1.2",
+    "decimal.js": "^10.1.1",
     "discord.js": "^11.4.2",
-    "dotenv": "^6.1.0",
+    "dotenv": "^6.2.0",
     "figlet": "^1.2.1",
-    "google-tts-api": "0.0.3",
+    "file-type": "^10.9.0",
+    "fuse.js": "^3.4.4",
     "is-thirteen": "^2.0.0",
     "jimp": "^0.3.11",
     "jpgjs": "git+https://git@github.com/makr28/jpgjs.git",
-    "node-opus": "^0.3.0",
-    "opusscript": "0.0.6",
-    "puppeteer": "^1.11.0",
+    "lastfm": "^0.9.3",
+    "lyricist": "^2.2.2",
+    "nekos.life": "^2.0.4",
+    "node-opus": "^0.3.1",
     "request": "^2.88.0",
     "safe-eval": "^0.4.1",
-    "table": "^5.1.0",
+    "table": "^5.2.3",
     "tinycolor2": "^1.4.1",
     "to-zalgo": "^1.0.1",
     "unicode": "^11.0.1",
-    "vm2": "^3.6.4",
-    "xmorse": "0.0.4",
-    "yandex-translate": "^2.1.1"
+    "vm2": "^3.6.10",
+    "xmorse": "0.0.4"
   },
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TheLastZombie/ich_iel.git"
+    "url": "git+https://github.com/TheLastZombie/Specki.git"
   },
   "bugs": {
-    "url": "https://github.com/TheLastZombie/ich_iel/issues"
+    "url": "https://github.com/TheLastZombie/Specki/issues"
   },
-  "homepage": "https://github.com/TheLastZombie/ich_iel#readme"
+  "homepage": "https://github.com/TheLastZombie/Specki#readme"
 }

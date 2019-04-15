@@ -9,6 +9,9 @@ if (args && args != "") {
 					icon_url: client.user.avatarURL
 				},
 				url: "https://rsch.neocities.org",
+				thumbnail: {
+					url: "https://via.placeholder.com/512/" + temp.toHex() + "?text=+"
+				},
 				fields: [
 					{
 						name: "Werte",

@@ -4,7 +4,7 @@ if (endp.includes(temp)) {
     request({
         url: "https://www.giantbomb.com/api/" + temp + "/?api_key=" + process.env.BOMB_TK + "&format=json&field_list=deck,image,name,site_detail_url&limit=1&filter=name:" + args.join(" "),
         headers: {
-            "User-Agent": "TheLastZombie/ich_iel"
+            "User-Agent": "TheLastZombie/Specki"
         }
     }, function (error, response, body) {
         if (JSON.parse(body).results.length > 0) {

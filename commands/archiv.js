@@ -6,7 +6,7 @@ if (args && args != "") {
 		if (JSON.parse(body).archived_snapshots.closest) {
 			archive1 = JSON.parse(body).archived_snapshots.closest.url;
 		};
-		request("http://archive.is/newest/" + args.join(" "), function (error, response, body) {
+		request("http://archive.today/newest/" + args.join(" "), function (error, response, body) {
 			if (response.statusCode == 200) {
 				archive2 = response.request.href;
 			};
@@ -27,7 +27,7 @@ if (args && args != "") {
 								value: ((archive1) ? "✅ " + archive1 : "❎ Unavailable")
 							},
 							{
-								name: "archive.is",
+								name: "archive.today",
 								value: ((archive2) ? "✅ " + archive2 : "❎ Unavailable")
 							},
 							{

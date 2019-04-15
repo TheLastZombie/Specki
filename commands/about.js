@@ -12,34 +12,39 @@ message.channel.send({
 				inline: true
 			},
 			{
+				name: "Bot List",
+				value: "https://discordbots.org/bot/548801589079572497",
+				inline: true
+			},
+			{
 				name: "Discord",
 				value: "https://discord.gg/VmPbt3B",
 				inline: true
 			},
 			{
 				name: "GitHub",
-				value: "https://github.com/TheLastZombie/ich_iel",
+				value: "https://github.com/TheLastZombie/Specki",
 				inline: true
 			},
 			{
 				name: "Wiki",
-				value: "https://github.com/TheLastZombie/ich_iel/wiki",
+				value: "https://github.com/TheLastZombie/Specki/wiki",
 				inline: true
 			},
 			{
 				name: "Invite (Neccessary)",
-				value: "https://discordapp.com/oauth2/authorize?client_id=405408491969314826&permissions=70380641&scope=bot",
+				value: "https://discordapp.com/oauth2/authorize?client_id=548801589079572497&permissions=70380641&scope=bot",
 				inline: true
 			},
 			{
 				name: "Invite (Future-Proof)",
-				value: "https://discordapp.com/oauth2/authorize?client_id=405408491969314826&permissions=8&scope=bot",
+				value: "https://discordapp.com/oauth2/authorize?client_id=548801589079572497&permissions=8&scope=bot",
 				inline: true
 			}
 		],
 		footer: {
 			icon_url: client.user.avatarURL,
-			text: "v2.3.4 | " + client.guilds.size + "G, " + client.channels.size + "C, " + client.users.size + "U | Commit " + commid + " | by @rx#0001 using discord.js"
+			text: "v2.4.0 | " + client.guilds.size + "G, " + client.channels.size + "C, " + client.users.size + "U | Commit " + commid + " | by @ry#3082 using discord.js"
 		}
 	}
 });

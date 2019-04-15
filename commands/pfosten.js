@@ -14,12 +14,12 @@ if (args && args != "") {
 								"inline": true
 							},
 							{
-								"name": "Autor",
+								"name": "Author",
 								"value": JSON.parse(body)[0]["data"]["children"][0]["data"]["author"],
 								"inline": true
 							},
 							{
-								"name": "Datum",
+								"name": "Date",
 								"value": new Date(JSON.parse(body)[0]["data"]["children"][0]["data"]["created"] * 1000).toISOString().replace(/T/, " ").replace(/\..+/, ""),
 								"inline": true
 							},
@@ -29,7 +29,7 @@ if (args && args != "") {
 								"inline": true
 							},
 							{
-								"name": "Aktivität",
+								"name": "Activity",
 								"value": "🗩 " + JSON.parse(body)[0]["data"]["children"][0]["data"]["num_comments"] + " | " + JSON.parse(body)[0]["data"]["children"][0]["data"]["num_crossposts"] + " ✕",
 								"inline": true
 							},

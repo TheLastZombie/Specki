@@ -1,6 +1,6 @@
 <img src="https://forthebadge.com/images/badges/you-didnt-ask-for-this.svg" width="100%">
 
-# ich_iel Roboter
+# Specki
 
 Bot for the German ich_iel Discord server, now with 200% more inside jokes!
 
@@ -8,12 +8,12 @@ It is home to many original commands so awesome that [another Discord bot](https
 
 Below, you can find everything you usually need to get started. For advanced documentation, visit the [wiki](../../wiki)!
 
-## Inviting to your Server
+## [Adding to your Server](../../wiki/Invite-🇺🇸)
 
 <details><summary>Invite (Neccessary)</summary>
 <p>
 
-https://discordapp.com/oauth2/authorize?client_id=405408491969314826&permissions=70372416&scope=bot
+https://discordapp.com/oauth2/authorize?client_id=548801589079572497&permissions=70380641&scope=bot
 
 </p>
 </details>
@@ -21,7 +21,7 @@ https://discordapp.com/oauth2/authorize?client_id=405408491969314826&permissions
 <details><summary>Invite (Future-Proof)</summary>
 <p>
 
-https://discordapp.com/oauth2/authorize?client_id=405408491969314826&permissions=8&scope=bot
+https://discordapp.com/oauth2/authorize?client_id=548801589079572497&permissions=8&scope=bot
 
 </p>
 </details>
@@ -34,18 +34,18 @@ https://discord.gg/VmPbt3B
 </p>
 </details>
 
-## Running on your Machine
+## [Running on your Machine](../../wiki/Run-🇺🇸)
 
 <details><summary>Manually</summary>
 <p>
 
 ```
-git clone https://github.com/TheLastZombie/ich_iel
-cd ich_iel
+git clone https://github.com/TheLastZombie/Specki
+cd Specki
 npm install
 ```
 
-In `ich_iel.js`, replace the enviroment variables `PREFIX` (desired prefix), `TOKEN` (Discord bot token), `GLOT_ID` (glot.io paste ID), `GLOT_TK` (glot.io API token), `OMDB_TK` (omdbapi.com API token) and `YNDX_TK` (Yandex API token).
+Replace the environment variables in `index.js`.
 
 ```
 npm start
@@ -58,15 +58,15 @@ npm start
 <p>
 
 ```
-git clone https://github.com/TheLastZombie/ich_iel
-cd ich_iel
+git clone https://github.com/TheLastZombie/Specki
+cd Specki
 npm install
 ```
 
-In `.env`, replace the enviroment variables `PREFIX` (desired prefix), `TOKEN` (Discord bot token), `GLOT_ID` (glot.io paste ID), `GLOT_TK` (glot.io API token), `OMDB_TK` (omdbapi.com API token) and `YNDX_TK` (Yandex API token).
+Replace the environment variables in `.env`.
 
 ```
-node -r dotenv/config ich_iel.js
+node -r dotenv/config index.js
 ```
 
 </p>
@@ -76,12 +76,12 @@ node -r dotenv/config ich_iel.js
 <p>
 
 ```
-git clone https://github.com/TheLastZombie/ich_iel
-cd ich_iel
+git clone https://github.com/TheLastZombie/Specki
+cd Specki
 npm install
 ```
 
-In `.env`, replace the enviroment variables `PREFIX` (desired prefix), `TOKEN` (Discord bot token), `GLOT_ID` (glot.io paste ID), `GLOT_TK` (glot.io API token), `OMDB_TK` (omdbapi.com API token) and `YNDX_TK` (Yandex API token).
+Replace the environment variables in `.env`.
 
 ```
 heroku local

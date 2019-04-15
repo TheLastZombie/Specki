@@ -1,5 +1,5 @@
 if (args && args != "") {
-	console.log("Ändere Bot-Nick zu \"" + args.join(" ") + "\".");
+	console.log("Changing nickname to \"" + args.join(" ") + "\".");
 	client.guilds.map(guild => {
 		if (guild.me.hasPermission("CHANGE_NICKNAME")) {
 			guild.me.setNickname(args.join(" "));
@@ -9,7 +9,7 @@ if (args && args != "") {
 	message.channel.fetchMessages({
 		limit: 2
 	}).then(temp => {
-		console.log("Ändere Bot-Nick zu \"" + temp.last().content + "\".");
+		console.log("Changing nickname to \"" + temp.last().content + "\".");
 		client.guilds.map(guild => {
 			if (guild.me.hasPermission("CHANGE_NICKNAME")) {
 				guild.me.setNickname(temp.last().content);

@@ -1,19 +1,11 @@
 if (message.channel.nsfw == false) {
 	message.react("🔞");
 } else {
-	(async () => {
-		var browser = await puppeteer.launch({
-			ignoreHTTPSErrors: true,
-			args: ['--no-sandbox', '--disable-setuid-sandbox']
-		});
-		var page = await browser.newPage();
-		await page.goto("https://twitchlotto.com/");
-		var image = await page.evaluate(() =>
-			document.querySelector("img").getAttribute("src")
-		);
-		await browser.close();
+	request("https://twitchlotto.com/static/js/bundle.d4481544.js", function (error, response, body) {
+		eval(body.match(/Xg=\[\[".+?"\]\]/).toString());
+		var Xg = [].concat.apply([], Xg);
 		message.channel.send({
-			files: [image]
+			files: [Xg[Math.floor(Math.random() * Xg.length)]]
 		});
-	})();
+	});
 };
