@@ -26,6 +26,7 @@ const lastfm = new LastFmNode({
 });
 const Decimal = require("decimal.js");
 const Fuse = require("fuse.js");
+const parseString = require("xml2js").parseString;
 const util = require("util");
 const exec = require("child_process").exec;
 const path = require("path");
