@@ -72,7 +72,7 @@ client.on("message", async message => {
 	};
 	console.log("New command message from " + message.author.username + " (ID: " + message.author.id + ").");
 	if (rllist.has(message.author.id)) {
-		console.log("Message from " + client.user.username + " (ID: " + client.user.id + ") ignored because of rate limiting (" + ((rltime[message.author.id] - Date.now()) / 1000) + " seconds left).");
+		console.log("Message from " + message.author.username + " (ID: " + message.author.id + ") ignored because of rate limiting (" + ((rltime[message.author.id] - Date.now()) / 1000) + " seconds left).");
 		message.channel.send("Halt die verdammte " + message.author.username + " für " + ((rltime[message.author.id] - Date.now()) / 1000) + " Sekunden");
 	} else {
 		var args = message.content.slice(process.env.PREFIX.length).trim().split(/\s/g);
