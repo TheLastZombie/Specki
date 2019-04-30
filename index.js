@@ -42,8 +42,12 @@ var cmdscc;
 var commid;
 var isplay = new Set();
 var offline = false;
+var modules = fs.readdirSync("./modules", {
+	withFileTypes: true
+}).filter(x => !x.isDirectory()).map(x => x.name);
 client.login(process.env.TOKEN);
 client.on("ready", () => {
+	for (x in modules) require("./modules/" + modules[x]);
 	console.log("Successfully logged in as " + client.user.username + " (ID: " + client.user.id + ").");
 	request({
 		url: "https://api.github.com/repos/TheLastZombie/Specki/git/refs/heads/master",
