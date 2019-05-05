@@ -45,7 +45,7 @@ cd Specki
 npm install
 ```
 
-Replace the environment variables in `index.js`.
+Replace the environment variables in `index.js` and all commands.
 
 ```
 npm start

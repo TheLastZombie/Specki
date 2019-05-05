@@ -26,6 +26,7 @@ const lastfm = new LastFmNode({
 });
 const Decimal = require("decimal.js");
 const Fuse = require("fuse.js");
+const parseString = require("xml2js").parseString;
 const util = require("util");
 const exec = require("child_process").exec;
 const path = require("path");
@@ -41,8 +42,12 @@ var cmdscc;
 var commid;
 var isplay = new Set();
 var offline = false;
+var modules = fs.readdirSync("./modules", {
+	withFileTypes: true
+}).filter(x => !x.isDirectory()).map(x => x.name);
 client.login(process.env.TOKEN);
 client.on("ready", () => {
+	for (x in modules) require("./modules/" + modules[x]);
 	console.log("Successfully logged in as " + client.user.username + " (ID: " + client.user.id + ").");
 	request({
 		url: "https://api.github.com/repos/TheLastZombie/Specki/git/refs/heads/master",
@@ -71,7 +76,7 @@ client.on("message", async message => {
 	};
 	console.log("New command message from " + message.author.username + " (ID: " + message.author.id + ").");
 	if (rllist.has(message.author.id)) {
-		console.log("Message from " + client.user.username + " (ID: " + client.user.id + ") ignored because of rate limiting (" + ((rltime[message.author.id] - Date.now()) / 1000) + " seconds left).");
+		console.log("Message from " + message.author.username + " (ID: " + message.author.id + ") ignored because of rate limiting (" + ((rltime[message.author.id] - Date.now()) / 1000) + " seconds left).");
 		message.channel.send("Halt die verdammte " + message.author.username + " für " + ((rltime[message.author.id] - Date.now()) / 1000) + " Sekunden");
 	} else {
 		var args = message.content.slice(process.env.PREFIX.length).trim().split(/\s/g);
