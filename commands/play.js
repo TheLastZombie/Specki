@@ -1,5 +1,5 @@
 if (args && args != "") {
-	if (isplay.has(message.guild.id) || fs.existsSync(__dirname + "/sounds/" + args.join(" ").toLowerCase() + ".mp3") == false) {
+	if (isplay.has(message.guild.id) || fs.existsSync(__dirname + "/sounds/" + args.join(" ").toLowerCase() + ".mp3") == false || message.member.voiceChannel == undefined) {
 		message.react("❎");
 	} else {
 		message.member.voiceChannel.join().then(connection => {
