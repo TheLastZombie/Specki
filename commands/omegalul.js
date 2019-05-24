@@ -4,6 +4,6 @@ if (args && args != "") {
 	message.channel.fetchMessages({
 		limit: 2
 	}).then(temp => {
-		message.channel.send("**" + message.author.tag + ": **" + temp.last().content.replace(/o/gi, "<:omegalul:567236059772092426>")));
+		message.channel.send("**" + message.author.tag + ": **" + temp.last().content.replace(/o/gi, "<:omegalul:567236059772092426>"));
 	});
 };
