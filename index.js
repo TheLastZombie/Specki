@@ -7,7 +7,6 @@ const tinycolor = require("tinycolor2");
 const is = require("is-thirteen");
 const jimp = require("jimp");
 const fs = require("fs");
-const {VM} = require("vm2");
 const {table} = require("table");
 const breakdance = require("breakdance");
 const translate = require("@vitalets/google-translate-api");
