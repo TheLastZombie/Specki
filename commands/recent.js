@@ -5,7 +5,7 @@ if (ownerIds.includes(message.author.id)) {
 		client.guilds.find("name", gld).channels.find("name", chn).fetchMessages({
 			limit: 50
 		}).then(function(messages) {
-			var msg = "**Last messages in #" + chn + "**\n" + messages.map(x => "**" + x.author.tag + ":** " + x.content).reverse();
+			var msg = "**Last messages in #" + chn + "** (most recent first)\n" + messages.map(x => "**" + x.author.tag + ":** " + x.content).join("\n");
 			message.channel.send((msg.length > 2000 ? msg.substring(0, 1999) + "…" : msg));
 		});
 	} else {
