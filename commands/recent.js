@@ -6,7 +6,7 @@ if (ownerIds.includes(message.author.id)) {
 			limit: 50
 		}).then(function(messages) {
 			var msg = "**Last messages in #" + chn + "**\n" + messages.map(x => "**" + x.author.tag + ":** " + x.content).reverse();
-			message.channel.send((msg.length > 2000 ? msg.substring(0, 1999) + "…" : msg)));
+			message.channel.send((msg.length > 2000 ? msg.substring(0, 1999) + "…" : msg));
 		});
 	} else {
 		message.channel.send("Error: Invalid syntax or number of arguments!\nUsage: `" + process.env.PREFIX + command + " [Guild] [Channel]`");
