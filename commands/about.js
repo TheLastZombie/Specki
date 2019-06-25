@@ -5,6 +5,7 @@ message.channel.send({
 			icon_url: client.user.avatarURL
 		},
 		url: "https://rsch.neocities.org",
+		description: "Running on " + os.hostname() + " (" + os.type() + " " + os.release() + ") for " + format(client.uptime) + ".",
 		fields: [
 			{
 				name: "Website",
@@ -48,3 +49,9 @@ message.channel.send({
 		}
 	}
 });
+function format(i) {
+	var s = Math.floor((i / 1000) % 60);
+	var m = Math.floor((i / (1000 * 60)) % 60);
+	var h = Math.floor((i / (1000 * 60 * 60)) % 24);
+	return h + " hours, " + m + " minutes and " + s + " seconds";
+};

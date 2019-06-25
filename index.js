@@ -29,6 +29,7 @@ const parseString = require("xml2js").parseString;
 const util = require("util");
 const exec = require("child_process").exec;
 const path = require("path");
+const os = require("os");
 const client = new discord.Client({
 	autoReconnect: true,
 	disableEveryone: true
