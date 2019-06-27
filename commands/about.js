@@ -52,6 +52,6 @@ message.channel.send({
 function format(i) {
 	var s = Math.floor((i / 1000) % 60);
 	var m = Math.floor((i / (1000 * 60)) % 60);
-	var h = Math.floor((i / (1000 * 60 * 60)) % 24);
+	var h = Math.floor(i / (1000 * 60 * 60));
 	return h + " hours, " + m + " minutes and " + s + " seconds";
 };
