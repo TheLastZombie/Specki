@@ -20,8 +20,10 @@ if (args == false || args == "" || isplay.has(message.guild.id) || message.membe
 			}
 		}).pipe(fs.createWriteStream(__dirname + "/sounds/temp.mp3")).on("close", function () {
 			connection.playFile(__dirname + "/sounds/temp.mp3").on("end", () => {
-				message.member.voiceChannel.leave();
-				isplay.delete(message.guild.id);
+				setTimeout(function() {
+					message.member.voiceChannel.leave();
+					isplay.delete(message.guild.id);
+				}, 2500);
 			});
 		});
 	}).catch(err => message.channel.send(err.toString()));
