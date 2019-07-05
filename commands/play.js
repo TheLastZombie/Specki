@@ -5,8 +5,10 @@ if (args && args != "") {
 		message.member.voiceChannel.join().then(connection => {
 			isplay.add(message.guild.id);
 			connection.playFile(__dirname + "/sounds/" + args.join(" ").toLowerCase() + ".mp3").on("end", () => {
-				message.member.voiceChannel.leave();
-				isplay.delete(message.guild.id);
+				setTimeout(function() {
+					message.member.voiceChannel.leave();
+					isplay.delete(message.guild.id);
+				}, 2500);
 			});
 		}).catch(err => message.channel.send(err));
 	};
