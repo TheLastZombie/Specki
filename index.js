@@ -40,7 +40,6 @@ var rltime = {};
 var cmdcnt = {};
 var cmdscc;
 var commid;
-var isplay = new Set();
 var offline = false;
 var modules = fs.readdirSync("./modules", {
 	withFileTypes: true

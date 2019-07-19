@@ -1,8 +1,7 @@
-if (args == false || args == "" || isplay.has(message.guild.id) || message.member.voiceChannel == undefined) {
+if (args == false || args == "" || msg.guild.voiceConnection || message.member.voiceChannel == undefined) {
 	message.react("❎");
 } else {
 	message.member.voiceChannel.join().then(connection => {
-		isplay.add(message.guild.id);
 		request({
 			url: "https://gateway-lon.watsonplatform.net/text-to-speech/api/v1/synthesize",
 			method: "POST",
@@ -22,7 +21,6 @@ if (args == false || args == "" || isplay.has(message.guild.id) || message.membe
 			connection.playFile(__dirname + "/sounds/temp.mp3").on("end", () => {
 				setTimeout(function() {
 					message.member.voiceChannel.leave();
-					isplay.delete(message.guild.id);
 				}, 2500);
 			});
 		});
