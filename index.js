@@ -106,6 +106,10 @@ client.on("message", async message => {
 		if (command == "osu!") command = "osu";
 		if (command == "headpat") command = "pat";
 		if (command == "post" || command == "reddit") command = "pfosten";
+		if (command == "fm") {
+			if (args[0] == "songchart") args.shift();
+			command = "songchart";
+		};
 		if (command == "mock") command = "spott";
 		if (fs.existsSync("./commands/" + command.replace(/.*\//, "") + ".js")) {
 			if (command in cmdcnt) {

@@ -1,4 +1,8 @@
 if (args && args != "") {
+	if (args[1] == undefined || args[1] == "all") args[1] = "overall";
+	if (args[1] == "week" || args[1] == "1week") args[1] = "7day";
+	if (args[1] == "month") args[1] = "1month";
+	if (args[1] == "year" || args[1] == "1year") args[1] = "12month";
 	if (["overall", "7day", "1month", "3month", "6month", "12month"].includes(args[1])) {
 		lastfm.request("user.getTopTracks", {
 			user: args[0],
