@@ -21,6 +21,7 @@
     "cryptiles": "^4.1.2",
     "decimal.js": "^10.2.0",
     "discord.js": "^11.5.0",
+    "discord.js-minesweeper": "^1.0.4-b",
     "dotenv": "^6.2.0",
     "figlet": "^1.2.1",
     "file-type": "^10.11.0",
