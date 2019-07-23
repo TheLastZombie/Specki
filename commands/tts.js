@@ -1,4 +1,4 @@
-if (args == false || args == "" || msg.guild.voiceConnection || message.member.voiceChannel == undefined) {
+if (args == false || args == "" || message.guild.voiceConnection || message.member.voiceChannel == undefined) {
 	message.react("❎");
 } else {
 	message.member.voiceChannel.join().then(connection => {
