@@ -1,6 +1,6 @@
 <img src="https://forthebadge.com/images/badges/you-didnt-ask-for-this.svg" width="100%">
 
-# Specki
+# Specki [![CodeFactor](https://www.codefactor.io/repository/github/thelastzombie/specki/badge)](https://www.codefactor.io/repository/github/thelastzombie/specki) [![Discord](https://img.shields.io/discord/473058049704329236)](https://discord.gg/VmPbt3B)
 
 Bot for the German ich_iel Discord server, now with 200% more inside jokes!
 
