@@ -45,7 +45,7 @@ message.channel.send({
 		],
 		footer: {
 			icon_url: client.user.avatarURL,
-			text: "v3.0.0 | " + client.guilds.size + "G, " + client.channels.size + "C, " + client.users.size + "U | Commit " + commid + " | by @ry#1234 using discord.js"
+			text: "v3.0.1 | " + client.guilds.size + "G, " + client.channels.size + "C, " + client.users.size + "U | Commit " + commid + " | by @" + client.users.get("421371986824921109").tag + " using discord.js"
 		}
 	}
 });

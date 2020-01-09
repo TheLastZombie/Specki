@@ -1,6 +1,6 @@
 {
   "name": "specki",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Bot for the German ich_iel Discord server, now with 200% more inside jokes!",
   "main": "index.js",
   "engines": {
