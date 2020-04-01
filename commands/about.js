@@ -9,12 +9,12 @@ message.channel.send({
 		fields: [
 			{
 				name: "Website",
-				value: "https://rsch.neocities.org",
+				value: "https://rxyz.rocks",
 				inline: true
 			},
 			{
 				name: "Bot List",
-				value: "https://discordbots.org/bot/548801589079572497",
+				value: "https://top.gg/bot/548801589079572497",
 				inline: true
 			},
 			{
