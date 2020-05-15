@@ -2,7 +2,7 @@
     request("https://raw.githubusercontent.com/jdm-contrib/jdm/master/_data/sites.json", function (error, response, body) {
         var temp = new Fuse(JSON.parse(body), {
             keys: ["name"]
-        }).search(args.join(" "))[0];
+        }).search(args.join(" "))[0].item;
         if (temp == undefined) {
             message.react("❎");
             return;
