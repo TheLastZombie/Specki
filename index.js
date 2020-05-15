@@ -29,6 +29,7 @@ const parseString = require("xml2js").parseString;
 const Minesweeper = require("discord.js-minesweeper");
 const util = require("util");
 const exec = require("child_process").exec;
+const spawn = require("child_process").spawn;
 const path = require("path");
 const os = require("os");
 const client = new discord.Client({
@@ -49,14 +50,8 @@ client.login(process.env.TOKEN);
 client.on("ready", () => {
 	for (x in modules) require("./modules/" + modules[x]);
 	console.log("Successfully logged in as " + client.user.username + " (ID: " + client.user.id + ").");
-	request({
-		url: "https://api.github.com/repos/TheLastZombie/Specki/git/refs/heads/master",
-		headers: {
-			"User-Agent": "TheLastZombie/Specki"
-		}
-	}, function(error, response, body) {
-		commid = JSON.parse(body).object.url.substr(JSON.parse(body).object.url.lastIndexOf("/") + 1, 7);
-	});
+	const commidcmd = spawn("git", ["rev-parse", "--short", "HEAD"]);
+	commidcmd.stdout.on("data", data => commid = data.toString().trim());
 	request("https://snippets.glot.io/snippets/" + process.env.GLOT_ID, function (error, response, body) {
 		if (error) {
 			cmdscc = false;
