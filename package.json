@@ -41,6 +41,9 @@
     "xml2js": "^0.4.19",
     "xmorse": "^1.0.0"
   },
+  "devDependencies": {
+    "standard": "^16.0.3"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TheLastZombie/Specki.git"

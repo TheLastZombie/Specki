@@ -1,1 +1,1 @@
-console.log("Example module successfully loaded!");
+console.log('Example module successfully loaded!')

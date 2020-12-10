@@ -1,6 +1,6 @@
-var temp = client.guilds.find("name", args.join(" "));
+const temp = client.guilds.find('name', args.join(' '))
 if (temp == undefined) {
-	message.react("❎");
+  message.react('❎')
 } else {
-	message.channel.send("**Emotes in " + temp.name + "**\n" + temp.emojis.array().join(" "));
+  message.channel.send('**Emotes in ' + temp.name + '**\n' + temp.emojis.array().join(' '))
 };

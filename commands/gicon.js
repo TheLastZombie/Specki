@@ -1,3 +1,3 @@
 message.channel.send({
-	files: [message.guild.iconURL]
-});
+  files: [message.guild.iconURL]
+})
